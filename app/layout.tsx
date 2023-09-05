@@ -7,6 +7,8 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 
 import './globals.css'
 
+import { cn } from '@/lib/utils'
+
 const font = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -27,7 +29,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={font.className}>
+        <body className={cn(font.className, 'bg-white dark:bg-gray-800')}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
