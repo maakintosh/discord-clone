@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { fetchOrCreateProfile } from '@/lib/actions/fetch-or-create-profile'
 import { db } from '@/lib/db'
+import { InitialModal } from '@/components/modals/initial-modal'
 
 export default async function RootPage() {
   const profile = await fetchOrCreateProfile()
@@ -20,5 +21,5 @@ export default async function RootPage() {
     redirect(`/servers/${server.id}`)
   }
 
-  return <div>root page</div>
+  return <InitialModal />
 }

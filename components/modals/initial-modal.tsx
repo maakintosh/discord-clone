@@ -1,0 +1,102 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+
+const formSchema = z.object({
+  name: z.string().nonempty({ message: 'Server name is required' }),
+  imageUrl: z.string().url({ message: 'Image URL is invalid' }),
+})
+
+export function InitialModal() {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      imageUrl: '',
+    },
+  })
+
+  const isLoding = form.formState.isSubmitting
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
+  }
+
+  if (!isMounted) {
+    return null
+  }
+
+  return (
+    <Dialog open>
+      <DialogContent className="rounded-md bg-slate-800 ">
+        <DialogHeader className="p-6">
+          <DialogTitle className="text-center text-2xl ">
+            Customize your server
+          </DialogTitle>
+          <DialogDescription className="text-center">
+            You can always change it later.
+          </DialogDescription>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="flex items-center justify-center text-center">
+              TODO: image upload div
+            </div>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="uppercase text-zinc-500">
+                    server name
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isLoding}
+                      placeholder="Enter server name"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500" />
+                </FormItem>
+              )}
+            />
+            <DialogFooter className="p-6">
+              <Button type="submit" disabled={isLoding} variant={'primary'}>
+                Create
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
+  )
+}
