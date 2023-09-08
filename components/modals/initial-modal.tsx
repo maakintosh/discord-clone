@@ -68,24 +68,25 @@ export function InitialModal() {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="flex items-center justify-center text-center">
-              <FormField
-                control={form.control}
-                name="imageUrl"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <FileUploader
-                        endpoint="serverImage"
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-red-500" />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel className="uppercase text-zinc-500">
+                    server image
+                  </FormLabel>
+                  <FormControl className=" justify-center">
+                    <FileUploader
+                      endpoint="serverImage"
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500" />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="name"
