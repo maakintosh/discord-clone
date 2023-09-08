@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { UserButton } from '@clerk/nextjs'
 
 import { fetchOrCreateProfile } from '@/lib/actions/fetch-or-create-profile'
 import { db } from '@/lib/db'
@@ -21,5 +22,10 @@ export default async function RootPage() {
     redirect(`/servers/${server.id}`)
   }
 
-  return <InitialModal />
+  return (
+    <div>
+      <InitialModal />
+      <UserButton afterSignOutUrl="/" />
+    </div>
+  )
 }

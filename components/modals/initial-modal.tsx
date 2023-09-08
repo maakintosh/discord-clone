@@ -23,6 +23,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { FileUploader } from '@/components/file-uploader'
 
 const formSchema = z.object({
   name: z.string().nonempty({ message: 'Server name is required' }),
@@ -68,7 +69,22 @@ export function InitialModal() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="flex items-center justify-center text-center">
-              TODO: image upload div
+              <FormField
+                control={form.control}
+                name="imageUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <FileUploader
+                        endpoint="serverImage"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-red-500" />
+                  </FormItem>
+                )}
+              />
             </div>
             <FormField
               control={form.control}
@@ -81,7 +97,7 @@ export function InitialModal() {
                   <FormControl>
                     <Input
                       disabled={isLoding}
-                      placeholder="Enter server name"
+                      placeholder="Enter a server name"
                       {...field}
                     />
                   </FormControl>
@@ -89,7 +105,7 @@ export function InitialModal() {
                 </FormItem>
               )}
             />
-            <DialogFooter className="p-6">
+            <DialogFooter className="py-6">
               <Button type="submit" disabled={isLoding} variant={'primary'}>
                 Create
               </Button>
