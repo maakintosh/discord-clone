@@ -7,13 +7,13 @@ import { UploadDropzone } from '@/lib/uploadthing'
 
 import '@uploadthing/react/styles.css'
 
-interface FileUploadProps {
+interface FileUploaderProps {
   onChange: (url?: string) => void
   value: string
   endpoint: 'messageFile' | 'serverImage'
 }
 
-export function FileUploader({ onChange, value, endpoint }: FileUploadProps) {
+export function FileUploader({ onChange, value, endpoint }: FileUploaderProps) {
   const fileType = value?.split('.').pop()
 
   if (value && fileType !== 'pdf') {
