@@ -82,11 +82,11 @@ export function InitialModal() {
               control={form.control}
               name="imageUrl"
               render={({ field }) => (
-                <FormItem className="flex flex-col">
+                <FormItem className="flex flex-col justify-center">
                   <FormLabel className="uppercase text-zinc-500">
                     server image
                   </FormLabel>
-                  <FormControl className=" justify-center">
+                  <FormControl className=" flex flex-col justify-center">
                     <FileUploader
                       endpoint="serverImage"
                       value={field.value}

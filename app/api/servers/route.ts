@@ -7,13 +7,13 @@ import { db } from '@/lib/db'
 
 export async function POST(req: Request) {
   try {
+    const { name, imageUrl } = await req.json()
+
     const profile = await currentUserProfile()
 
     if (!profile) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
-
-    const { name, imageUrl } = await req.json()
 
     const server = await db.server.create({
       data: {

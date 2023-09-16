@@ -25,7 +25,6 @@ export default async function RootPage() {
   return (
     <div>
       <InitialModal />
-      <UserButton afterSignOutUrl="/" />
     </div>
   )
 }
