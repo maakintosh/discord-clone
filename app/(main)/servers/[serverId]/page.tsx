@@ -3,5 +3,5 @@ interface ServerPageProps {
 }
 
 export default async function ServerPage({ params }: ServerPageProps) {
-  return <div>server page </div>
+  return <div>server page</div>
 }
