@@ -1,5 +1,3 @@
-'use client'
-
 interface NavigationSidebarProps {}
 
 export function NavigationSidebar() {
