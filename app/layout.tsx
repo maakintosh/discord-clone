@@ -3,11 +3,11 @@ import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
 
+import { cn } from '@/lib/utils'
+import { ModalProvider } from '@/components/providers/modal-provider'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 
 import './globals.css'
-
-import { cn } from '@/lib/utils'
 
 const font = Inter({ subsets: ['latin'] })
 
@@ -29,7 +29,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={cn(font.className, 'bg-white dark:bg-gray-800')}>
+        <body className={cn(font.className, 'bg-gray-200 dark:bg-gray-800')}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
@@ -37,6 +37,7 @@ export default function RootLayout({
             storageKey="discord-clone-theme"
           >
             {children}
+            <ModalProvider />
           </ThemeProvider>
         </body>
       </html>
