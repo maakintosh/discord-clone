@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-import { useModal } from '@/hooks/use-modal'
+import { useModal } from '@/hooks/use-modal-store'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -68,8 +68,8 @@ export function CreateServerModal() {
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="rounded-md bg-slate-800 ">
         <DialogHeader className="p-6">
-          <DialogTitle className="text-center text-2xl ">
-            Customize your server
+          <DialogTitle className="text-center text-2xl text-white ">
+            Create your server
           </DialogTitle>
           <DialogDescription className="text-center">
             You can always change it later.

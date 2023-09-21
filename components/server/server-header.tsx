@@ -12,6 +12,7 @@ import {
   Users2,
 } from 'lucide-react'
 
+import { useModal } from '@/hooks/use-modal-store'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -27,6 +28,8 @@ interface ServerHeaderProps {
 }
 
 export function ServerHeader({ server, role }: ServerHeaderProps) {
+  const { onOpen } = useModal()
+
   const isAdmin = role === MemberRole.ADMIN
   const isModerator = isAdmin || role === MemberRole.MODERATOR
 
@@ -43,8 +46,11 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 space-y-1 font-medium text-black dark:text-zinc-300">
         {isModerator && (
-          <DropdownMenuItem className="text-indigo-600 dark:text-indigo-400">
-            Invite People
+          <DropdownMenuItem
+            onClick={() => onOpen('invite', { server })}
+            className="text-indigo-600 dark:text-indigo-400"
+          >
+            Invite Friends
             <UserPlus2 className="ml-auto h-5 w-5" />
           </DropdownMenuItem>
         )}

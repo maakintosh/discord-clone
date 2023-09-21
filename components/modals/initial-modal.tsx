@@ -69,8 +69,8 @@ export function InitialModal() {
     <Dialog open>
       <DialogContent className="rounded-md bg-slate-800 ">
         <DialogHeader className="p-6">
-          <DialogTitle className="text-center text-2xl ">
-            Customize your server
+          <DialogTitle className="text-center text-2xl text-white ">
+            Create your server
           </DialogTitle>
           <DialogDescription className="text-center">
             You can always change it later.

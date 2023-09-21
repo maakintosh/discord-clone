@@ -2,7 +2,7 @@
 
 import { Plus } from 'lucide-react'
 
-import { useModal } from '@/hooks/use-modal'
+import { useModal } from '@/hooks/use-modal-store'
 import { ActionTooltip } from '@/components/action-tooltip'
 
 export function NavigationAction() {
