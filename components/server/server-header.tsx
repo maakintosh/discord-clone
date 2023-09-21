@@ -38,7 +38,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="secondary"
-          className="text-md flex h-12 w-full items-center px-3 font-semibold"
+          className="text-md flex h-12 w-full items-center overflow-hidden px-3 font-semibold"
         >
           {server.name}
           <ChevronDown className="ml-auto h-5 w-5" />
@@ -68,7 +68,10 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
           </DropdownMenuItem>
         )}
         {isAdmin && (
-          <DropdownMenuItem className="">
+          <DropdownMenuItem
+            onClick={() => onOpen('edit-server', { server })}
+            className=""
+          >
             Server Setttings
             <Settings className="ml-auto h-5 w-5" />
           </DropdownMenuItem>

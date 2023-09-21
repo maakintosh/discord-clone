@@ -67,7 +67,7 @@ export function CreateServerModal() {
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="rounded-md bg-slate-800 ">
-        <DialogHeader className="p-6">
+        <DialogHeader className="pt-6">
           <DialogTitle className="text-center text-2xl text-white ">
             Create your server
           </DialogTitle>
@@ -76,26 +76,28 @@ export function CreateServerModal() {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="imageUrl"
-              render={({ field }) => (
-                <FormItem className="flex flex-col justify-center">
-                  <FormLabel className="uppercase text-zinc-500">
-                    server image
-                  </FormLabel>
-                  <FormControl className=" flex flex-col justify-center">
-                    <FileUploader
-                      endpoint="serverImage"
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-500" />
-                </FormItem>
-              )}
-            />
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 p-6"
+          >
+            <div className="flex items-center justify-center">
+              <FormField
+                control={form.control}
+                name="imageUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <FileUploader
+                        endpoint="serverImage"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-red-500" />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="name"
@@ -115,7 +117,7 @@ export function CreateServerModal() {
                 </FormItem>
               )}
             />
-            <DialogFooter className="py-6">
+            <DialogFooter className="">
               <Button type="submit" disabled={isLoding} variant={'primary'}>
                 Create
               </Button>

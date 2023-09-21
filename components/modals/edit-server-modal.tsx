@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import { useModal } from '@/hooks/use-modal-store'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -32,13 +33,10 @@ const formSchema = z.object({
   imageUrl: z.string().nonempty({ message: 'Server image is required' }),
 })
 
-export function InitialModal() {
-  const [isMounted, setIsMounted] = useState(false)
+export function EditServerModal() {
   const router = useRouter()
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  const { isOpen, onClose, type, data } = useModal()
+  const { server } = data
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -48,32 +46,42 @@ export function InitialModal() {
     },
   })
 
+  useEffect(() => {
+    if (server) {
+      form.setValue('name', server.name)
+      form.setValue('imageUrl', server.imageUrl)
+    }
+  }, [server, form])
+
   const isLoding = form.formState.isSubmitting
+  const isModalOpen = isOpen && type === 'edit-server'
+
+  function handleClose() {
+    form.reset()
+    onClose()
+  }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await axios.post('/api/servers', values)
+      await axios.patch(`/api/servers/${server?.id}`, values)
 
       form.reset()
       router.refresh()
+      onClose()
     } catch (error) {
       console.log(error)
     }
   }
 
-  if (!isMounted) {
-    return null
-  }
-
   return (
-    <Dialog open>
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="rounded-md bg-slate-800 ">
         <DialogHeader className="pt-6">
           <DialogTitle className="text-center text-2xl text-white ">
-            Create your server
+            Edit your server
           </DialogTitle>
           <DialogDescription className="text-center">
-            You can always change it later.
+            Change server name and image.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -86,7 +94,10 @@ export function InitialModal() {
                 control={form.control}
                 name="imageUrl"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="flex flex-col justify-center">
+                    <FormLabel className="uppercase text-zinc-500">
+                      server image
+                    </FormLabel>
                     <FormControl className=" flex flex-col justify-center">
                       <FileUploader
                         endpoint="serverImage"
@@ -120,7 +131,7 @@ export function InitialModal() {
             />
             <DialogFooter className="">
               <Button type="submit" disabled={isLoding} variant={'primary'}>
-                Create
+                Save
               </Button>
             </DialogFooter>
           </form>
