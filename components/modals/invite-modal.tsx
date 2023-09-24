@@ -54,8 +54,8 @@ export function InviteModal() {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="rounded-md bg-slate-800 ">
-        <DialogHeader className="p-6">
+      <DialogContent className="overflow-hidden rounded-md bg-slate-800">
+        <DialogHeader className="pt-6">
           <DialogTitle className="text-center text-2xl text-white">
             Invite Friends
           </DialogTitle>
@@ -63,7 +63,7 @@ export function InviteModal() {
             Send them this link!
           </DialogDescription>
         </DialogHeader>
-        <div className="p-6">
+        <div className="p-2 md:p-4">
           <Label className=" uppercase text-zinc-500">server invite code</Label>
           <div className="flex items-center gap-x-2">
             <Input value={inviteUrl} disabled={isLoading} className="" />

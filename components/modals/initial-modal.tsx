@@ -67,7 +67,7 @@ export function InitialModal() {
 
   return (
     <Dialog open>
-      <DialogContent className="rounded-md bg-slate-800 ">
+      <DialogContent className="overflow-hidden rounded-md bg-slate-800">
         <DialogHeader className="pt-6">
           <DialogTitle className="text-center text-2xl text-white ">
             Create your server
@@ -79,7 +79,7 @@ export function InitialModal() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 p-6"
+            className="space-y-8 p-2 md:p-4"
           >
             <div className="flex items-center justify-center">
               <FormField

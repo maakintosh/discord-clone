@@ -62,7 +62,10 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
         )}
         <DropdownMenuSeparator />
         {isAdmin && (
-          <DropdownMenuItem className="">
+          <DropdownMenuItem
+            onClick={() => onOpen('members', { server })}
+            className=""
+          >
             Manage Members
             <Users2 className="ml-auto h-5 w-5" />
           </DropdownMenuItem>
