@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as z from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -56,8 +57,10 @@ export function InitialModal() {
 
       form.reset()
       router.refresh()
+      toast.success('Server created! 🎉')
     } catch (error) {
       console.log(error)
+      toast.error('Something went wrong. 😢')
     }
   }
 

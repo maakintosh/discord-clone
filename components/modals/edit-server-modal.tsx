@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as z from 'zod'
 
 import { useModal } from '@/hooks/use-modal-store'
@@ -67,9 +68,11 @@ export function EditServerModal() {
 
       form.reset()
       router.refresh()
+      toast.success('Server updated! 👍')
       onClose()
     } catch (error) {
       console.log(error)
+      toast.error('Something went wrong. 😢')
     }
   }
 

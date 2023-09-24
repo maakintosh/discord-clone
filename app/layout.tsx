@@ -9,6 +9,8 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 
 import './globals.css'
 
+import { ToastProvider } from '@/components/providers/toast-provider'
+
 const font = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -38,6 +40,7 @@ export default function RootLayout({
           >
             {children}
             <ModalProvider />
+            <ToastProvider />
           </ThemeProvider>
         </body>
       </html>

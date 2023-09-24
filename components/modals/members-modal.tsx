@@ -12,6 +12,7 @@ import {
 import axios from 'axios'
 import { Loader2, MoreVertical, UserX2 } from 'lucide-react'
 import qs from 'query-string'
+import toast from 'react-hot-toast'
 
 import { useModal } from '@/hooks/use-modal-store'
 import {
@@ -63,9 +64,11 @@ export function MembersModal() {
       const res = await axios.patch(url, { role })
 
       router.refresh()
+      toast.success('Role changed! 👍')
       onOpen('members', { server: res.data })
     } catch (error) {
       console.log(error)
+      toast.error('Something went wrong. 😢')
     } finally {
       setLoadingId('')
     }
@@ -85,9 +88,11 @@ export function MembersModal() {
       const res = await axios.delete(url)
 
       router.refresh()
+      toast.success('Member deleted. 👋')
       onOpen('members', { server: res.data })
     } catch (error) {
       console.log(error)
+      toast.error('Something went wrong. 😢')
     } finally {
       setLoadingId('')
     }

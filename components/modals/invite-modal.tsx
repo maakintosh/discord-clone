@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { Check, Copy, RefreshCw } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 import { useModal } from '@/hooks/use-modal-store'
 import { useOrigin } from '@/hooks/use-origin'
@@ -32,6 +33,7 @@ export function InviteModal() {
   function onCopy() {
     navigator.clipboard.writeText(inviteUrl)
     setIsCopied(true)
+    toast.success('Copied! 👍')
 
     setTimeout(() => {
       setIsCopied(false)
@@ -44,9 +46,11 @@ export function InviteModal() {
 
       const res = await axios.patch(`/api/servers/${server?.id}/invite-code`)
 
+      toast.success('New invite code generated! 👍')
       onOpen('invite', { server: res.data })
     } catch (error) {
       console.log(error)
+      toast.error('Something went wrong. 😢')
     } finally {
       setIsLoading(false)
     }
