@@ -5,8 +5,12 @@ import { useRouter } from 'next/navigation'
 import { roleIconMap } from '@/constants/icon-map'
 import { ServerWithMembersWithProfile } from '@/type'
 import { MemberRole } from '@prisma/client'
+import {
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu'
 import axios from 'axios'
-import { Loader2, UserX2 } from 'lucide-react'
+import { Loader2, MoreVertical, UserX2 } from 'lucide-react'
 import qs from 'query-string'
 
 import { useModal } from '@/hooks/use-modal-store'
@@ -17,6 +21,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Select,
@@ -117,48 +128,44 @@ export function MembersModal() {
                 {server?.profileId !== member.profile.id &&
                   loadingId !== member.id && (
                     <div className="ml-auto">
-                      <Select defaultValue={member.role}>
-                        <SelectTrigger className="">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent align="end">
-                          <SelectItem
-                            onClick={() =>
-                              onRoleChange(member.id, MemberRole.MODERATOR)
-                            }
-                            disabled={member.role === MemberRole.MODERATOR}
-                            value={MemberRole.MODERATOR}
-                          >
-                            <div className=" flex gap-x-1">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <MoreVertical className="h-5 w-5" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent side="left" align="center">
+                          <DropdownMenuRadioGroup value={member.role}>
+                            <DropdownMenuRadioItem
+                              onClick={() =>
+                                onRoleChange(member.id, MemberRole.MODERATOR)
+                              }
+                              disabled={member.role === MemberRole.MODERATOR}
+                              value={MemberRole.MODERATOR}
+                            >
                               {roleIconMap[MemberRole.MODERATOR]}
-                              {MemberRole.MODERATOR}
-                            </div>
-                          </SelectItem>
-                          <SelectItem
-                            onClick={() =>
-                              onRoleChange(member.id, MemberRole.GUEST)
-                            }
-                            disabled={member.role === MemberRole.GUEST}
-                            value={MemberRole.GUEST}
-                          >
-                            <div className=" flex gap-x-1">
+                              Moderator
+                            </DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem
+                              onClick={() =>
+                                onRoleChange(member.id, MemberRole.GUEST)
+                              }
+                              disabled={member.role === MemberRole.GUEST}
+                              value={MemberRole.GUEST}
+                            >
                               {roleIconMap[MemberRole.GUEST]}
-                              {MemberRole.GUEST}
-                            </div>
-                          </SelectItem>
-                          <SelectSeparator />
-                          <SelectItem
+                              Guest
+                            </DropdownMenuRadioItem>
+                          </DropdownMenuRadioGroup>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem
                             onClick={() => onKickout(member.id)}
-                            value="Kickout"
-                            className="bg-rose-400"
                           >
-                            <div className="flex gap-x-1 ">
-                              {<UserX2 className="h-5 w-5 text-red-600" />}
-                              Kickout
+                            <div className="flex cursor-pointer justify-center gap-x-2 bg-red-500 hover:bg-red-500/80 ">
+                              <UserX2 className="h-5 w-5 text-white" />
+                              <p className="text-white">Kickout</p>
                             </div>
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   )}
                 {loadingId === member.id && (
