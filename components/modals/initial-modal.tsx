@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as z from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -56,8 +57,10 @@ export function InitialModal() {
 
       form.reset()
       router.refresh()
+      toast.success('Server created! 🎉')
     } catch (error) {
       console.log(error)
+      toast.error('Something went wrong. 😢')
     }
   }
 
@@ -67,36 +70,38 @@ export function InitialModal() {
 
   return (
     <Dialog open>
-      <DialogContent className="rounded-md bg-slate-800 ">
-        <DialogHeader className="p-6">
+      <DialogContent className="overflow-hidden rounded-md bg-gray-100 dark:bg-gray-800">
+        <DialogHeader className="pt-6">
           <DialogTitle className="text-center text-2xl ">
-            Customize your server
+            Create your server
           </DialogTitle>
           <DialogDescription className="text-center">
             You can always change it later.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="imageUrl"
-              render={({ field }) => (
-                <FormItem className="flex flex-col justify-center">
-                  <FormLabel className="uppercase text-zinc-500">
-                    server image
-                  </FormLabel>
-                  <FormControl className=" flex flex-col justify-center">
-                    <FileUploader
-                      endpoint="serverImage"
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-500" />
-                </FormItem>
-              )}
-            />
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 p-2 md:p-4"
+          >
+            <div className="flex items-center justify-center">
+              <FormField
+                control={form.control}
+                name="imageUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl className=" flex flex-col justify-center">
+                      <FileUploader
+                        endpoint="serverImage"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-red-500" />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="name"
@@ -116,7 +121,7 @@ export function InitialModal() {
                 </FormItem>
               )}
             />
-            <DialogFooter className="py-6">
+            <DialogFooter className="">
               <Button type="submit" disabled={isLoding} variant={'primary'}>
                 Create
               </Button>

@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { ModeToggle } from '@/components/mode-toggle'
 
 import { NavigationAction } from './navigation-action'
-import { NavigationSidebarItem } from './navigation-sidebar-Item'
+import { NavigationSidebarItem } from './navigation-sidebar-item'
 
 export async function NavigationSidebar() {
   const profile = await currentUserProfile()

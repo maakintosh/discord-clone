@@ -7,10 +7,10 @@ export default async function MainLayout({
 }) {
   return (
     <div className="min-h-screen">
-      <section className="w-18 fixed inset-y-0 z-30 h-full max-md:hidden">
+      <section className="fixed inset-y-0 z-30 flex h-full w-[72px] max-md:hidden">
         <NavigationSidebar />
       </section>
-      <main className="h-full md:pl-18">{children}</main>
+      <main className="h-full md:pl-[72px]">{children}</main>
     </div>
   )
 }

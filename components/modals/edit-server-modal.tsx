@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
@@ -33,9 +34,10 @@ const formSchema = z.object({
   imageUrl: z.string().nonempty({ message: 'Server image is required' }),
 })
 
-export function CreateServerModal() {
+export function EditServerModal() {
   const router = useRouter()
-  const { isOpen, onClose, type } = useModal()
+  const { isOpen, onClose, type, data } = useModal()
+  const { server } = data
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -45,8 +47,15 @@ export function CreateServerModal() {
     },
   })
 
+  useEffect(() => {
+    if (server) {
+      form.setValue('name', server.name)
+      form.setValue('imageUrl', server.imageUrl)
+    }
+  }, [server, form])
+
   const isLoding = form.formState.isSubmitting
-  const isModalOpen = isOpen && type === 'create-server'
+  const isModalOpen = isOpen && type === 'edit-server'
 
   function handleClose() {
     form.reset()
@@ -55,11 +64,11 @@ export function CreateServerModal() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await axios.post('/api/servers', values)
+      await axios.patch(`/api/servers/${server?.id}`, values)
 
       form.reset()
       router.refresh()
-      toast.success('Server created! 🎉')
+      toast.success('Server updated! 👍')
       onClose()
     } catch (error) {
       console.log(error)
@@ -72,10 +81,10 @@ export function CreateServerModal() {
       <DialogContent className="overflow-hidden rounded-md bg-gray-100 dark:bg-gray-800">
         <DialogHeader className="pt-6">
           <DialogTitle className="text-center text-2xl ">
-            Create your server
+            Edit your server
           </DialogTitle>
           <DialogDescription className="text-center">
-            You can always change it later.
+            Change server name and image.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -122,7 +131,7 @@ export function CreateServerModal() {
             />
             <DialogFooter className="">
               <Button type="submit" disabled={isLoding} variant={'primary'}>
-                Create
+                Save
               </Button>
             </DialogFooter>
           </form>

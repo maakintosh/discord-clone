@@ -9,12 +9,14 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 
 import './globals.css'
 
+import { ToastProvider } from '@/components/providers/toast-provider'
+
 const font = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'discord-clone',
+  title: 'ChatApp',
   description:
-    'discord-clone built with Next13, shadcn-UI, Clerk, Prisma, Socket.io, react-query etc.',
+    'discord-like chat app built with Next13, shadcn-UI, Clerk, Prisma, Socket.io, react-query etc.',
 }
 
 export default function RootLayout({
@@ -38,6 +40,7 @@ export default function RootLayout({
           >
             {children}
             <ModalProvider />
+            <ToastProvider />
           </ThemeProvider>
         </body>
       </html>
