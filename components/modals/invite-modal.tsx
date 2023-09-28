@@ -58,9 +58,9 @@ export function InviteModal() {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="overflow-hidden rounded-md bg-slate-800">
+      <DialogContent className="overflow-hidden rounded-md bg-gray-100 dark:bg-gray-800">
         <DialogHeader className="pt-6">
-          <DialogTitle className="text-center text-2xl text-white">
+          <DialogTitle className="text-center text-2xl ">
             Invite Friends
           </DialogTitle>
           <DialogDescription className="text-center">

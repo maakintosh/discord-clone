@@ -30,14 +30,6 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { UserAvatar } from '@/components/user-avatar'
 
 export function MembersModal() {
@@ -100,9 +92,9 @@ export function MembersModal() {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className=" rounded-md bg-slate-800">
+      <DialogContent className=" rounded-md bg-gray-100 dark:bg-gray-800">
         <DialogHeader className="pt-6">
-          <DialogTitle className="text-center text-2xl text-white">
+          <DialogTitle className="text-center text-2xl ">
             Manage Members ({server?.members?.length})
           </DialogTitle>
           <DialogDescription className="text-center">
@@ -114,15 +106,13 @@ export function MembersModal() {
             return (
               <div
                 key={member.id}
-                className="my-2 flex w-full items-center justify-between gap-x-2 rounded-md border-2 border-slate-700 p-2"
+                className="my-2 flex w-full items-center justify-between gap-x-2 rounded-md border-2 border-zinc-300 p-2 dark:border-zinc-700"
               >
                 <div className="flex items-center ">
                   <UserAvatar src={member.profile.imageUrl} />
                   <div className="ml-2 flex flex-col  gap-y-1">
                     <div className="flex items-center gap-x-1 text-sm font-semibold">
-                      <p className="truncate text-white">
-                        {member.profile.name}
-                      </p>
+                      <p className="truncate ">{member.profile.name}</p>
                       <p>{roleIconMap[member.role]}</p>
                     </div>
                     <p className="text-ellipsis break-all text-xs text-muted-foreground">
@@ -165,8 +155,8 @@ export function MembersModal() {
                             onClick={() => onKickout(member.id)}
                           >
                             <div className="flex cursor-pointer justify-center gap-x-2 bg-red-500 hover:bg-red-500/80 ">
-                              <UserX2 className="h-5 w-5 text-white" />
-                              <p className="text-white">Kickout</p>
+                              <UserX2 className="h-5 w-5 " />
+                              <p className="">Kickout</p>
                             </div>
                           </DropdownMenuItem>
                         </DropdownMenuContent>

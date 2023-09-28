@@ -44,7 +44,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
           <ChevronDown className="ml-auto h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 space-y-1 font-medium text-black dark:text-zinc-300">
+      <DropdownMenuContent className="w-56 space-y-1 font-medium">
         {isModerator && (
           <>
             <DropdownMenuItem
@@ -54,7 +54,10 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
               Invite Friends
               <UserPlus2 className="ml-auto h-5 w-5" />
             </DropdownMenuItem>
-            <DropdownMenuItem className="">
+            <DropdownMenuItem
+              onClick={() => onOpen('create-channel', { server })}
+              className=""
+            >
               Create Channel
               <Hash className="ml-auto h-5 w-5" />
             </DropdownMenuItem>
