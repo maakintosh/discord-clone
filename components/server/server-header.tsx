@@ -88,7 +88,10 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
           </>
         )}
         {!isAdmin && (
-          <DropdownMenuItem className="text-rose-600 dark:text-rose-400">
+          <DropdownMenuItem
+            onClick={() => onOpen('leave-server', { server })}
+            className="text-rose-600 dark:text-rose-400"
+          >
             Leave Server
             <LogOut className="ml-auto h-5 w-5" />
           </DropdownMenuItem>

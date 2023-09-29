@@ -56,7 +56,7 @@ export function MembersModal() {
       const res = await axios.patch(url, { role })
 
       router.refresh()
-      toast.success('Role changed! 👍')
+      toast.success('Successfully changed role! 👍')
       onOpen('members', { server: res.data })
     } catch (error) {
       console.log(error)
@@ -80,7 +80,7 @@ export function MembersModal() {
       const res = await axios.delete(url)
 
       router.refresh()
-      toast.success('Member deleted. 👋')
+      toast.success('Successfully deleted member. 👋')
       onOpen('members', { server: res.data })
     } catch (error) {
       console.log(error)

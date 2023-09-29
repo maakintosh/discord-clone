@@ -8,8 +8,6 @@ export async function PATCH(
   { params }: { params: { serverId: string } }
 ) {
   try {
-    const { name, imageUrl } = await req.json()
-
     const profile = await currentUserProfile()
 
     if (!profile) {
@@ -23,16 +21,26 @@ export async function PATCH(
     const server = await db.server.update({
       where: {
         id: params.serverId,
-        profileId: profile.id,
+        profileId: {
+          not: profile.id,
+        },
+        members: {
+          some: {
+            profileId: profile.id,
+          },
+        },
       },
       data: {
-        name,
-        imageUrl,
+        members: {
+          deleteMany: {
+            profileId: profile.id,
+          },
+        },
       },
     })
     return NextResponse.json(server)
   } catch (error) {
-    console.log('SERVER_ID_PATCH', error)
+    console.log('SERVER_ID_LEAVE_PATCH', error)
     return new NextResponse('Intenal Error', { status: 500 })
   }
 }

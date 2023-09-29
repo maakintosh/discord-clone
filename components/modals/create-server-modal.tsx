@@ -59,7 +59,7 @@ export function CreateServerModal() {
 
       form.reset()
       router.refresh()
-      toast.success('Server created! 🎉')
+      toast.success('Successfully created server! 🎉')
       onClose()
     } catch (error) {
       console.log(error)

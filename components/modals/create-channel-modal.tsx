@@ -77,7 +77,7 @@ export function CreateChannelModal() {
 
       form.reset()
       router.refresh()
-      toast.success('Channel created! 🎉')
+      toast.success('Successfully created channel! 🎉')
       onClose()
     } catch (error) {
       console.log(error)

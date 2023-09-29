@@ -1,10 +1,11 @@
-import { Member, Server } from '@prisma/client'
+import { Server } from '@prisma/client'
 import { create } from 'zustand'
 
 export type ModalType =
   | 'create-server'
-  | 'invite'
   | 'edit-server'
+  | 'leave-server'
+  | 'invite'
   | 'members'
   | 'create-channel'
 
