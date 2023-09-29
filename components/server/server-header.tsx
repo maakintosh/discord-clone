@@ -81,7 +81,10 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
               <Settings className="ml-auto h-5 w-5" />
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-rose-600 dark:text-rose-400">
+            <DropdownMenuItem
+              onClick={() => onOpen('delete-server', { server })}
+              className="text-rose-600 dark:text-rose-400"
+            >
               Delete Server
               <Trash2 className="ml-auto h-5 w-5" />
             </DropdownMenuItem>
