@@ -56,7 +56,7 @@ export function LeaveServerModal() {
             unless you are invited again.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="p-4">
+        <DialogFooter className="rounded-md bg-gray-200 p-2 dark:bg-gray-700">
           <div className="flex w-full items-center justify-between">
             <Button variant="ghost" onClick={() => onClose()}>
               Cancel

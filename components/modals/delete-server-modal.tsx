@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { AlertTriangle } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 import { useModal } from '@/hooks/use-modal-store'
@@ -43,11 +44,20 @@ export function DeleteServerModal() {
             Delete this server?
           </DialogTitle>
           <DialogDescription className="text-center">
-            ! DANGER ! <br /> You will lose all your server data FOREVER <br />
+            <div className="flex items-center justify-center gap-x-2 text-red-500">
+              <AlertTriangle className="h-5 w-5" />
+              <p className="text-lg font-semibold">DANGER!</p>
+            </div>
+            You will lose all{' '}
+            <span className="text-lg font-bold text-indigo-500">
+              {server?.name}
+            </span>{' '}
+            server data FOREVER.
+            <br />
             and this action cannot be undone.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="p-6">
+        <DialogFooter className="p-4">
           <div className="flex w-full items-center justify-between">
             <Button variant="ghost" onClick={() => onClose()}>
               Cancel

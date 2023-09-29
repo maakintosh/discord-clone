@@ -83,7 +83,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => onOpen('delete-server', { server })}
-              className="text-rose-600 dark:text-rose-400"
+              className="text-rose-500"
             >
               Delete Server
               <Trash2 className="ml-auto h-5 w-5" />
@@ -93,7 +93,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
         {!isAdmin && (
           <DropdownMenuItem
             onClick={() => onOpen('leave-server', { server })}
-            className="text-rose-600 dark:text-rose-400"
+            className="text-rose-500"
           >
             Leave Server
             <LogOut className="ml-auto h-5 w-5" />
