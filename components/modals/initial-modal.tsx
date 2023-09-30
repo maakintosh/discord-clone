@@ -57,7 +57,7 @@ export function InitialModal() {
 
       form.reset()
       router.refresh()
-      toast.success('Server created! 🎉')
+      toast.success('Successfully created server! 🎉')
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong. 😢')

@@ -68,7 +68,7 @@ export function EditServerModal() {
 
       form.reset()
       router.refresh()
-      toast.success('Server updated! 👍')
+      toast.success('Successfully updated server! 👍')
       onClose()
     } catch (error) {
       console.log(error)
