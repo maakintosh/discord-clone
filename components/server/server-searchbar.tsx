@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { roleIconMap } from '@/constants/icon-map'
+import { MemberRole } from '@prisma/client'
 import { Command, Search } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -24,6 +26,7 @@ interface ServerSearchbarProps {
           id: string
           name: string
           icon: React.ReactNode
+          role?: MemberRole
           avatarImage?: string
         }[]
       | undefined
@@ -79,7 +82,7 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
             if (!searchData?.length) return null
             return type === 'channel' ? (
               <CommandGroup key={label} heading={label} className="">
-                <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
                   {data?.map(({ id, name, icon }) => (
                     <CommandItem
                       key={id}
@@ -95,16 +98,19 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
               </CommandGroup>
             ) : (
               <CommandGroup key={label} heading={label} className="">
-                <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
-                  {data?.map(({ id, name, icon, avatarImage }) => (
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+                  {data?.map(({ id, name, icon, role, avatarImage }) => (
                     <CommandItem
                       key={id}
                       onSelect={() => onClick({ type, id })}
                     >
                       <div className="flex items-center">
                         <UserAvatar src={avatarImage} />
-                        <div className="ml-2 flex flex-col gap-y-1">
-                          <p>{icon}</p>
+                        <div className="ml-1 flex flex-col gap-y-1">
+                          <div className="flex items-center">
+                            <p className="">{icon}</p>
+                            <p className="">{role}</p>
+                          </div>
                           <p className="">{name}</p>
                         </div>
                       </div>

@@ -97,6 +97,7 @@ export async function ServerSidebar({ serverId }: ServerSidebarProps) {
                   id: member.id,
                   name: member.profile.name,
                   icon: roleIconMap[member.role],
+                  role: member.role,
                   avatarImage: member.profile.imageUrl,
                 })),
               },
