@@ -1,6 +1,7 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 import { channelTypeIconMap } from '@/constants/icon-map'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ChannelType } from '@prisma/client'
@@ -44,8 +45,9 @@ const formSchema = z.object({
 
 export function CreateChannelModal() {
   const router = useRouter()
+  const params = useParams()
   const { isOpen, onClose, type, data } = useModal()
-  const { server } = data
+  const { channelType } = data
 
   const isModalOpen = isOpen && type === 'create-channel'
 
@@ -53,9 +55,17 @@ export function CreateChannelModal() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      type: ChannelType.TEXT,
+      type: channelType || ChannelType.TEXT,
     },
   })
+
+  useEffect(() => {
+    if (channelType) {
+      form.setValue('type', channelType)
+    } else {
+      form.setValue('type', ChannelType.TEXT)
+    }
+  }, [channelType, form])
 
   const isLoding = form.formState.isSubmitting
 
@@ -69,7 +79,7 @@ export function CreateChannelModal() {
       const url = qs.stringifyUrl({
         url: '/api/channels/',
         query: {
-          serverId: server?.id,
+          serverId: params.serverId,
         },
       })
 
@@ -112,7 +122,7 @@ export function CreateChannelModal() {
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      defaultValue={channelType}
                       disabled={isLoding}
                       className="flex justify-center space-x-4"
                     >

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { roleIconMap } from '@/constants/icon-map'
 import { MemberRole } from '@prisma/client'
 import { Command, Search } from 'lucide-react'
 
@@ -20,7 +19,7 @@ import { UserAvatar } from '@/components/user-avatar'
 interface ServerSearchbarProps {
   searchData: {
     label: string
-    type: 'member' | 'channel'
+    searchType: 'member' | 'channel'
     data:
       | {
           id: string
@@ -51,12 +50,18 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
     return () => document.removeEventListener('keydown', commandK)
   }, [isOpen])
 
-  function onClick({ type, id }: { type: 'member' | 'channel'; id: string }) {
+  function onClick({
+    searchType,
+    id,
+  }: {
+    searchType: 'member' | 'channel'
+    id: string
+  }) {
     setIsOpen(false)
-    if (type === 'member') {
+    if (searchType === 'member') {
       return router.push(`/servers/${params.serverId}/conversations/${id}`)
     }
-    if (type === 'channel') {
+    if (searchType === 'channel') {
       return router.push(`/servers/${params.serverId}/channels/${id}`)
     }
   }
@@ -78,15 +83,15 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
         <CommandInput placeholder="Search all Channels and Members." />
         <CommandList>
           <CommandEmpty>No results found.. 🙁</CommandEmpty>
-          {searchData.map(({ label, type, data }) => {
+          {searchData.map(({ label, searchType, data }) => {
             if (!searchData?.length) return null
-            return type === 'channel' ? (
+            return searchType === 'channel' ? (
               <CommandGroup key={label} heading={label} className="">
                 <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
                   {data?.map(({ id, name, icon }) => (
                     <CommandItem
                       key={id}
-                      onSelect={() => onClick({ type, id })}
+                      onSelect={() => onClick({ searchType, id })}
                     >
                       <div className="flex items-center">
                         <p>{icon}</p>
@@ -102,11 +107,11 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
                   {data?.map(({ id, name, icon, role, avatarImage }) => (
                     <CommandItem
                       key={id}
-                      onSelect={() => onClick({ type, id })}
+                      onSelect={() => onClick({ searchType, id })}
                     >
                       <div className="flex items-center">
                         <UserAvatar src={avatarImage} />
-                        <div className="ml-1 flex flex-col gap-y-1">
+                        <div className="ml-2 flex flex-col gap-y-1">
                           <div className="flex items-center">
                             <p className="">{icon}</p>
                             <p className="">{role}</p>
