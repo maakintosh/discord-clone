@@ -53,3 +53,63 @@ export async function DELETE(
     return new NextResponse('Intenal Error', { status: 500 })
   }
 }
+
+export async function PATCH(
+  req: Request,
+  { params }: { params: { channelId: string } }
+) {
+  try {
+    const { searchParams } = new URL(req.url)
+    const serverId = searchParams.get('serverId')
+    const { name } = await req.json()
+
+    const profile = await currentUserProfile()
+
+    if (!profile) {
+      return new NextResponse('Unauthorized', { status: 401 })
+    }
+
+    if (!params.channelId) {
+      return new NextResponse('Member ID is missing', { status: 400 })
+    }
+
+    if (!serverId) {
+      return new NextResponse('Server ID is missing', { status: 400 })
+    }
+
+    if (!name) {
+      return new NextResponse('Channel name is missing', { status: 400 })
+    }
+
+    const channel = await db.server.update({
+      where: {
+        id: serverId,
+        members: {
+          some: {
+            profileId: profile.id,
+            role: {
+              in: [MemberRole.ADMIN, MemberRole.MODERATOR],
+            },
+          },
+        },
+      },
+      data: {
+        channels: {
+          update: {
+            where: {
+              id: params.channelId,
+            },
+            data: {
+              name,
+            },
+          },
+        },
+      },
+    })
+
+    return NextResponse.json(channel)
+  } catch (error) {
+    console.log('CHANNEL_ID_PATCH', error)
+    return new NextResponse('Intenal Error', { status: 500 })
+  }
+}
