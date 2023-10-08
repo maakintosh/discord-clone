@@ -42,7 +42,7 @@ export function ServerSection({
         </ActionTooltip>
       )}
       {role === MemberRole.ADMIN && sectionType === 'members' && (
-        <ActionTooltip label="manege members" side="top">
+        <ActionTooltip label="manage members" side="top">
           <Button
             onClick={() => onOpen('members', { server })}
             variant="ghost"
