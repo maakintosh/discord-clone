@@ -12,8 +12,8 @@ import { ActionTooltip } from '@/components/action-tooltip'
 
 interface ServerChannelProps {
   channel: Channel
+  server: Server
   role?: MemberRole
-  server?: Server
 }
 
 export function ServerChannel({ channel, role, server }: ServerChannelProps) {
@@ -27,7 +27,11 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
     router.push(`/servers/${params.serverId}/channels/${channel.id}`)
   }
 
-  function onAction(e: React.MouseEvent, action: ModalType) {
+  function onAction(
+    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
+    action: ModalType
+  ) {
+    // prevents the event from bubbling up to the parent Button component.
     e.stopPropagation()
     onOpen(action, { channel, server })
   }

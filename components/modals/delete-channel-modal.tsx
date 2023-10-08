@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { AlertTriangle } from 'lucide-react'
+import qs from 'query-string'
 import toast from 'react-hot-toast'
 
 import { useModal } from '@/hooks/use-modal-store'
@@ -17,23 +18,30 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 
-export function DeleteServerModal() {
+export function DeleteChannelModal() {
   const router = useRouter()
   const { isOpen, onClose, type, data } = useModal()
-  const { server } = data
+  const { channel, server } = data
 
-  const isModalOpen = isOpen && type === 'delete-server'
+  const isModalOpen = isOpen && type === 'delete-channel'
 
   const [isLoading, setIsLoading] = useState(false)
 
   async function onDelete() {
     try {
       setIsLoading(true)
-      await axios.delete(`/api/servers/${server?.id}`)
+      const url = qs.stringifyUrl({
+        url: `/api/channels/${channel?.id}`,
+        query: {
+          serverId: server?.id,
+        },
+      })
 
-      router.refresh()
-      toast.success('Successfully deleted server! 👍')
+      await axios.delete(url)
+
       onClose()
+      router.refresh()
+      toast.success('Successfully deleted channel! 👍')
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong. 😢')
@@ -47,7 +55,7 @@ export function DeleteServerModal() {
       <DialogContent className="overflow-hidden rounded-md bg-gray-100 dark:bg-gray-800">
         <DialogHeader className="pt-6">
           <DialogTitle className="text-center text-2xl ">
-            Delete this server?
+            Delete this channel?
           </DialogTitle>
           <DialogDescription className="text-center">
             <div className="flex items-center justify-center gap-x-2 text-red-500">
@@ -56,9 +64,9 @@ export function DeleteServerModal() {
             </div>
             You will lose all{' '}
             <span className="text-lg font-bold text-indigo-500">
-              {server?.name}
+              {channel?.name}
             </span>{' '}
-            server data FOREVER.
+            channel data FOREVER.
             <br />
             and this action cannot be undone.
           </DialogDescription>
