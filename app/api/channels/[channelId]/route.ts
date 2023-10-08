@@ -61,7 +61,7 @@ export async function PATCH(
   try {
     const { searchParams } = new URL(req.url)
     const serverId = searchParams.get('serverId')
-    const { name } = await req.json()
+    const { type, name } = await req.json()
 
     const profile = await currentUserProfile()
 
@@ -77,8 +77,10 @@ export async function PATCH(
       return new NextResponse('Server ID is missing', { status: 400 })
     }
 
-    if (!name) {
-      return new NextResponse('Channel name is missing', { status: 400 })
+    if (name === 'general') {
+      return new NextResponse('Channel name cannot be "general"', {
+        status: 400,
+      })
     }
 
     const channel = await db.server.update({
@@ -98,8 +100,12 @@ export async function PATCH(
           update: {
             where: {
               id: params.channelId,
+              NOT: {
+                name: 'general',
+              },
             },
             data: {
+              type,
               name,
             },
           },
