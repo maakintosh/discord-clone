@@ -10,8 +10,8 @@ import { InviteModal } from '@/components/modals/invite-modal'
 import { LeaveServerModal } from '@/components/modals/leave-server-modal'
 import { MembersModal } from '@/components/modals/members-modal'
 
-import { DeleteChannelModal } from '../modals/delete-channel-modal'
-import { EditChannelModal } from '../modals/edit-channel-modal'
+import { DeleteChannelModal } from '@/components/modals/delete-channel-modal'
+import { EditChannelModal } from '@/components/modals/edit-channel-modal'
 
 export function ModalProvider() {
   const [isMounted, setIsMounted] = useState(false)
