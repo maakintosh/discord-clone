@@ -32,7 +32,7 @@ export function ServerMember({ member }: ServerSidebarProps) {
           <p>{roleIconMap[member.role]}</p>
           <p
             className={cn(
-              'text-zinc-500',
+              'text-zinc-400 dark:text-zinc-500',
               params.memberId === member.id &&
                 'line-clamp-1 text-primary dark:text-white'
             )}
