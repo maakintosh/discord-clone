@@ -39,9 +39,9 @@ export function DeleteChannelModal() {
 
       await axios.delete(url)
 
-      onClose()
       router.refresh()
       toast.success('Successfully deleted channel! 👍')
+      onClose()
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong. 😢')
