@@ -1,7 +1,7 @@
 'use client'
 
 import { ServerWithMembersWithProfile } from '@/type'
-import { MemberRole } from '@prisma/client'
+import { ChannelType, MemberRole } from '@prisma/client'
 import {
   ChevronDown,
   Hash,
@@ -55,7 +55,9 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
               <UserPlus2 className="ml-auto h-5 w-5" />
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => onOpen('create-channel', { server })}
+              onClick={() =>
+                onOpen('create-channel', { channelType: ChannelType.TEXT })
+              }
               className=""
             >
               Create Channel

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { channelTypeIconMap } from '@/constants/icon-map'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ChannelType } from '@prisma/client'
@@ -33,7 +33,6 @@ import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
 const formSchema = z.object({
-  // requires the input name to be a non-empty string and not equal to the string "general".
   name: z
     .string()
     .nonempty({ message: 'Channel name is required' })
@@ -43,31 +42,28 @@ const formSchema = z.object({
   type: z.nativeEnum(ChannelType),
 })
 
-export function CreateChannelModal() {
+export function EditChannelModal() {
   const router = useRouter()
-  const params = useParams()
   const { isOpen, onClose, type, data } = useModal()
-  const { channelType } = data
-
-  const isModalOpen = isOpen && type === 'create-channel'
+  const { server, channel } = data
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      type: channelType || ChannelType.TEXT,
+      type: channel?.type || ChannelType.TEXT,
     },
   })
 
   useEffect(() => {
-    if (channelType) {
-      form.setValue('type', channelType)
-    } else {
-      form.setValue('type', ChannelType.TEXT)
+    if (channel) {
+      form.setValue('type', channel.type)
+      form.setValue('name', channel.name)
     }
-  }, [channelType, form])
+  }, [channel, form])
 
   const isLoding = form.formState.isSubmitting
+  const isModalOpen = isOpen && type === 'edit-channel'
 
   function handleClose() {
     form.reset()
@@ -77,17 +73,16 @@ export function CreateChannelModal() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const url = qs.stringifyUrl({
-        url: '/api/channels/',
+        url: `/api/channels/${channel?.id}`,
         query: {
-          serverId: params.serverId,
+          serverId: server?.id,
         },
       })
-
-      await axios.post(url, values)
+      await axios.patch(url, values)
 
       form.reset()
       router.refresh()
-      toast.success('Successfully created channel! 🎉')
+      toast.success('Successfully updated channel! 👍')
       onClose()
     } catch (error) {
       console.log(error)
@@ -99,11 +94,11 @@ export function CreateChannelModal() {
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="overflow-hidden rounded-md bg-gray-100 dark:bg-gray-800">
         <DialogHeader className="pt-6">
-          <DialogTitle className="text-center text-2xl  ">
-            Create a channel
+          <DialogTitle className="text-center text-2xl ">
+            Edit your channel
           </DialogTitle>
           <DialogDescription className="text-center">
-            Choose from Text, Voice or Video
+            Change channel name.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -122,7 +117,7 @@ export function CreateChannelModal() {
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
-                      defaultValue={channelType}
+                      defaultValue={channel?.type}
                       disabled={isLoding}
                       className="flex justify-center space-x-4"
                     >
@@ -180,7 +175,7 @@ export function CreateChannelModal() {
             />
             <DialogFooter className="">
               <Button type="submit" disabled={isLoding} variant={'primary'}>
-                Create
+                Save
               </Button>
             </DialogFooter>
           </form>
