@@ -4,20 +4,23 @@ import { currentUserProfile } from '@/lib/actions/current-user-profile'
 import { db } from '@/lib/db'
 import { ChatHeader } from '@/components/chat/chat-header'
 
-interface ChannelIdPageProps {
+interface MemberIdPageProps {
   params: {
     serverId: string
-    channelId: string
+    memberId: string
   }
 }
 
-export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
+export default async function MemberIdPage({ params }: MemberIdPageProps) {
   const profile = await currentUserProfile()
   if (!profile) return redirectToSignIn()
 
-  const channel = await db.channel.findUnique({
+  const member = await db.member.findUnique({
     where: {
-      id: params.channelId,
+      id: params.memberId,
+    },
+    include: {
+      profile: true,
     },
   })
 
@@ -28,14 +31,15 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
     },
   })
 
-  if (!channel || !currentUserMember) return null
+  if (!member || !currentUserMember) return null
 
   return (
     <div className="flex h-full flex-col">
       <ChatHeader
-        type="channel"
-        name={channel.name}
-        channelType={channel.type}
+        type="conversation"
+        name={member.profile.name}
+        memberRole={member.role}
+        avatarImage={member.profile.imageUrl}
       />
     </div>
   )

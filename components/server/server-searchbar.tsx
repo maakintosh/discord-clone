@@ -111,12 +111,12 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
                     >
                       <div className="flex items-center">
                         <UserAvatar src={avatarImage} />
-                        <div className="ml-2 flex flex-col gap-y-1">
+                        <div className="flex flex-col gap-y-1">
                           <div className="flex items-center">
                             <p className="">{icon}</p>
                             <p className="">{role}</p>
                           </div>
-                          <p className="">{name}</p>
+                          <p className="font-semibold">{name}</p>
                         </div>
                       </div>
                     </CommandItem>
