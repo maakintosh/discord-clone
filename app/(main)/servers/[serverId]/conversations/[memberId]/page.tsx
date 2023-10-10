@@ -36,6 +36,7 @@ export default async function MemberIdPage({ params }: MemberIdPageProps) {
   return (
     <div className="flex h-full flex-col">
       <ChatHeader
+        serverId={params.serverId}
         type="conversation"
         name={member.profile.name}
         memberRole={member.role}

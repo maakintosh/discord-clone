@@ -33,6 +33,7 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
   return (
     <div className="flex h-full flex-col">
       <ChatHeader
+        serverId={params.serverId}
         type="channel"
         name={channel.name}
         channelType={channel.type}

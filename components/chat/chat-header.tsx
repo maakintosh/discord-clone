@@ -1,10 +1,11 @@
 import { channelTypeIconMap, roleIconMap } from '@/constants/icon-map'
 import { ChannelType, MemberRole } from '@prisma/client'
-import { Menu } from 'lucide-react'
 
+import { MobileSidebar } from '@/components/mobile-sidebar'
 import { UserAvatar } from '@/components/user-avatar'
 
 interface ChatHeaderProps {
+  serverId: string
   type: 'channel' | 'conversation'
   name: string
   channelType?: ChannelType
@@ -13,6 +14,7 @@ interface ChatHeaderProps {
 }
 
 export async function ChatHeader({
+  serverId,
   type,
   name,
   channelType,
@@ -21,12 +23,12 @@ export async function ChatHeader({
 }: ChatHeaderProps) {
   return (
     <div className="text-md flex h-12 items-center  px-3 font-semibold">
-      <Menu className="mr-2 h-5 w-5" />
+      <MobileSidebar serverId={serverId} />
       {type === 'channel' && channelType && channelTypeIconMap[channelType]}
 
       {type === 'conversation' && memberRole && (
         <div className="flex items-center">
-          <UserAvatar src={avatarImage} className="h-10 w-10" />
+          <UserAvatar src={avatarImage} />
           <p>{roleIconMap[memberRole]}</p>
         </div>
       )}
