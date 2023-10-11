@@ -28,7 +28,7 @@ export async function ChatHeader({
 
       {type === 'conversation' && memberRole && (
         <div className="flex items-center">
-          <UserAvatar src={avatarImage} />
+          <UserAvatar src={avatarImage} className="h-8 w-8" />
           <p>{roleIconMap[memberRole]}</p>
         </div>
       )}

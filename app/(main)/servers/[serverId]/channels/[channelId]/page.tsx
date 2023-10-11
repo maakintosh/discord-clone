@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import { redirectToSignIn } from '@clerk/nextjs'
 
 import { currentUserProfile } from '@/lib/actions/current-user-profile'
@@ -28,7 +29,7 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
     },
   })
 
-  if (!channel || !currentUserMember) return null
+  if (!channel || !currentUserMember) return redirect('/')
 
   return (
     <div className="flex h-full flex-col">

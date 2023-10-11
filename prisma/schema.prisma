@@ -60,6 +60,12 @@ model Member {
   serverId String
   server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
+  conversationsStarted  Conversation[] @relation("Member1")
+  conversationsReceived Conversation[] @relation("Member2")
+
+  messages       Message[]
+  directMessages DirectMessage[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -84,9 +90,67 @@ model Channel {
   serverId String
   server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
+  mesaages Message[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([serverId])
   @@index([profileId])
+}
+
+model Message {
+  id      String  @id @default(uuid())
+  content String  @db.Text
+  deleted Boolean @default(false)
+  fileUrl String? @db.Text
+
+  channelId String
+  channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([channelId])
+  @@index([memberId])
+}
+
+model Conversation {
+  id String @id @default(uuid())
+
+  member1Id String
+  member1   Member @relation("Member1", fields: [member1Id], references: [id], onDelete: Cascade)
+
+  member2Id String
+  member2   Member @relation("Member2", fields: [member2Id], references: [id], onDelete: Cascade)
+
+  directMessages DirectMessage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([member1Id, member2Id])
+  @@index([member2Id])
+}
+
+model DirectMessage {
+  id      String  @id @default(uuid())
+  content String  @db.Text
+  deleted Boolean @default(false)
+  fileUrl String? @db.Text
+
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([memberId])
+  @@index([conversationId])
 }
