@@ -2,6 +2,7 @@ import { channelTypeIconMap, roleIconMap } from '@/constants/icon-map'
 import { ChannelType, MemberRole } from '@prisma/client'
 
 import { MobileSidebar } from '@/components/mobile-sidebar'
+import { SocketIndicator } from '@/components/socket-indicator'
 import { UserAvatar } from '@/components/user-avatar'
 
 interface ChatHeaderProps {
@@ -33,6 +34,9 @@ export async function ChatHeader({
         </div>
       )}
       <p className="font-semibold">{name}</p>
+      <div className="ml-auto flex items-center">
+        <SocketIndicator />
+      </div>
     </div>
   )
 }
