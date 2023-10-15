@@ -40,6 +40,7 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
         name={channel.name}
         channelType={channel.type}
       />
+{/*       TODO: chat messages component */}
       <div className="flex-1">chat massages here</div>
       <ChatInput
         type={'channel'}
