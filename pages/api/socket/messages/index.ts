@@ -18,8 +18,6 @@ export default async function handler(
     const profile = await currentUserProfilePages(req)
     if (!profile) return res.status(401).json({ error: 'Unauthorized' })
 
-    if (!content) return res.status(400).json({ error: 'Missing content' })
-
     if (!channelId) return res.status(400).json({ error: 'Missing channelId' })
 
     if (!serverId) return res.status(400).json({ error: 'Missing serverId' })

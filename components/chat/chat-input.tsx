@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import * as z from 'zod'
 
+import { useModal } from '@/hooks/use-modal-store'
 import {
   Form,
   FormControl,
@@ -31,6 +32,7 @@ const formSchema = z.object({
 
 export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
   const router = useRouter()
+  const { onOpen } = useModal()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,10 +70,9 @@ export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
             <FormItem>
               <FormControl>
                 <div className="relative p-4 pb-6">
-                  {/* TODO: 'messageFile' uploader button */}
                   <button
                     type="button"
-                    onClick={() => {}}
+                    onClick={() => onOpen('message-file', { apiUrl, query })}
                     disabled={isLoading}
                     className="absolute left-6 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-400 hover:bg-zinc-500"
                   >
