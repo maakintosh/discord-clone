@@ -24,7 +24,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
   const ChannelIcon = channelTypeIconMap[channel.type]
 
   function onClick() {
-    router.push(`/servers/${params.serverId}/channels/${channel.id}`)
+    router.push(`/servers/${params?.serverId}/channels/${channel.id}`)
   }
 
   function onAction(
@@ -45,7 +45,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
       <div
         className={cn(
           'text-zinc-400 dark:text-zinc-500',
-          params.channelId === channel.id && 'text-primary dark:text-white'
+          params?.channelId === channel.id && 'text-primary dark:text-white'
         )}
       >
         {ChannelIcon}
@@ -53,7 +53,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
       <p
         className={cn(
           'text-zinc-400 dark:text-zinc-500',
-          params.channelId === channel.id &&
+          params?.channelId === channel.id &&
             'line-clamp-1 text-primary dark:text-white'
         )}
       >
@@ -66,7 +66,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
               onClick={(e) => onAction(e, 'edit-channel')}
               className={cn(
                 'hidden h-5 w-5 text-zinc-400 group-hover:block dark:text-zinc-500',
-                params.channelId === channel.id &&
+                params?.channelId === channel.id &&
                   'text-primary dark:text-white'
               )}
             />
@@ -76,7 +76,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
               onClick={(e) => onAction(e, 'delete-channel')}
               className={cn(
                 'hidden h-5 w-5 text-zinc-400 group-hover:block dark:text-zinc-500',
-                params.channelId === channel.id &&
+                params?.channelId === channel.id &&
                   'text-primary dark:text-white'
               )}
             />
@@ -88,7 +88,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
           <Lock
             className={cn(
               'h-5 w-5 text-zinc-400 dark:text-zinc-500',
-              params.channelId === channel.id && 'text-primary dark:text-white'
+              params?.channelId === channel.id && 'text-primary dark:text-white'
             )}
           />
         </div>

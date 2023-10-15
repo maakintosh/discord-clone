@@ -17,7 +17,7 @@ export function ServerMember({ member }: ServerSidebarProps) {
   const params = useParams()
 
   function onClick() {
-    router.push(`/servers/${params.serverId}/conversations/${member.id}`)
+    router.push(`/servers/${params?.serverId}/conversations/${member.id}`)
   }
 
   return (
@@ -33,7 +33,7 @@ export function ServerMember({ member }: ServerSidebarProps) {
           <p
             className={cn(
               'font-semibold text-zinc-400 dark:text-zinc-500',
-              params.memberId === member.id &&
+              params?.memberId === member.id &&
                 'line-clamp-1 text-primary dark:text-white'
             )}
           >

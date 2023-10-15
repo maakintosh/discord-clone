@@ -4,6 +4,7 @@ import { redirectToSignIn } from '@clerk/nextjs'
 import { currentUserProfile } from '@/lib/actions/current-user-profile'
 import { db } from '@/lib/db'
 import { ChatHeader } from '@/components/chat/chat-header'
+import { ChatInput } from '@/components/chat/chat-input'
 
 interface ChannelIdPageProps {
   params: {
@@ -32,12 +33,22 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
   if (!channel || !currentUserMember) return redirect('/')
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex min-h-screen flex-col">
       <ChatHeader
         serverId={params.serverId}
         type="channel"
         name={channel.name}
         channelType={channel.type}
+      />
+      <div className="flex-1">chat massages here</div>
+      <ChatInput
+        type={'channel'}
+        apiUrl="/api/socket/messages"
+        query={{
+          channelId: channel.id,
+          serverId: channel.serverId,
+        }}
+        name={channel.name}
       />
     </div>
   )

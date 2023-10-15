@@ -59,10 +59,10 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
   }) {
     setIsOpen(false)
     if (searchType === 'member') {
-      return router.push(`/servers/${params.serverId}/conversations/${id}`)
+      return router.push(`/servers/${params?.serverId}/conversations/${id}`)
     }
     if (searchType === 'channel') {
-      return router.push(`/servers/${params.serverId}/channels/${id}`)
+      return router.push(`/servers/${params?.serverId}/channels/${id}`)
     }
   }
 
