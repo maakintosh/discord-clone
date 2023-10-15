@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
-import { Plus, Smile } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import qs from 'query-string'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { EmojiPicker } from '@/components/emoji-picker'
 
 interface ChatInputProps {
   type: 'channel' | 'conversation'
@@ -89,9 +90,12 @@ export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
                    text-zinc-500 dark:bg-gray-800 dark:text-zinc-300"
                     {...field}
                   />
-                  <div className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center text-zinc-400 hover:text-zinc-500">
-                    {/* TODO: Emoji component */}
-                    <Smile />
+                  <div className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center">
+                    <EmojiPicker
+                      onChange={(emoji: string) =>
+                        field.onChange(`${field.value} ${emoji}`)
+                      }
+                    />
                   </div>
                 </div>
               </FormControl>
