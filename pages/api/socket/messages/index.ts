@@ -38,17 +38,18 @@ export default async function handler(
 
     if (!server) return res.status(404).json({ error: 'Server not found' })
 
-    const member = server.members.find(
+    const currentUserMember = server.members.find(
       (member) => member.profileId === profile.id
     )
 
-    if (!member) return res.status(404).json({ error: 'Member not found' })
+    if (!currentUserMember)
+      return res.status(404).json({ error: 'Member not found' })
 
     const message = await db.message.create({
       data: {
         content,
         fileUrl,
-        memberId: member.id,
+        memberId: currentUserMember.id,
         channelId: channelId as string,
       },
       include: {
