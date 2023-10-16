@@ -110,10 +110,12 @@ export function MembersModal() {
               >
                 <div className="flex items-center ">
                   <UserAvatar src={member.profile.imageUrl} />
-                  <div className="ml-2 flex flex-col  gap-y-1">
+                  <div className=" flex flex-col  gap-y-1">
                     <div className="flex items-center  text-sm font-semibold">
                       <p>{roleIconMap[member.role]}</p>
-                      <p className="truncate ">{member.profile.name}</p>
+                      <p className="truncate font-semibold">
+                        {member.profile.name}
+                      </p>
                     </div>
                     <p className="text-ellipsis break-all text-xs text-muted-foreground">
                       {member.profile.email}

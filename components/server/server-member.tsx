@@ -17,7 +17,7 @@ export function ServerMember({ member }: ServerSidebarProps) {
   const params = useParams()
 
   function onClick() {
-    router.push(`/servers/${params.serverId}/comversations/${member.id}`)
+    router.push(`/servers/${params?.serverId}/conversations/${member.id}`)
   }
 
   return (
@@ -27,13 +27,13 @@ export function ServerMember({ member }: ServerSidebarProps) {
       className="group flex w-full items-center justify-start rounded-md px-2 hover:bg-gray-300 dark:hover:bg-gray-700"
     >
       <div className="flex items-center">
-        <UserAvatar src={member.profile.imageUrl} className="mr-2 h-8 w-8" />
-        <div className="flex items-center  text-sm font-semibold">
+        <UserAvatar src={member.profile.imageUrl} className="h-7 w-7" />
+        <div className="flex items-center text-sm">
           <p>{roleIconMap[member.role]}</p>
           <p
             className={cn(
-              'text-zinc-500',
-              params.memberId === member.id &&
+              'font-semibold text-zinc-400 dark:text-zinc-500',
+              params?.memberId === member.id &&
                 'line-clamp-1 text-primary dark:text-white'
             )}
           >

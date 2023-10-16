@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-import { UserButton } from '@clerk/nextjs'
 
 import { fetchOrCreateProfile } from '@/lib/actions/fetch-or-create-profile'
 import { db } from '@/lib/db'

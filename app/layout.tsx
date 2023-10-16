@@ -9,6 +9,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 
 import './globals.css'
 
+import { SocketProvider } from '@/components/providers/socket-provider'
 import { ToastProvider } from '@/components/providers/toast-provider'
 
 const font = Inter({ subsets: ['latin'] })
@@ -38,9 +39,11 @@ export default function RootLayout({
             enableSystem={false}
             storageKey="discord-clone-theme"
           >
-            {children}
-            <ModalProvider />
-            <ToastProvider />
+            <SocketProvider>
+              {children}
+              <ModalProvider />
+              <ToastProvider />
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
