@@ -9,6 +9,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 
 import './globals.css'
 
+import { QueryProvider } from '@/components/providers/query-provider'
 import { SocketProvider } from '@/components/providers/socket-provider'
 import { ToastProvider } from '@/components/providers/toast-provider'
 
@@ -40,9 +41,11 @@ export default function RootLayout({
             storageKey="discord-clone-theme"
           >
             <SocketProvider>
-              {children}
-              <ModalProvider />
-              <ToastProvider />
+              <QueryProvider>
+                {children}
+                <ModalProvider />
+                <ToastProvider />
+              </QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
