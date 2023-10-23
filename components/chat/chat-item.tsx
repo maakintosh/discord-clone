@@ -62,7 +62,7 @@ export function ChatItem({
       <div onClick={onMemberClick} className="cursor-pointer">
         <UserAvatar src={messageOwnerMember.profile.imageUrl} />
       </div>
-      <div className=" flex flex-col gap-y-1">
+      <div className=" flex h-full flex-col gap-y-1">
         <div className="flex items-center justify-start gap-x-1 text-sm font-semibold">
           <p>{roleIconMap[messageOwnerMember.role]}</p>
           <p
@@ -75,19 +75,19 @@ export function ChatItem({
             {timestamp}
           </p>
           {canDeleteMessage && (
-            <div className="ml-auto hidden items-center gap-x-2 group-hover:flex">
+            <div className="ml-4 hidden items-center gap-x-2 group-hover:flex">
               {canEditMessage && (
                 <ActionTooltip label="edit">
                   <Edit
                     onClick={() => setIsEditing(true)}
-                    className="h-6 w-6 text-zinc-400 dark:text-zinc-500"
+                    className="h-5 w-5 text-zinc-400 dark:text-zinc-500"
                   />
                 </ActionTooltip>
               )}
               <ActionTooltip label="delete">
                 <Trash
                   // onClick={(e) => onAction(e, 'edit-channel')}
-                  className="h-6 w-6 text-zinc-400 dark:text-zinc-500"
+                  className="h-5 w-5 text-zinc-400 dark:text-zinc-500"
                 />
               </ActionTooltip>
             </div>
