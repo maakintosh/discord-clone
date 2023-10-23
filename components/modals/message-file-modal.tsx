@@ -27,6 +27,7 @@ import {
 } from '@/components/ui/form'
 import { FileUploader } from '@/components/file-uploader'
 
+//TODO: allows this modal to upload file with string comment
 const formSchema = z.object({
   fileUrl: z.string().nonempty({ message: 'At least one file is required' }),
 })

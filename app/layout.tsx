@@ -33,7 +33,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={cn(font.className, 'bg-gray-300 dark:bg-gray-700')}>
+        <body className={cn(font.className, 'bg-gray-300/70 dark:bg-gray-700')}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
