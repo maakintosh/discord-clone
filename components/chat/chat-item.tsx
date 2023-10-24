@@ -7,7 +7,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Member, MemberRole, Profile } from '@prisma/client'
 import axios from 'axios'
 import { Edit, FileIcon, Trash } from 'lucide-react'
-import { comma } from 'postcss/lib/list'
 import qs from 'query-string'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -58,18 +57,10 @@ export function ChatItem({
   messageOwnerMember,
   currentUserMember,
 }: ChatItemProps) {
+  const [isEditing, setIsEditing] = useState(false)
   const router = useRouter()
   const { onOpen } = useModal()
 
-  const isAdmin = currentUserMember.role === MemberRole.ADMIN
-  const isModerator = currentUserMember.role === MemberRole.MODERATOR
-  const isOwner = currentUserMember.id === messageOwnerMember.id
-  const canEditMessage = !isDeleted && isOwner
-  const canDeleteMessage = !isDeleted && (isOwner || isAdmin || isModerator)
-
-  const fileType = fileUrl?.split('.').pop()
-  const isPDF = fileUrl && fileType === 'pdf'
-  const isImage = fileUrl && fileType !== 'pdf'
 
   useEffect(() => {
     function commandEscape(e: KeyboardEvent) {
@@ -93,20 +84,13 @@ export function ChatItem({
     )
   }
 
-  const [isEditing, setIsEditing] = useState(false)
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content: '',
+      content,
     },
   })
-
-  useEffect(() => {
-    form.reset({
-      content,
-    })
-  }, [content, form])
 
   const isLoading = form.formState.isSubmitting
 
@@ -127,6 +111,22 @@ export function ChatItem({
       toast.error('Something went wrong. 😢')
     }
   }
+  
+  useEffect(() => {
+    form.reset({
+      content,
+    })
+  }, [content, form])
+  
+  const isAdmin = currentUserMember.role === MemberRole.ADMIN
+  const isModerator = currentUserMember.role === MemberRole.MODERATOR
+  const isOwner = currentUserMember.id === messageOwnerMember.id
+  const canEditMessage = !isDeleted && isOwner
+  const canDeleteMessage = !isDeleted && (isOwner || isAdmin || isModerator)
+
+  const fileType = fileUrl?.split('.').pop()
+  const isPDF = fileUrl && fileType === 'pdf'
+  const isImage = fileUrl && fileType !== 'pdf'
 
   return (
     <div className="group m-1 flex gap-x-1 rounded-md  p-2 hover:bg-gray-300/80 dark:hover:bg-gray-700/80">
@@ -174,7 +174,7 @@ export function ChatItem({
             href={fileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className=" relative mx-2 flex aspect-square h-64 w-64 items-center overflow-hidden rounded-md"
+            className=" relative mx-2 flex aspect-square h-64 w-64 items-center overflow-hidden rounded-md md:h-90 md:w-90"
           >
             {/* TODO: Image size optimization */}
             <Image
@@ -233,7 +233,7 @@ export function ChatItem({
                     </FormItem>
                   )}
                 />
-                <Button type="submit" disabled={isLoading} variant={'primary'}>
+                <Button disabled={isLoading} variant={'primary'} size={'sm'}>
                   Save
                 </Button>
               </div>
