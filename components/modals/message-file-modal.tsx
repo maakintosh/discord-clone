@@ -27,6 +27,7 @@ import {
 } from '@/components/ui/form'
 import { FileUploader } from '@/components/file-uploader'
 
+//TODO: allows this modal to upload file with string comment
 const formSchema = z.object({
   fileUrl: z.string().nonempty({ message: 'At least one file is required' }),
 })
@@ -43,7 +44,7 @@ export function MessageFileModal() {
     },
   })
 
-  const isLoding = form.formState.isSubmitting
+  const isLoading = form.formState.isSubmitting
   const isModalOpen = isOpen && type === 'message-file'
 
   function handleClose() {
@@ -107,7 +108,7 @@ export function MessageFileModal() {
               />
             </div>
             <DialogFooter className="">
-              <Button type="submit" disabled={isLoding} variant={'primary'}>
+              <Button type="submit" disabled={isLoading} variant={'primary'}>
                 Upload
               </Button>
             </DialogFooter>

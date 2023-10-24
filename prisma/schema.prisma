@@ -100,10 +100,10 @@ model Channel {
 }
 
 model Message {
-  id      String  @id @default(uuid())
-  content String  @db.Text
-  deleted Boolean @default(false)
-  fileUrl String? @db.Text
+  id        String  @id @default(uuid())
+  content   String  @db.Text
+  isDeleted Boolean @default(false)
+  fileUrl   String? @db.Text
 
   channelId String
   channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
@@ -137,10 +137,10 @@ model Conversation {
 }
 
 model DirectMessage {
-  id      String  @id @default(uuid())
-  content String  @db.Text
-  deleted Boolean @default(false)
-  fileUrl String? @db.Text
+  id        String  @id @default(uuid())
+  content   String  @db.Text
+  isDeleted Boolean @default(false)
+  fileUrl   String? @db.Text
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)

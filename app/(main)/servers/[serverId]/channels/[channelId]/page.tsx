@@ -52,7 +52,7 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
         paramKey="channelId"
         paramValue={channel.id}
         chatId={channel.id}
-        member={currentUserMember}
+        currentUserMember={currentUserMember}
         name={channel.name}
       />
       <ChatInput

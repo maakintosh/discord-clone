@@ -54,7 +54,7 @@ export function EditServerModal() {
     }
   }, [server, form])
 
-  const isLoding = form.formState.isSubmitting
+  const isLoading = form.formState.isSubmitting
   const isModalOpen = isOpen && type === 'edit-server'
 
   function handleClose() {
@@ -120,7 +120,7 @@ export function EditServerModal() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoding}
+                      disabled={isLoading}
                       placeholder="Enter a server name"
                       {...field}
                     />
@@ -130,7 +130,7 @@ export function EditServerModal() {
               )}
             />
             <DialogFooter className="">
-              <Button type="submit" disabled={isLoding} variant={'primary'}>
+              <Button type="submit" disabled={isLoading} variant={'primary'}>
                 Save
               </Button>
             </DialogFooter>

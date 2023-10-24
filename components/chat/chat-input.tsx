@@ -70,6 +70,7 @@ export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
+                {/* TODO: make chat-input fixed to bottom */}
                 <div className="relative p-4 pb-6">
                   <button
                     type="button"

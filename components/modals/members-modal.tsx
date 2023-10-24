@@ -137,6 +137,7 @@ export function MembersModal() {
                               }
                               disabled={member.role === MemberRole.MODERATOR}
                               value={MemberRole.MODERATOR}
+                              className="cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-700"
                             >
                               {roleIconMap[MemberRole.MODERATOR]}
                               Moderator
@@ -147,6 +148,7 @@ export function MembersModal() {
                               }
                               disabled={member.role === MemberRole.GUEST}
                               value={MemberRole.GUEST}
+                              className="cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-700"
                             >
                               {roleIconMap[MemberRole.GUEST]}
                               Guest

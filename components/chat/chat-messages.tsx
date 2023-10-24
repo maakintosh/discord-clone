@@ -2,11 +2,15 @@
 
 import { Fragment } from 'react'
 import { Member, Message, Profile } from '@prisma/client'
+import { format } from 'date-fns'
 import { Loader2, ServerCrash } from 'lucide-react'
 
 import { useChatQuery } from '@/hooks/use-chat-query'
 
+import { ChatItem } from './chat-item'
 import { ChatWelcome } from './chat-welcome'
+
+const DATE_FORMAT = 'MMM d yyyy, HH:mm'
 
 type MessageWithMemberWithProfile = Message & {
   member: Member & {
@@ -22,7 +26,7 @@ interface ChatMessagesProps {
   paramKey: 'channelId' | 'conversationId'
   paramValue: string
   chatId: string
-  member: Member
+  currentUserMember: Member
   name: string
 }
 
@@ -34,7 +38,7 @@ export function ChatMessages({
   paramKey,
   paramValue,
   chatId,
-  member,
+  currentUserMember,
   name,
 }: ChatMessagesProps) {
   const queryKey = `chat:${chatId}`
@@ -49,8 +53,8 @@ export function ChatMessages({
 
   if (status === 'loading') {
     return (
-      <div className="my-4 flex flex-1 flex-col items-center justify-center ">
-        <Loader2 className="h-8 w-8 animate-spin text-zinc-500" />
+      <div className="flex flex-1 flex-col items-center justify-center ">
+        <Loader2 className="my-4 h-8 w-8 animate-spin text-zinc-500" />
         <p className="text-zinc-500">Loading messages...</p>
       </div>
     )
@@ -58,8 +62,8 @@ export function ChatMessages({
 
   if (status === 'error') {
     return (
-      <div className="my-4 flex flex-1 flex-col items-center justify-center ">
-        <ServerCrash className="h-8 w-8 text-zinc-500" />
+      <div className="flex flex-1 flex-col items-center justify-center ">
+        <ServerCrash className="my-4 h-8 w-8 text-zinc-500" />
         <p className="text-zinc-500">Something went wrong!</p>
       </div>
     )
@@ -73,7 +77,19 @@ export function ChatMessages({
         {data?.pages.map((group, i) => (
           <Fragment key={i}>
             {group.messages.map((message: MessageWithMemberWithProfile) => (
-              <div key={message.id}>{message.content}</div>
+              <ChatItem
+                key={message.id}
+                socketUrl={socketUrl}
+                socketQuery={socketQuery}
+                id={message.id}
+                content={message.content}
+                isDeleted={message.isDeleted}
+                fileUrl={message.fileUrl}
+                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                isUpdated={message.updatedAt !== message.createdAt}
+                messageOwnerMember={message.member}
+                currentUserMember={currentUserMember}
+              />
             ))}
           </Fragment>
         ))}

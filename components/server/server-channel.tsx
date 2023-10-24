@@ -44,7 +44,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
     >
       <div
         className={cn(
-          'text-zinc-400 dark:text-zinc-500',
+          'text-zinc-500',
           params?.channelId === channel.id && 'text-primary dark:text-white'
         )}
       >
@@ -52,7 +52,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
       </div>
       <p
         className={cn(
-          'text-zinc-400 dark:text-zinc-500',
+          'text-zinc-500',
           params?.channelId === channel.id &&
             'line-clamp-1 text-primary dark:text-white'
         )}
@@ -65,7 +65,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
             <Edit
               onClick={(e) => onAction(e, 'edit-channel')}
               className={cn(
-                'hidden h-5 w-5 text-zinc-400 group-hover:block dark:text-zinc-500',
+                'block h-5 w-5 text-zinc-500 hover:text-zinc-600 group-hover:block dark:hover:text-zinc-400 md:hidden',
                 params?.channelId === channel.id &&
                   'text-primary dark:text-white'
               )}
@@ -75,7 +75,7 @@ export function ServerChannel({ channel, role, server }: ServerChannelProps) {
             <Trash2
               onClick={(e) => onAction(e, 'delete-channel')}
               className={cn(
-                'hidden h-5 w-5 text-zinc-400 group-hover:block dark:text-zinc-500',
+                'block h-5 w-5 text-zinc-500 hover:text-zinc-600 group-hover:block dark:hover:text-zinc-400 md:hidden',
                 params?.channelId === channel.id &&
                   'text-primary dark:text-white'
               )}
