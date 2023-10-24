@@ -44,7 +44,7 @@ export function MessageFileModal() {
     },
   })
 
-  const isLoding = form.formState.isSubmitting
+  const isLoading = form.formState.isSubmitting
   const isModalOpen = isOpen && type === 'message-file'
 
   function handleClose() {
@@ -108,7 +108,7 @@ export function MessageFileModal() {
               />
             </div>
             <DialogFooter className="">
-              <Button type="submit" disabled={isLoding} variant={'primary'}>
+              <Button type="submit" disabled={isLoading} variant={'primary'}>
                 Upload
               </Button>
             </DialogFooter>

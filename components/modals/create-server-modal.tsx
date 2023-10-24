@@ -45,7 +45,7 @@ export function CreateServerModal() {
     },
   })
 
-  const isLoding = form.formState.isSubmitting
+  const isLoading = form.formState.isSubmitting
   const isModalOpen = isOpen && type === 'create-server'
 
   function handleClose() {
@@ -111,7 +111,7 @@ export function CreateServerModal() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoding}
+                      disabled={isLoading}
                       placeholder="Enter a server name"
                       {...field}
                     />
@@ -121,7 +121,7 @@ export function CreateServerModal() {
               )}
             />
             <DialogFooter className="">
-              <Button type="submit" disabled={isLoding} variant={'primary'}>
+              <Button type="submit" disabled={isLoading} variant={'primary'}>
                 Create
               </Button>
             </DialogFooter>

@@ -49,7 +49,7 @@ export function InitialModal() {
     },
   })
 
-  const isLoding = form.formState.isSubmitting
+  const isLoading = form.formState.isSubmitting
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -112,7 +112,7 @@ export function InitialModal() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoding}
+                      disabled={isLoading}
                       placeholder="Enter a server name"
                       {...field}
                     />
@@ -122,7 +122,7 @@ export function InitialModal() {
               )}
             />
             <DialogFooter className="">
-              <Button type="submit" disabled={isLoding} variant={'primary'}>
+              <Button type="submit" disabled={isLoading} variant={'primary'}>
                 Create
               </Button>
             </DialogFooter>

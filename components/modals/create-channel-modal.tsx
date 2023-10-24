@@ -67,7 +67,7 @@ export function CreateChannelModal() {
     }
   }, [channelType, form])
 
-  const isLoding = form.formState.isSubmitting
+  const isLoading = form.formState.isSubmitting
 
   function handleClose() {
     form.reset()
@@ -123,7 +123,7 @@ export function CreateChannelModal() {
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={channelType}
-                      disabled={isLoding}
+                      disabled={isLoading}
                       className="flex justify-center space-x-4"
                     >
                       <FormItem className="flex items-center space-x-1">
@@ -169,7 +169,7 @@ export function CreateChannelModal() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoding}
+                      disabled={isLoading}
                       placeholder="Enter a server name"
                       {...field}
                     />
@@ -179,7 +179,7 @@ export function CreateChannelModal() {
               )}
             />
             <DialogFooter className="">
-              <Button type="submit" disabled={isLoding} variant={'primary'}>
+              <Button type="submit" disabled={isLoading} variant={'primary'}>
                 Create
               </Button>
             </DialogFooter>

@@ -79,6 +79,8 @@ export function ChatMessages({
             {group.messages.map((message: MessageWithMemberWithProfile) => (
               <ChatItem
                 key={message.id}
+                socketUrl={socketUrl}
+                socketQuery={socketQuery}
                 id={message.id}
                 content={message.content}
                 isDeleted={message.isDeleted}
@@ -87,8 +89,6 @@ export function ChatMessages({
                 isUpdated={message.updatedAt !== message.createdAt}
                 messageOwnerMember={message.member}
                 currentUserMember={currentUserMember}
-                socketUrl={socketUrl}
-                socketQuery={socketQuery}
               />
             ))}
           </Fragment>
