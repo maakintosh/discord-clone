@@ -14,6 +14,7 @@ import toast from 'react-hot-toast'
 import * as z from 'zod'
 
 import { cn } from '@/lib/utils'
+import { useModal } from '@/hooks/use-modal-store'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -58,6 +59,7 @@ export function ChatItem({
   currentUserMember,
 }: ChatItemProps) {
   const router = useRouter()
+  const { onOpen } = useModal()
 
   const isAdmin = currentUserMember.role === MemberRole.ADMIN
   const isModerator = currentUserMember.role === MemberRole.MODERATOR
@@ -155,7 +157,12 @@ export function ChatItem({
               )}
               <ActionTooltip label="delete">
                 <Trash
-                  // onClick={(e) => onAction(e, 'edit-channel')}
+                  onClick={() =>
+                    onOpen('delete-message', {
+                      apiUrl: `${socketUrl}/${id}`,
+                      query: socketQuery,
+                    })
+                  }
                   className="h-5 w-5 cursor-pointer text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
                 />
               </ActionTooltip>
@@ -199,7 +206,7 @@ export function ChatItem({
             )}
           >
             {isUpdated && !isDeleted && (
-              <span className="mx-2 text-xs text-zinc-500 dark:text-zinc-400">
+              <span className="mx-2 text-xs italic text-zinc-500 dark:text-zinc-400">
                 (edited)
               </span>
             )}
