@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import { Loader2, ServerCrash } from 'lucide-react'
 
 import { useChatQuery } from '@/hooks/use-chat-query'
+import { useChatSocket } from '@/hooks/use-chat-socket'
 
 import { ChatItem } from './chat-item'
 import { ChatWelcome } from './chat-welcome'
@@ -42,6 +43,8 @@ export function ChatMessages({
   name,
 }: ChatMessagesProps) {
   const queryKey = `chat:${chatId}`
+  const addKey = `chat:${chatId}:messages`
+  const updateKey = `chat:${chatId}:messages:update`
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useChatQuery({
@@ -50,6 +53,7 @@ export function ChatMessages({
       paramKey,
       paramValue,
     })
+  useChatSocket({ addKey, updateKey, queryKey })
 
   if (status === 'loading') {
     return (
