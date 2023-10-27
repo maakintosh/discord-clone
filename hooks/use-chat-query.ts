@@ -39,7 +39,8 @@ export function useChatQuery({
       queryKey: [queryKey],
       queryFn: fetchMessages,
       getNextPageParam: (lastPage) => lastPage?.nextcursor,
-      refetchInterval: isConnected ? false : 1000,
+      // TODO: find out socket problem cause, and toggle false or 1000 reffering to isConnected state above instead of forcefully refetching every 1s
+      refetchInterval: 1000,
     })
 
   return {

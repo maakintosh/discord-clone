@@ -1,6 +1,7 @@
 'use client'
 
 import { Fragment } from 'react'
+import { MessageWithMemberWithProfile } from '@/type'
 import { Member, Message, Profile } from '@prisma/client'
 import { format } from 'date-fns'
 import { Loader2, ServerCrash } from 'lucide-react'
@@ -12,12 +13,6 @@ import { ChatItem } from './chat-item'
 import { ChatWelcome } from './chat-welcome'
 
 const DATE_FORMAT = 'MMM d yyyy, HH:mm'
-
-type MessageWithMemberWithProfile = Message & {
-  member: Member & {
-    profile: Profile
-  }
-}
 
 interface ChatMessagesProps {
   type: 'channel' | 'conversation'
