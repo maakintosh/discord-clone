@@ -18,7 +18,7 @@ export function ModeToggle() {
   }
 
   return (
-    <Toggle>
+    <Toggle asChild>
       <Button
         onClick={toggleTheme}
         variant="outline"
