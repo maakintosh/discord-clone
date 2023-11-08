@@ -35,8 +35,9 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
 
   return (
     <div className="flex min-h-screen flex-col">
+      {/* TODO: fix chat-input top */}
       <ChatHeader
-        serverId={params.serverId}
+        serverId={channel.serverId}
         type="channel"
         name={channel.name}
         channelType={channel.type}
@@ -55,6 +56,7 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
         currentUserMember={currentUserMember}
         name={channel.name}
       />
+      {/* TODO: fix chat-input bottom */}
       <ChatInput
         type={'channel'}
         apiUrl="/api/socket/messages"

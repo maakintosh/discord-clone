@@ -49,7 +49,7 @@ export async function GET(req: Request) {
     }
 
     return NextResponse.json({
-      messages,
+      items: messages,
       nextCursor,
     })
   } catch (error) {

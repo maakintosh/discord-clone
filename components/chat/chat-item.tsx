@@ -29,14 +29,14 @@ import { ActionTooltip } from '@/components/action-tooltip'
 import { UserAvatar } from '@/components/user-avatar'
 
 interface ChatItemProps {
-  socketUrl: string
-  socketQuery: Record<string, string>
   id: string
   content: string
   isDeleted: boolean
   fileUrl: string | null
   timestamp: string
   isUpdated: boolean
+  socketUrl: string
+  socketQuery: Record<string, string>
   messageOwnerMember: Member & {
     profile: Profile
   }

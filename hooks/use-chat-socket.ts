@@ -10,6 +10,7 @@ interface UseChatSocketProps {
   queryKey: string
 }
 
+// abstracts the logic of managing chat messages, making it easier to maintain and test. It also improves the performance by reducing unnecessary re-renders, thanks to the efficient caching and data management of React Query.
 export function useChatSocket({
   addKey,
   updateKey,
@@ -19,6 +20,7 @@ export function useChatSocket({
   const queryClient = useQueryClient()
 
   useEffect(() => {
+    // triggered when a message update event is received from the socket. It updates the corresponding message in the query data.
     function handleUpdate(message: MessageWithMemberWithProfile) {
       queryClient.setQueryData([queryKey], (oldData: any) => {
         if (!oldData || !oldData.pages || oldData.pages.length === 0) {
@@ -48,6 +50,7 @@ export function useChatSocket({
       })
     }
 
+    // triggered when a new message event is received from the socket. It adds the new message to the beginning of the messages list in the query data.
     function handleAdd(message: MessageWithMemberWithProfile) {
       queryClient.setQueryData([queryKey], (oldData: any) => {
         if (!oldData || !oldData.pages || oldData.pages.length === 0) {
