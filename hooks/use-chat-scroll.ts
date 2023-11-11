@@ -17,7 +17,9 @@ export function useChatScroll({
 }: useChatScrollProps) {
   const [hasInitialized, setHasInitialized] = useState(false)
 
-  // automatically loads more messages if the user is at the top of the displayed chat messages component and there are still more messages to load
+  // automatically loads more messages if 
+  // 1.the user is at the top of the displayed chat messages component, and 
+  // 2.there are still more messages to load
   useEffect(() => {
     const topDiv = chatRef?.current
 
@@ -28,14 +30,14 @@ export function useChatScroll({
       }
     }
 
-    topDiv?.addEventListener('scroll', autoLoad)
+    topDiv?.addEventListener('autoLoad', autoLoad)
 
     return () => {
-      topDiv?.removeEventListener('scroll', autoLoad)
+      topDiv?.removeEventListener('autoLoad', autoLoad)
     }
   }, [chatRef, loadMoreFn, shouldLoadMore])
 
-  // hook to automatically scrolls chat page to the bottom when new messages are added.
+  // automatically scrolls chat page to the bottom when new messages are added.
   useEffect(() => {
     const topDiv = chatRef.current
     const bottomDiv = bottomRef?.current
