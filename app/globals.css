@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* (ESSENTIAL): this additional CSS options had made work for: 
+1. fixing ChatHeader at the top and ChatInput at the bottom.
+2. automatically loads more messages if the user is at the top of the displayed chat messages component */
+html,
+body,
+:root {
+  height: 100%;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

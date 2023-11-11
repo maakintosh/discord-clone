@@ -6,7 +6,7 @@ export default async function MainLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen">
+    <div className="h-full">
       <section className="fixed inset-y-0 z-30 flex h-full w-[72px] max-md:hidden">
         <NavigationSidebar />
       </section>

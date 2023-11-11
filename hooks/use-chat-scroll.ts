@@ -17,7 +17,7 @@ export function useChatScroll({
 }: useChatScrollProps) {
   const [hasInitialized, setHasInitialized] = useState(false)
 
-  // TODO: make this work in a way that automatically loads more messages if the user is at the top of the displayed chat messages component and there are still more messages to load
+  // automatically loads more messages if the user is at the top of the displayed chat messages component and there are still more messages to load
   useEffect(() => {
     const topDiv = chatRef?.current
 

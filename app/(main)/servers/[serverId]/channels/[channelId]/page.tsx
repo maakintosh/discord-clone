@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { redirectToSignIn } from '@clerk/nextjs'
+import { ChannelType } from '@prisma/client'
 
 import { currentUserProfile } from '@/lib/actions/current-user-profile'
 import { db } from '@/lib/db'
@@ -34,38 +35,40 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
   if (!channel || !currentUserMember) return redirect('/')
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* TODO: fix chat-input top */}
+    <div className=" flex h-full flex-col">
       <ChatHeader
         serverId={channel.serverId}
         type="channel"
         name={channel.name}
         channelType={channel.type}
       />
-      <ChatMessages
-        type="channel"
-        apiUrl="/api/messages"
-        socketUrl="/api/socket/messages"
-        socketQuery={{
-          channelId: channel.id,
-          serverId: channel.serverId,
-        }}
-        paramKey="channelId"
-        paramValue={channel.id}
-        chatId={channel.id}
-        currentUserMember={currentUserMember}
-        name={channel.name}
-      />
-      {/* TODO: fix chat-input bottom */}
-      <ChatInput
-        type={'channel'}
-        apiUrl="/api/socket/messages"
-        query={{
-          channelId: channel.id,
-          serverId: channel.serverId,
-        }}
-        name={channel.name}
-      />
+      {channel.type === ChannelType.TEXT && (
+        <>
+          <ChatMessages
+            type="channel"
+            apiUrl="/api/messages"
+            socketUrl="/api/socket/messages"
+            socketQuery={{
+              channelId: channel.id,
+              serverId: channel.serverId,
+            }}
+            paramKey="channelId"
+            paramValue={channel.id}
+            chatId={channel.id}
+            currentUserMember={currentUserMember}
+            name={channel.name}
+          />
+          <ChatInput
+            type={'channel'}
+            apiUrl="/api/socket/messages"
+            query={{
+              channelId: channel.id,
+              serverId: channel.serverId,
+            }}
+            name={channel.name}
+          />
+        </>
+      )}
     </div>
   )
 }
