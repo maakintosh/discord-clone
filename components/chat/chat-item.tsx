@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -27,14 +29,14 @@ import { ActionTooltip } from '@/components/action-tooltip'
 import { UserAvatar } from '@/components/user-avatar'
 
 interface ChatItemProps {
-  socketUrl: string
-  socketQuery: Record<string, string>
   id: string
   content: string
   isDeleted: boolean
   fileUrl: string | null
   timestamp: string
   isUpdated: boolean
+  socketUrl: string
+  socketQuery: Record<string, string>
   messageOwnerMember: Member & {
     profile: Profile
   }
@@ -61,7 +63,6 @@ export function ChatItem({
   const router = useRouter()
   const { onOpen } = useModal()
 
-
   useEffect(() => {
     function commandEscape(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -83,7 +84,6 @@ export function ChatItem({
       `/servers/${messageOwnerMember.serverId}/members/${messageOwnerMember.id}`
     )
   }
-
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -111,13 +111,13 @@ export function ChatItem({
       toast.error('Something went wrong. 😢')
     }
   }
-  
+
   useEffect(() => {
     form.reset({
       content,
     })
   }, [content, form])
-  
+
   const isAdmin = currentUserMember.role === MemberRole.ADMIN
   const isModerator = currentUserMember.role === MemberRole.MODERATOR
   const isOwner = currentUserMember.id === messageOwnerMember.id
@@ -174,7 +174,7 @@ export function ChatItem({
             href={fileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className=" relative mx-2 flex aspect-square h-64 w-64 items-center overflow-hidden rounded-md md:h-90 md:w-90"
+            className=" md:h-90 md:w-90 relative mx-2 flex aspect-square h-64 w-64 items-center overflow-hidden rounded-md"
           >
             {/* TODO: Image size optimization */}
             <Image

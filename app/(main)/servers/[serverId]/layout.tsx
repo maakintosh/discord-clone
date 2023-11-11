@@ -29,7 +29,7 @@ export default async function ServerIdLayout({
   if (!server) redirect('/')
 
   return (
-    <div className="min-h-screen">
+    <div className="h-full">
       <section className="fixed inset-y-0 z-20 flex h-full w-60 flex-col max-md:hidden">
         <ServerSidebar serverId={params.serverId} />
       </section>
