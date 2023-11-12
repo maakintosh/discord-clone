@@ -17,8 +17,8 @@ export function useChatScroll({
 }: useChatScrollProps) {
   const [hasInitialized, setHasInitialized] = useState(false)
 
-  // automatically loads more messages if 
-  // 1.the user is at the top of the displayed chat messages component, and 
+  // automatically loads more messages if
+  // 1.the user is at the top of the displayed chat messages component, and
   // 2.there are still more messages to load
   useEffect(() => {
     const topDiv = chatRef?.current
@@ -30,10 +30,11 @@ export function useChatScroll({
       }
     }
 
-    topDiv?.addEventListener('autoLoad', autoLoad)
+    // the first argument for 'listener' is required to be 'scroll' for the event listener to work.
+    topDiv?.addEventListener('scroll', autoLoad)
 
     return () => {
-      topDiv?.removeEventListener('autoLoad', autoLoad)
+      topDiv?.removeEventListener('scroll', autoLoad)
     }
   }, [chatRef, loadMoreFn, shouldLoadMore])
 

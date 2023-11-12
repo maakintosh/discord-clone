@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server'
-import { Message } from '@prisma/client'
+import { DirectMessage } from '@prisma/client'
 
 import { currentUserProfile } from '@/lib/actions/current-user-profile'
 import { db } from '@/lib/db'
 
-const MESSAGES_BATCH_SIZE = 20
+const DIRECT_MESSAGES_BATCH_SIZE = 20
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
-    const channelId = searchParams.get('channelId')
+    const conversationId = searchParams.get('conversationId')
     const cursor = searchParams.get('cursor')
 
     const profile = await currentUserProfile()
@@ -17,18 +17,18 @@ export async function GET(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    if (!channelId) {
-      return new NextResponse('Channel ID is missing', { status: 400 })
+    if (!conversationId) {
+      return new NextResponse('Conversation ID is missing', { status: 400 })
     }
 
-    let messages: Message[] = []
+    let directMessages: DirectMessage[] = []
 
-    messages = await db.message.findMany({
-      take: MESSAGES_BATCH_SIZE,
+    directMessages = await db.directMessage.findMany({
+      take: DIRECT_MESSAGES_BATCH_SIZE,
       skip: cursor ? 1 : 0,
       cursor: cursor ? { id: cursor } : undefined,
       where: {
-        channelId,
+        conversationId,
       },
       include: {
         member: {
@@ -44,16 +44,16 @@ export async function GET(req: Request) {
 
     let nextCursor = null
 
-    if (messages.length === MESSAGES_BATCH_SIZE) {
-      nextCursor = messages[MESSAGES_BATCH_SIZE - 1].id
+    if (directMessages.length === DIRECT_MESSAGES_BATCH_SIZE) {
+      nextCursor = directMessages[DIRECT_MESSAGES_BATCH_SIZE - 1].id
     }
 
     return NextResponse.json({
-      items: messages,
+      items: directMessages,
       nextCursor,
     })
   } catch (error) {
-    console.log('[MESSAGES_GET]', error)
+    console.log('[DIRECT_MESSAGES_GET]', error)
     return new NextResponse('Internal Error', { status: 500 })
   }
 }

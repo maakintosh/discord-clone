@@ -48,14 +48,14 @@ const formSchema = z.object({
 })
 
 export function ChatItem({
-  socketUrl,
-  socketQuery,
   id,
   content,
   isDeleted,
   fileUrl,
   timestamp,
   isUpdated,
+  socketUrl,
+  socketQuery,
   messageOwnerMember,
   currentUserMember,
 }: ChatItemProps) {
@@ -63,6 +63,7 @@ export function ChatItem({
   const router = useRouter()
   const { onOpen } = useModal()
 
+  // users can press escape to cancel editing
   useEffect(() => {
     function commandEscape(e: KeyboardEvent) {
       if (e.key === 'Escape') {
