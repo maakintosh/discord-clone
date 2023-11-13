@@ -13,13 +13,10 @@ export default async function handler(
 
   try {
     const { content, fileUrl } = req.body
-    const { currentUserMemberId, opponentMemberId, conversationId } = req.query
+    const { conversationId } = req.query
 
     const profile = await currentUserProfilePages(req)
     if (!profile) return res.status(401).json({ error: 'Unauthorized' })
-
-    if (!opponentMemberId)
-      return res.status(400).json({ error: 'Missing opponentMemberId' })
 
     if (!conversationId)
       return res.status(400).json({ error: 'Missing conversationId' })
@@ -29,12 +26,14 @@ export default async function handler(
         id: conversationId as string,
         OR: [
           {
-            member1Id: currentUserMemberId as string,
-            member2Id: opponentMemberId as string,
+            member1: {
+              profileId: profile.id,
+            },
           },
           {
-            member1Id: opponentMemberId as string,
-            member2Id: currentUserMemberId as string,
+            member2: {
+              profileId: profile.id,
+            },
           },
         ],
       },
@@ -76,9 +75,10 @@ export default async function handler(
       },
     })
 
-    const conversationKey = `chat:${conversationId}:direct-messages`
+    const channelKey = `chat:${conversationId}:messages`
 
-    res?.socket?.server?.io?.emit(conversationKey, directMessage)
+    // the Socket.IO library enables real-time, bidirectional, and event-based communication between the browser and the server .The emit function is used to send messages from the server to the client.
+    res?.socket?.server?.io?.emit(channelKey, directMessage)
 
     return res.status(200).json(directMessage)
   } catch (error) {

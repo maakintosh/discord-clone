@@ -55,11 +55,8 @@ export default async function MemberIdPage({ params }: MemberIdPageProps) {
       <ChatMessages
         type="conversation"
         apiUrl="/api/direct-messages"
-        // TODO: complete directMessageId socket
-        socketUrl="/api/socket/"
+        socketUrl="/api/socket/direct-messages"
         socketQuery={{
-          currentUserMemberId: currentUserMember.id,
-          opponentMemberId: opponentMember.id,
           conversationId: conversation.id,
         }}
         paramKey="conversationId"
@@ -72,8 +69,6 @@ export default async function MemberIdPage({ params }: MemberIdPageProps) {
         type={'conversation'}
         apiUrl="/api/socket/direct-messages"
         query={{
-          currentUserMemberId: currentUserMember.id,
-          opponentMemberId: opponentMember.id,
           conversationId: conversation.id,
         }}
         name={opponentMember.profile.name}
