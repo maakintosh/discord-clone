@@ -61,8 +61,10 @@ export default async function handler(
       },
     })
 
+    // this 'channelKey' should be identical string to the one passed into use-chat-socket (addKey in this case).
     const channelKey = `chat:${channelId}:messages`
 
+    // the Socket.IO library, which enables real-time, bidirectional, and event-based communication between the browser and the server .The emit function is used to send messages from the server to the client.
     res?.socket?.server?.io?.emit(channelKey, message)
 
     return res.status(200).json(message)

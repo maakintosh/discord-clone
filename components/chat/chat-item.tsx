@@ -48,14 +48,14 @@ const formSchema = z.object({
 })
 
 export function ChatItem({
-  socketUrl,
-  socketQuery,
   id,
   content,
   isDeleted,
   fileUrl,
   timestamp,
   isUpdated,
+  socketUrl,
+  socketQuery,
   messageOwnerMember,
   currentUserMember,
 }: ChatItemProps) {
@@ -63,6 +63,7 @@ export function ChatItem({
   const router = useRouter()
   const { onOpen } = useModal()
 
+  // users can press escape to cancel editing
   useEffect(() => {
     function commandEscape(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -120,9 +121,10 @@ export function ChatItem({
 
   const isAdmin = currentUserMember.role === MemberRole.ADMIN
   const isModerator = currentUserMember.role === MemberRole.MODERATOR
-  const isOwner = currentUserMember.id === messageOwnerMember.id
-  const canEditMessage = !isDeleted && isOwner
-  const canDeleteMessage = !isDeleted && (isOwner || isAdmin || isModerator)
+  const isMessageOwner = currentUserMember.id === messageOwnerMember.id
+  const canEditMessage = !isDeleted && isMessageOwner
+  const canDeleteMessage =
+    !isDeleted && (isMessageOwner || isAdmin || isModerator)
 
   const fileType = fileUrl?.split('.').pop()
   const isPDF = fileUrl && fileType === 'pdf'

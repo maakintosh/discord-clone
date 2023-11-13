@@ -1,10 +1,12 @@
 import { redirect } from 'next/navigation'
 import { redirectToSignIn } from '@clerk/nextjs'
 
+import { findOrCreateNewConversation } from '@/lib/actions/conversation'
 import { currentUserProfile } from '@/lib/actions/current-user-profile'
-import { findOrCreateNewConversation } from '@/lib/conversation'
 import { db } from '@/lib/db'
 import { ChatHeader } from '@/components/chat/chat-header'
+import { ChatInput } from '@/components/chat/chat-input'
+import { ChatMessages } from '@/components/chat/chat-messages'
 
 interface MemberIdPageProps {
   params: {
@@ -49,6 +51,27 @@ export default async function MemberIdPage({ params }: MemberIdPageProps) {
         name={opponentMember.profile.name}
         memberRole={opponentMember.role}
         avatarImage={opponentMember.profile.imageUrl}
+      />
+      <ChatMessages
+        type="conversation"
+        apiUrl="/api/direct-messages"
+        socketUrl="/api/socket/direct-messages"
+        socketQuery={{
+          conversationId: conversation.id,
+        }}
+        paramKey="conversationId"
+        paramValue={conversation.id}
+        chatId={conversation.id}
+        currentUserMember={currentUserMember}
+        name={opponentMember.profile.name}
+      />
+      <ChatInput
+        type={'conversation'}
+        apiUrl="/api/socket/direct-messages"
+        query={{
+          conversationId: conversation.id,
+        }}
+        name={opponentMember.profile.name}
       />
     </div>
   )
