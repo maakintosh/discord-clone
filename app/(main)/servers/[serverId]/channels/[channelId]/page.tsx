@@ -7,6 +7,7 @@ import { db } from '@/lib/db'
 import { ChatHeader } from '@/components/chat/chat-header'
 import { ChatInput } from '@/components/chat/chat-input'
 import { ChatMessages } from '@/components/chat/chat-messages'
+import { MediaRoom } from '@/components/media-room'
 
 interface ChannelIdPageProps {
   params: {
@@ -68,6 +69,12 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
             name={channel.name}
           />
         </>
+      )}
+      {channel.type === ChannelType.VOICE && (
+        <MediaRoom chatId={channel.id} isVideo={false} isAudio={true} />
+      )}
+      {channel.type === ChannelType.VIDEO && (
+        <MediaRoom chatId={channel.id} isVideo={true} isAudio={true} />
       )}
     </div>
   )
