@@ -1,6 +1,7 @@
 import { channelTypeIconMap, roleIconMap } from '@/constants/icon-map'
 import { ChannelType, MemberRole } from '@prisma/client'
 
+import { ConversationVideoButton } from '@/components/chat/conversation-video-button'
 import { MobileSidebar } from '@/components/mobile-sidebar'
 import { SocketIndicator } from '@/components/socket-indicator'
 import { UserAvatar } from '@/components/user-avatar'
@@ -34,7 +35,8 @@ export async function ChatHeader({
         </div>
       )}
       <p className="font-semibold">{name}</p>
-      <div className="ml-auto flex items-center">
+      <div className="ml-auto flex items-center gap-x-1">
+        {type === 'conversation' && <ConversationVideoButton />}
         <SocketIndicator />
       </div>
     </div>
