@@ -82,7 +82,7 @@ export function ChatItem({
   async function onMemberClick() {
     if (messageOwnerMember.id === currentUserMember.id) return
     router.push(
-      `/servers/${messageOwnerMember.serverId}/members/${messageOwnerMember.id}`
+      `/servers/${messageOwnerMember.serverId}/conversations/${messageOwnerMember.id}`
     )
   }
 
