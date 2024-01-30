@@ -1,0 +1,54 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node-postgres
+{
+	"name": "Node.js & PostgreSQL",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally. This can be used to network with other containers or with the host.
+  // Forwardind vs Publishing ports: https://containers.dev/implementors/json_reference/#publishing-vs-forwarding-ports
+  "forwardPorts": [3000, 5432],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "pnpm install",
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      // same as .vscode/settings.json
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": true,
+          "source.organizeImports": true,
+        },
+        "editor.tabSize": 2,
+        "[prisma]": {
+          "editor.defaultFormatter": "Prisma.prisma",
+        },
+      },
+      "extensions": [
+        "Prisma.prisma",
+        "dsznajder.es7-react-js-snippets",
+        "YoavBls.pretty-ts-errors",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "steoates.autoimport",
+        "christian-kohler.path-intellisense",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "Gruntfuggly.todo-tree",
+        "mhutchie.git-graph",
+      ],
+    },
+  },
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}
