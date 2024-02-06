@@ -29,7 +29,7 @@ export async function PATCH(
     const server = await db.server.update({
       where: {
         id: serverId,
-        profileId: profile.id,
+        profileId: profile.id
       },
       data: {
         members: {
@@ -37,24 +37,24 @@ export async function PATCH(
             where: {
               id: params.memberId,
               // prevents ADMIN from updating himself
-              profileId: { not: profile.id },
+              profileId: { not: profile.id }
             },
             data: {
-              role,
-            },
-          },
-        },
+              role
+            }
+          }
+        }
       },
       include: {
         members: {
           include: {
-            profile: true,
+            profile: true
           },
           orderBy: {
-            role: 'asc',
-          },
-        },
-      },
+            role: 'asc'
+          }
+        }
+      }
     })
     return NextResponse.json(server)
   } catch (error) {
@@ -88,27 +88,27 @@ export async function DELETE(
     const server = await db.server.update({
       where: {
         id: serverId,
-        profileId: profile.id,
+        profileId: profile.id
       },
       data: {
         members: {
           deleteMany: {
             id: params.memberId,
             // prevents ADMIN from deleteing himself
-            profileId: { not: profile.id },
-          },
-        },
+            profileId: { not: profile.id }
+          }
+        }
       },
       include: {
         members: {
           include: {
-            profile: true,
+            profile: true
           },
           orderBy: {
-            role: 'asc',
-          },
-        },
-      },
+            role: 'asc'
+          }
+        }
+      }
     })
     return NextResponse.json(server)
   } catch (error) {

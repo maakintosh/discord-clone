@@ -28,18 +28,18 @@ export async function GET(req: Request) {
       skip: cursor ? 1 : 0,
       cursor: cursor ? { id: cursor } : undefined,
       where: {
-        channelId,
+        channelId
       },
       include: {
         member: {
           include: {
-            profile: true,
-          },
-        },
+            profile: true
+          }
+        }
       },
       orderBy: {
-        createdAt: 'desc',
-      },
+        createdAt: 'desc'
+      }
     })
 
     let nextCursor = null
@@ -50,7 +50,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       items: messages,
-      nextCursor,
+      nextCursor
     })
   } catch (error) {
     console.log('[MESSAGES_GET]', error)

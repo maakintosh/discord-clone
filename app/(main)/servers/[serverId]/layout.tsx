@@ -7,7 +7,7 @@ import { ServerSidebar } from '@/components/server/server-sidebar'
 
 export default async function ServerIdLayout({
   children,
-  params,
+  params
 }: {
   children: React.ReactNode
   params: { serverId: string }
@@ -20,10 +20,10 @@ export default async function ServerIdLayout({
       id: params.serverId,
       members: {
         some: {
-          profileId: profile?.id,
-        },
-      },
-    },
+          profileId: profile?.id
+        }
+      }
+    }
   })
 
   if (!server) redirect('/')

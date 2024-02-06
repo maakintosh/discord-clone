@@ -15,7 +15,7 @@ interface NavigationSidebarItemProps {
 export function NavigationSidebarItem({
   id,
   name,
-  imageUrl,
+  imageUrl
 }: NavigationSidebarItemProps) {
   const router = useRouter()
   const params = useParams()
@@ -37,7 +37,7 @@ export function NavigationSidebarItem({
         {/* server image button */}
         <div
           className={cn(
-            'group relative ml-2 flex h-12 w-12 overflow-hidden rounded-full transition-all group-hover:rounded-2xl',
+            'group relative ml-2 flex size-12 overflow-hidden rounded-full transition-all group-hover:rounded-2xl',
             params?.serverId === id && 'rounded-2xl'
           )}
         >

@@ -14,7 +14,7 @@ interface UseChatSocketProps {
 export function useChatSocket({
   addKey,
   updateKey,
-  queryKey,
+  queryKey
 }: UseChatSocketProps) {
   const { socket } = useSocket()
   const queryClient = useQueryClient()
@@ -40,12 +40,12 @@ export function useChatSocket({
               }
 
               return item
-            }),
+            })
           }
         })
         return {
           ...oldData,
-          pages: newData,
+          pages: newData
         }
       })
     }
@@ -57,9 +57,9 @@ export function useChatSocket({
           return {
             pages: [
               {
-                items: [message],
-              },
-            ],
+                items: [message]
+              }
+            ]
           }
         }
 
@@ -71,12 +71,12 @@ export function useChatSocket({
 
         newData[0] = {
           ...newData[0],
-          items: [message, ...newData[0].items],
+          items: [message, ...newData[0].items]
         }
 
         return {
           ...oldData,
-          pages: newData,
+          pages: newData
         }
       })
     }

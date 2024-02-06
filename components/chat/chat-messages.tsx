@@ -37,7 +37,7 @@ export function ChatMessages({
   paramValue,
   chatId,
   currentUserMember,
-  name,
+  name
 }: ChatMessagesProps) {
   const queryKey = `chat:${chatId}`
   const addKey = `chat:${chatId}:messages`
@@ -51,7 +51,7 @@ export function ChatMessages({
       queryKey,
       apiUrl,
       paramKey,
-      paramValue,
+      paramValue
     })
   useChatSocket({ addKey, updateKey, queryKey })
   useChatScroll({
@@ -59,13 +59,13 @@ export function ChatMessages({
     bottomRef,
     loadMoreFn: fetchNextPage,
     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
-    count: data?.pages?.[0]?.items?.length ?? 0,
+    count: data?.pages?.[0]?.items?.length ?? 0
   })
 
   if (status === 'loading') {
     return (
       <div className="flex flex-1 flex-col items-center justify-center ">
-        <Loader2 className="my-4 h-8 w-8 animate-spin text-zinc-500" />
+        <Loader2 className="my-4 size-8 animate-spin text-zinc-500" />
         <p className="text-zinc-500">Loading messages...</p>
       </div>
     )
@@ -74,7 +74,7 @@ export function ChatMessages({
   if (status === 'error') {
     return (
       <div className="flex flex-1 flex-col items-center justify-center ">
-        <ServerCrash className="my-4 h-8 w-8 text-zinc-500" />
+        <ServerCrash className="my-4 size-8 text-zinc-500" />
         <p className="text-zinc-500">Something went wrong!</p>
       </div>
     )
@@ -89,7 +89,7 @@ export function ChatMessages({
       {hasNextPage && (
         <div className="flex justify-center">
           {isFetchingNextPage ? (
-            <Loader2 className="my-4 h-5 w-5 animate-spin text-zinc-500" />
+            <Loader2 className="my-4 size-5 animate-spin text-zinc-500" />
           ) : (
             <Button
               onClick={() => fetchNextPage()}

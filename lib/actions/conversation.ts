@@ -21,25 +21,25 @@ async function findConversation(member1Id: string, member2Id: string) {
       where: {
         AND: [
           {
-            member1Id,
+            member1Id
           },
           {
-            member2Id,
-          },
-        ],
+            member2Id
+          }
+        ]
       },
       include: {
         member1: {
           include: {
-            profile: true,
-          },
+            profile: true
+          }
         },
         member2: {
           include: {
-            profile: true,
-          },
-        },
-      },
+            profile: true
+          }
+        }
+      }
     })
   } catch (error) {
     return null
@@ -51,20 +51,20 @@ async function createNewConversation(member1Id: string, member2Id: string) {
     return await db.conversation.create({
       data: {
         member1Id,
-        member2Id,
+        member2Id
       },
       include: {
         member1: {
           include: {
-            profile: true,
-          },
+            profile: true
+          }
         },
         member2: {
           include: {
-            profile: true,
-          },
-        },
-      },
+            profile: true
+          }
+        }
+      }
     })
   } catch (error) {
     return null

@@ -27,13 +27,13 @@ export default async function handler(
         id: serverId as string,
         members: {
           some: {
-            profileId: profile.id,
-          },
-        },
+            profileId: profile.id
+          }
+        }
       },
       include: {
-        members: true,
-      },
+        members: true
+      }
     })
 
     if (!server) return res.status(404).json({ error: 'Server not found' })
@@ -50,15 +50,15 @@ export default async function handler(
         content,
         fileUrl,
         memberId: currentUserMember.id,
-        channelId: channelId as string,
+        channelId: channelId as string
       },
       include: {
         member: {
           include: {
-            profile: true,
-          },
-        },
-      },
+            profile: true
+          }
+        }
+      }
     })
 
     // this 'channelKey' should be identical string to the one passed into use-chat-socket (addKey in this case).

@@ -30,28 +30,28 @@ export default async function handler(
         OR: [
           {
             member1: {
-              profileId: profile.id,
-            },
+              profileId: profile.id
+            }
           },
           {
             member2: {
-              profileId: profile.id,
-            },
-          },
-        ],
+              profileId: profile.id
+            }
+          }
+        ]
       },
       include: {
         member1: {
           include: {
-            profile: true,
-          },
+            profile: true
+          }
         },
         member2: {
           include: {
-            profile: true,
-          },
-        },
-      },
+            profile: true
+          }
+        }
+      }
     })
 
     if (!conversation)
@@ -68,15 +68,15 @@ export default async function handler(
     let directMessage = await db.directMessage.findFirst({
       where: {
         id: directMessageId as string,
-        conversationId: conversationId as string,
+        conversationId: conversationId as string
       },
       include: {
         member: {
           include: {
-            profile: true,
-          },
-        },
-      },
+            profile: true
+          }
+        }
+      }
     })
 
     if (!directMessage || directMessage.isDeleted) {
@@ -99,38 +99,38 @@ export default async function handler(
 
       directMessage = await db.directMessage.update({
         where: {
-          id: directMessageId as string,
+          id: directMessageId as string
         },
         data: {
-          content,
+          content
         },
         include: {
           member: {
             include: {
-              profile: true,
-            },
-          },
-        },
+              profile: true
+            }
+          }
+        }
       })
     }
 
     if (req.method === 'DELETE') {
       directMessage = await db.directMessage.update({
         where: {
-          id: directMessageId as string,
+          id: directMessageId as string
         },
         data: {
           content: 'this message has been deleted',
           isDeleted: true,
-          fileUrl: null,
+          fileUrl: null
         },
         include: {
           member: {
             include: {
-              profile: true,
-            },
-          },
-        },
+              profile: true
+            }
+          }
+        }
       })
     }
 

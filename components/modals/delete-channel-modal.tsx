@@ -15,7 +15,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
+  DialogTitle
 } from '@/components/ui/dialog'
 
 export function DeleteChannelModal() {
@@ -33,8 +33,8 @@ export function DeleteChannelModal() {
       const url = qs.stringifyUrl({
         url: `/api/channels/${channel?.id}`,
         query: {
-          serverId: server?.id,
-        },
+          serverId: server?.id
+        }
       })
 
       await axios.delete(url)
@@ -59,7 +59,7 @@ export function DeleteChannelModal() {
           </DialogTitle>
           <DialogDescription className="text-center">
             <div className="flex items-center justify-center gap-x-2 text-red-500">
-              <AlertTriangle className="h-5 w-5" />
+              <AlertTriangle className="size-5" />
               <p className="text-lg font-semibold">DANGER!</p>
             </div>
             You will lose all{' '}

@@ -26,10 +26,10 @@ export default async function InvitePage({ params }: InvitePageProps) {
       inviteCode: params.inviteCode,
       members: {
         some: {
-          profileId: profile?.id,
-        },
-      },
-    },
+          profileId: profile?.id
+        }
+      }
+    }
   })
 
   if (existingServer) {
@@ -38,17 +38,17 @@ export default async function InvitePage({ params }: InvitePageProps) {
 
   const server = await db.server.update({
     where: {
-      inviteCode: params.inviteCode,
+      inviteCode: params.inviteCode
     },
     data: {
       members: {
         create: [
           {
-            profileId: profile!.id,
-          },
-        ],
-      },
-    },
+            profileId: profile!.id
+          }
+        ]
+      }
+    }
   })
 
   if (server) {

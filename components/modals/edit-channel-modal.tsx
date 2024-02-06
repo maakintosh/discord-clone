@@ -19,7 +19,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
+  DialogTitle
 } from '@/components/ui/dialog'
 import {
   Form,
@@ -27,7 +27,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
@@ -37,9 +37,9 @@ const formSchema = z.object({
     .string()
     .nonempty({ message: 'Channel name is required' })
     .refine((name) => name !== 'general', {
-      message: 'New channel name cannot be general',
+      message: 'New channel name cannot be general'
     }),
-  type: z.nativeEnum(ChannelType),
+  type: z.nativeEnum(ChannelType)
 })
 
 export function EditChannelModal() {
@@ -51,8 +51,8 @@ export function EditChannelModal() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      type: channel?.type || ChannelType.TEXT,
-    },
+      type: channel?.type || ChannelType.TEXT
+    }
   })
 
   useEffect(() => {
@@ -75,8 +75,8 @@ export function EditChannelModal() {
       const url = qs.stringifyUrl({
         url: `/api/channels/${channel?.id}`,
         query: {
-          serverId: server?.id,
-        },
+          serverId: server?.id
+        }
       })
       await axios.patch(url, values)
 

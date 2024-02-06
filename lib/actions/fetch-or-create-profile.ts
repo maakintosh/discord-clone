@@ -11,8 +11,8 @@ export async function fetchOrCreateProfile() {
 
   const profile = await db.profile.findUnique({
     where: {
-      userId: user.id,
-    },
+      userId: user.id
+    }
   })
 
   if (profile) {
@@ -24,8 +24,8 @@ export async function fetchOrCreateProfile() {
       userId: user.id,
       name: `${user.firstName} ${user.lastName}`,
       email: user.emailAddresses[0].emailAddress,
-      imageUrl: user.imageUrl,
-    },
+      imageUrl: user.imageUrl
+    }
   })
 
   return newProfile

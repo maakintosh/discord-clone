@@ -29,13 +29,13 @@ export default async function handler(
         id: serverId as string,
         members: {
           some: {
-            profileId: profile.id,
-          },
-        },
+            profileId: profile.id
+          }
+        }
       },
       include: {
-        members: true,
-      },
+        members: true
+      }
     })
 
     if (!server) return res.status(404).json({ error: 'Server not found' })
@@ -50,15 +50,15 @@ export default async function handler(
     let message = await db.message.findFirst({
       where: {
         id: messageId as string,
-        channelId: channelId as string,
+        channelId: channelId as string
       },
       include: {
         member: {
           include: {
-            profile: true,
-          },
-        },
-      },
+            profile: true
+          }
+        }
+      }
     })
 
     if (!message || message.isDeleted) {
@@ -83,38 +83,38 @@ export default async function handler(
 
       message = await db.message.update({
         where: {
-          id: messageId as string,
+          id: messageId as string
         },
         data: {
-          content,
+          content
         },
         include: {
           member: {
             include: {
-              profile: true,
-            },
-          },
-        },
+              profile: true
+            }
+          }
+        }
       })
     }
 
     if (req.method === 'DELETE') {
       message = await db.message.update({
         where: {
-          id: messageId as string,
+          id: messageId as string
         },
         data: {
           content: 'this message has been deleted',
           isDeleted: true,
-          fileUrl: null,
+          fileUrl: null
         },
         include: {
           member: {
             include: {
-              profile: true,
-            },
-          },
-        },
+              profile: true
+            }
+          }
+        }
       })
     }
 

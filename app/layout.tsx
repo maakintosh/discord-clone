@@ -18,18 +18,18 @@ const font = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'ChatApp',
   description:
-    'discord-like chat app built with Next13, shadcn-UI, Clerk, Prisma, Socket.io, react-query etc.',
+    'discord-like chat app built with Next13, shadcn-UI, Clerk, Prisma, Socket.io, react-query etc.'
 }
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: dark,
+        baseTheme: dark
       }}
     >
       <html lang="en">

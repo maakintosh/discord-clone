@@ -1,7 +1,7 @@
 import { NavigationSidebar } from '@/components/navigations/navigation-sidebar'
 
 export default async function MainLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {

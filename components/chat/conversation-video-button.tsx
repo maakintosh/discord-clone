@@ -21,8 +21,8 @@ export function ConversationVideoButton() {
       {
         url: pathname || '',
         query: {
-          video: isVideo ? undefined : true,
-        },
+          video: isVideo ? undefined : true
+        }
       },
       // if a query parameter's value is null or undefined, it will not be included in the resulting stringified URL.
       { skipNull: true }
@@ -34,7 +34,7 @@ export function ConversationVideoButton() {
   return (
     <ActionTooltip label={tooltipLabel} side="bottom">
       <Button onClick={onClick} size="sm" variant="ghost">
-        <Icon className="h-6 w-6 text-zinc-500" />
+        <Icon className="size-6 text-zinc-500" />
       </Button>
     </ActionTooltip>
   )

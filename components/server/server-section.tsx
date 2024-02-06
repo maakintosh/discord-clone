@@ -21,7 +21,7 @@ export function ServerSection({
   sectionType,
   role,
   channelType,
-  server,
+  server
 }: ServerSectionProps) {
   const { onOpen } = useModal()
   return (
@@ -37,7 +37,7 @@ export function ServerSection({
             size="icon"
             className="text-gray-400 dark:text-gray-600"
           >
-            <Plus className="h-5 w-5" />
+            <Plus className="size-5" />
           </Button>
         </ActionTooltip>
       )}
@@ -49,7 +49,7 @@ export function ServerSection({
             size="icon"
             className="text-gray-400 dark:text-gray-600"
           >
-            <Settings className="h-4 w-4" />
+            <Settings className="size-4" />
           </Button>
         </ActionTooltip>
       )}

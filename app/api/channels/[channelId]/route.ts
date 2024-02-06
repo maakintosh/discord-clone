@@ -33,18 +33,18 @@ export async function DELETE(
           some: {
             profileId: profile.id,
             role: {
-              in: [MemberRole.ADMIN, MemberRole.MODERATOR],
-            },
-          },
-        },
+              in: [MemberRole.ADMIN, MemberRole.MODERATOR]
+            }
+          }
+        }
       },
       data: {
         channels: {
           delete: {
-            id: params.channelId,
-          },
-        },
-      },
+            id: params.channelId
+          }
+        }
+      }
     })
 
     return NextResponse.json(channel)
@@ -79,7 +79,7 @@ export async function PATCH(
 
     if (name === 'general') {
       return new NextResponse('Channel name cannot be "general"', {
-        status: 400,
+        status: 400
       })
     }
 
@@ -90,10 +90,10 @@ export async function PATCH(
           some: {
             profileId: profile.id,
             role: {
-              in: [MemberRole.ADMIN, MemberRole.MODERATOR],
-            },
-          },
-        },
+              in: [MemberRole.ADMIN, MemberRole.MODERATOR]
+            }
+          }
+        }
       },
       data: {
         channels: {
@@ -101,16 +101,16 @@ export async function PATCH(
             where: {
               id: params.channelId,
               NOT: {
-                name: 'general',
-              },
+                name: 'general'
+              }
             },
             data: {
               type,
-              name,
-            },
-          },
-        },
-      },
+              name
+            }
+          }
+        }
+      }
     })
 
     return NextResponse.json(channel)

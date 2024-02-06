@@ -16,7 +16,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
+  DialogTitle
 } from '@/components/ui/dialog'
 import {
   Form,
@@ -24,14 +24,14 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { FileUploader } from '@/components/file-uploader'
 
 const formSchema = z.object({
   name: z.string().nonempty({ message: 'Server name is required' }),
-  imageUrl: z.string().nonempty({ message: 'Server image is required' }),
+  imageUrl: z.string().nonempty({ message: 'Server image is required' })
 })
 
 export function EditServerModal() {
@@ -43,8 +43,8 @@ export function EditServerModal() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      imageUrl: '',
-    },
+      imageUrl: ''
+    }
   })
 
   useEffect(() => {

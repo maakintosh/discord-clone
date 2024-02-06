@@ -7,7 +7,7 @@ import { ServerWithMembersWithProfile } from '@/type'
 import { MemberRole } from '@prisma/client'
 import {
   DropdownMenuItem,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@radix-ui/react-dropdown-menu'
 import axios from 'axios'
 import { Loader2, MoreVertical, UserX2 } from 'lucide-react'
@@ -20,14 +20,14 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
+  DialogTitle
 } from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
+  DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { UserAvatar } from '@/components/user-avatar'
@@ -49,8 +49,8 @@ export function MembersModal() {
       const url = qs.stringifyUrl({
         url: `/api/members/${memberId}`,
         query: {
-          serverId: server?.id,
-        },
+          serverId: server?.id
+        }
       })
 
       const res = await axios.patch(url, { role })
@@ -73,8 +73,8 @@ export function MembersModal() {
       const url = qs.stringifyUrl({
         url: `/api/members/${memberId}`,
         query: {
-          serverId: server?.id,
-        },
+          serverId: server?.id
+        }
       })
 
       const res = await axios.delete(url)
@@ -127,7 +127,7 @@ export function MembersModal() {
                     <div className="ml-auto">
                       <DropdownMenu>
                         <DropdownMenuTrigger>
-                          <MoreVertical className="h-5 w-5" />
+                          <MoreVertical className="size-5" />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent side="left" align="center">
                           <DropdownMenuRadioGroup value={member.role}>
@@ -159,7 +159,7 @@ export function MembersModal() {
                             onClick={() => onKickout(member.id)}
                           >
                             <div className="flex cursor-pointer justify-center gap-x-2 bg-red-500 hover:bg-red-500/80 ">
-                              <UserX2 className="h-5 w-5 " />
+                              <UserX2 className="size-5 " />
                               <p className="">Kickout</p>
                             </div>
                           </DropdownMenuItem>
@@ -168,7 +168,7 @@ export function MembersModal() {
                     </div>
                   )}
                 {loadingId === member.id && (
-                  <Loader2 className="ml-auto h-5 w-5 animate-spin" />
+                  <Loader2 className="ml-auto size-5 animate-spin" />
                 )}
               </div>
             )
