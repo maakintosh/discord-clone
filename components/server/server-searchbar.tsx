@@ -12,7 +12,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
+  CommandList
 } from '@/components/ui/command'
 import { UserAvatar } from '@/components/user-avatar'
 
@@ -52,7 +52,7 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
 
   function onClick({
     searchType,
-    id,
+    id
   }: {
     searchType: 'member' | 'channel'
     id: string
@@ -73,10 +73,10 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
         className=" flex w-full items-center p-2 text-muted-foreground"
         variant="outline"
       >
-        <Search className="mr-1 h-5 w-5 " />
+        <Search className="mr-1 size-5 " />
         <p className=" font-semibold ">Search</p>
         <kbd className=" pointer-events-none ml-auto inline-flex select-none items-center gap-1 rounded border">
-          <Command className="h-3 w-3" />K
+          <Command className="size-3" />K
         </kbd>
       </Button>
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>

@@ -1,0 +1,54 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node-postgres
+{
+  "name": "discord-clone",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/prisma": "latest"
+  },
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally. This can be used to network with other containers or with the host.
+  // Forwardind vs Publishing ports: https://containers.dev/implementors/json_reference/#publishing-vs-forwarding-ports
+  // 5555: prisma studio
+  "forwardPorts": [5555],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "npm install",
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      // same as .vscode/settings.json
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "[prisma]": {
+          "editor.defaultFormatter": "Prisma.prisma"
+        }
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "steoates.autoimport",
+        "christian-kohler.path-intellisense",
+        "Gruntfuggly.todo-tree",
+        "mhutchie.git-graph",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "richie5um2.vscode-sort-json",
+        "Prisma.prisma",
+        "YoavBls.pretty-ts-errors",
+        "bradlc.vscode-tailwindcss",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}

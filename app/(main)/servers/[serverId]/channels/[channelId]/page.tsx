@@ -22,15 +22,15 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
 
   const channel = await db.channel.findUnique({
     where: {
-      id: params.channelId,
-    },
+      id: params.channelId
+    }
   })
 
   const currentUserMember = await db.member.findFirst({
     where: {
       profileId: profile.id,
-      serverId: params.serverId,
-    },
+      serverId: params.serverId
+    }
   })
 
   if (!channel || !currentUserMember) return redirect('/')
@@ -51,7 +51,7 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
             socketUrl="/api/socket/messages"
             socketQuery={{
               channelId: channel.id,
-              serverId: channel.serverId,
+              serverId: channel.serverId
             }}
             paramKey="channelId"
             paramValue={channel.id}
@@ -64,7 +64,7 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
             apiUrl="/api/socket/messages"
             query={{
               channelId: channel.id,
-              serverId: channel.serverId,
+              serverId: channel.serverId
             }}
             name={channel.name}
           />

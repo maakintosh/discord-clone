@@ -27,28 +27,28 @@ export default async function handler(
         OR: [
           {
             member1: {
-              profileId: profile.id,
-            },
+              profileId: profile.id
+            }
           },
           {
             member2: {
-              profileId: profile.id,
-            },
-          },
-        ],
+              profileId: profile.id
+            }
+          }
+        ]
       },
       include: {
         member1: {
           include: {
-            profile: true,
-          },
+            profile: true
+          }
         },
         member2: {
           include: {
-            profile: true,
-          },
-        },
-      },
+            profile: true
+          }
+        }
+      }
     })
 
     if (!conversation)
@@ -64,15 +64,15 @@ export default async function handler(
         content,
         fileUrl,
         memberId: currentUserMember.id,
-        conversationId: conversationId as string,
+        conversationId: conversationId as string
       },
       include: {
         member: {
           include: {
-            profile: true,
-          },
-        },
-      },
+            profile: true
+          }
+        }
+      }
     })
 
     // this 'channelKey' should be identical string to the one passed into use-chat-socket (addKey in this case).

@@ -10,7 +10,7 @@ type SocketContextType = {
 
 const SocketContext = createContext<SocketContextType>({
   socket: null,
-  isConnected: false,
+  isConnected: false
 })
 
 export const useSocket = () => {
@@ -25,7 +25,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
     const socketInstance = new (ClientIO as any)(
       process.env.NEXT_PUBLIC_SITE_URL!,
       {
-        path: '/api/socket/io',
+        path: '/api/socket/io'
       }
     )
 

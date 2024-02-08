@@ -25,19 +25,19 @@ export async function POST(req: Request) {
           create: [
             {
               name: 'general',
-              profileId: profile.id,
-            },
-          ],
+              profileId: profile.id
+            }
+          ]
         },
         members: {
           create: [
             {
               profileId: profile.id,
-              role: MemberRole.ADMIN,
-            },
-          ],
-        },
-      },
+              role: MemberRole.ADMIN
+            }
+          ]
+        }
+      }
     })
     return NextResponse.json(server)
   } catch (error) {

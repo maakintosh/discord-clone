@@ -11,10 +11,10 @@ export default async function RootPage() {
     where: {
       members: {
         some: {
-          profileId: profile.id,
-        },
-      },
-    },
+          profileId: profile.id
+        }
+      }
+    }
   })
 
   if (server) {

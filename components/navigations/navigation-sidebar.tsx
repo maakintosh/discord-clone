@@ -21,14 +21,14 @@ export async function NavigationSidebar() {
     where: {
       members: {
         some: {
-          profileId: profile.id,
-        },
-      },
-    },
+          profileId: profile.id
+        }
+      }
+    }
   })
 
   return (
-    <div className="flex h-full w-full flex-col items-center space-y-4 bg-gray-100 px-1 py-3 dark:bg-gray-900">
+    <div className="flex size-full flex-col items-center space-y-4 bg-gray-100 px-1 py-3 dark:bg-gray-900">
       <NavigationAction />
       <Separator className="h-[2px] text-zinc-300 dark:text-zinc-700" />
       <ScrollArea className="w-full flex-1">
@@ -48,8 +48,8 @@ export async function NavigationSidebar() {
           afterSignOutUrl="/"
           appearance={{
             elements: {
-              avatarBox: 'h-12 w-12 rounded-full overflow-hidden',
-            },
+              avatarBox: 'h-12 w-12 rounded-full overflow-hidden'
+            }
           }}
         />
       </div>

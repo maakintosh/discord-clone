@@ -23,23 +23,23 @@ export async function ServerSidebar({ serverId }: ServerSidebarProps) {
 
   const server = await db.server.findUnique({
     where: {
-      id: serverId,
+      id: serverId
     },
     include: {
       members: {
         include: {
-          profile: true,
+          profile: true
         },
         orderBy: {
-          role: 'asc',
-        },
+          role: 'asc'
+        }
       },
       channels: {
         orderBy: {
-          createdAt: 'asc',
-        },
-      },
-    },
+          createdAt: 'asc'
+        }
+      }
+    }
   })
 
   if (!server) redirect('/')
@@ -57,11 +57,12 @@ export async function ServerSidebar({ serverId }: ServerSidebarProps) {
     (channel) => channel.type === 'VIDEO'
   )
 
-  const role = server.members.find((member) => member.profileId === profile.id)
-    ?.role
+  const role = server.members.find(
+    (member) => member.profileId === profile.id
+  )?.role
 
   return (
-    <div className="flex h-full w-full flex-col space-y-4 bg-gray-200 dark:bg-gray-800">
+    <div className="flex size-full flex-col space-y-4 bg-gray-200 dark:bg-gray-800">
       <ServerHeader server={server} role={role} />
       <ScrollArea className="flex-1 px-2">
         <div className="">
@@ -73,8 +74,8 @@ export async function ServerSidebar({ serverId }: ServerSidebarProps) {
                 data: textChannels.map((channel) => ({
                   id: channel.id,
                   name: channel.name,
-                  icon: channelTypeIconMap[channel.type],
-                })),
+                  icon: channelTypeIconMap[channel.type]
+                }))
               },
               {
                 label: 'Voice Channels',
@@ -82,8 +83,8 @@ export async function ServerSidebar({ serverId }: ServerSidebarProps) {
                 data: voiceChannels.map((channel) => ({
                   id: channel.id,
                   name: channel.name,
-                  icon: channelTypeIconMap[channel.type],
-                })),
+                  icon: channelTypeIconMap[channel.type]
+                }))
               },
               {
                 label: 'Video Channels',
@@ -91,8 +92,8 @@ export async function ServerSidebar({ serverId }: ServerSidebarProps) {
                 data: videoChannels.map((channel) => ({
                   id: channel.id,
                   name: channel.name,
-                  icon: channelTypeIconMap[channel.type],
-                })),
+                  icon: channelTypeIconMap[channel.type]
+                }))
               },
               {
                 label: 'Members',
@@ -102,9 +103,9 @@ export async function ServerSidebar({ serverId }: ServerSidebarProps) {
                   name: member.profile.name,
                   icon: roleIconMap[member.role],
                   role: member.role,
-                  avatarImage: member.profile.imageUrl,
-                })),
-              },
+                  avatarImage: member.profile.imageUrl
+                }))
+              }
             ]}
           />
         </div>

@@ -4,7 +4,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger,
+  TooltipTrigger
 } from '@/components/ui/tooltip'
 
 interface ActionTooltipProps {
@@ -18,7 +18,7 @@ export function ActionTooltip({
   label,
   children,
   side,
-  align,
+  align
 }: ActionTooltipProps) {
   return (
     <TooltipProvider>

@@ -17,20 +17,20 @@ export default async function ServerIdPage({ params }: ServerIdPageProps) {
       id: params.serverId,
       members: {
         some: {
-          profileId: profile?.id,
-        },
-      },
+          profileId: profile?.id
+        }
+      }
     },
     include: {
       channels: {
         where: {
-          name: 'general',
+          name: 'general'
         },
         orderBy: {
-          createdAt: 'asc',
-        },
-      },
-    },
+          createdAt: 'asc'
+        }
+      }
+    }
   })
 
   // Users always land on 'general' channel first.

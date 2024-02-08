@@ -22,7 +22,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { ActionTooltip } from '@/components/action-tooltip'
@@ -44,7 +44,7 @@ interface ChatItemProps {
 }
 
 const formSchema = z.object({
-  content: z.string().nonempty({ message: 'Message cannot be empty' }),
+  content: z.string().nonempty({ message: 'Message cannot be empty' })
 })
 
 export function ChatItem({
@@ -57,7 +57,7 @@ export function ChatItem({
   socketUrl,
   socketQuery,
   messageOwnerMember,
-  currentUserMember,
+  currentUserMember
 }: ChatItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const router = useRouter()
@@ -89,8 +89,8 @@ export function ChatItem({
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content,
-    },
+      content
+    }
   })
 
   const isLoading = form.formState.isSubmitting
@@ -99,7 +99,7 @@ export function ChatItem({
     try {
       const url = qs.stringifyUrl({
         url: `${socketUrl}/${id}`,
-        query: socketQuery,
+        query: socketQuery
       })
 
       await axios.patch(url, values)
@@ -115,7 +115,7 @@ export function ChatItem({
 
   useEffect(() => {
     form.reset({
-      content,
+      content
     })
   }, [content, form])
 
@@ -153,7 +153,7 @@ export function ChatItem({
                 <ActionTooltip label="edit">
                   <Edit
                     onClick={() => setIsEditing(!isEditing)}
-                    className="h-5 w-5 cursor-pointer text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
+                    className="size-5 cursor-pointer text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
                   />
                 </ActionTooltip>
               )}
@@ -162,10 +162,10 @@ export function ChatItem({
                   onClick={() =>
                     onOpen('delete-message', {
                       apiUrl: `${socketUrl}/${id}`,
-                      query: socketQuery,
+                      query: socketQuery
                     })
                   }
-                  className="h-5 w-5 cursor-pointer text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
+                  className="size-5 cursor-pointer text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
                 />
               </ActionTooltip>
             </div>
@@ -176,7 +176,7 @@ export function ChatItem({
             href={fileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className=" md:h-90 md:w-90 relative mx-2 flex aspect-square h-64 w-64 items-center overflow-hidden rounded-md"
+            className=" md:h-90 md:w-90 relative mx-2 flex aspect-square size-64 items-center overflow-hidden rounded-md"
           >
             {/* TODO: Image size optimization */}
             <Image
@@ -195,7 +195,7 @@ export function ChatItem({
               rel="noopener noreferrer"
               className=" flex items-center justify-center gap-x-3 text-sm text-indigo-500 hover:underline dark:text-indigo-400"
             >
-              <FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-400" />
+              <FileIcon className="size-10 fill-indigo-200 stroke-indigo-400" />
               <p>.pdf</p>
             </Link>
           </div>

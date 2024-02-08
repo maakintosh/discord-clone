@@ -23,12 +23,12 @@ export async function PATCH(
     const server = await db.server.update({
       where: {
         id: params.serverId,
-        profileId: profile.id,
+        profileId: profile.id
       },
       data: {
         name,
-        imageUrl,
-      },
+        imageUrl
+      }
     })
     return NextResponse.json(server)
   } catch (error) {
@@ -54,8 +54,8 @@ export async function DELETE(
     const server = await db.server.delete({
       where: {
         id: params.serverId,
-        profileId: profile.id,
-      },
+        profileId: profile.id
+      }
     })
     return NextResponse.json(server)
   } catch (error) {

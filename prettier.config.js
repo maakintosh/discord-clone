@@ -2,7 +2,7 @@ module.exports = {
   semi: false,
   singleQuote: true,
   tabWidth: 2,
-  trailingComma: 'es5',
+  trailingComma: 'none',
   tailwindConfig: './tailwind.config.js',
   importOrder: [
     '^(react/(.*)$)|^(react$)',
@@ -20,7 +20,7 @@ module.exports = {
     '^@/styles/(.*)$',
     '^@/app/(.*)$',
     '',
-    '^[./]',
+    '^[./]'
   ],
   importOrderSeparation: false,
   importOrderSortSpecifiers: true,
@@ -30,6 +30,6 @@ module.exports = {
   importOrderCombineTypeAndValueImports: true,
   plugins: [
     'prettier-plugin-tailwindcss',
-    '@ianvs/prettier-plugin-sort-imports',
-  ],
+    '@ianvs/prettier-plugin-sort-imports'
+  ]
 }

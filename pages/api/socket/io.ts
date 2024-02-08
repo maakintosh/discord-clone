@@ -5,8 +5,8 @@ import { Server as ServerIo } from 'socket.io'
 
 export const config = {
   api: {
-    bodyParser: false,
-  },
+    bodyParser: false
+  }
 }
 
 export default function ioHandler(
@@ -18,7 +18,7 @@ export default function ioHandler(
     const httpServer: NetServer = res.socket.server as any
 
     const io = new ServerIo(httpServer, {
-      path,
+      path
     })
     res.socket.server.io = io
   }

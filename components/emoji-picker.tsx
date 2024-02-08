@@ -8,7 +8,7 @@ import { useTheme } from 'next-themes'
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger,
+  PopoverTrigger
 } from '@/components/ui/popover'
 
 interface EmojiPickerProps {

@@ -28,18 +28,18 @@ export async function GET(req: Request) {
       skip: cursor ? 1 : 0,
       cursor: cursor ? { id: cursor } : undefined,
       where: {
-        conversationId,
+        conversationId
       },
       include: {
         member: {
           include: {
-            profile: true,
-          },
-        },
+            profile: true
+          }
+        }
       },
       orderBy: {
-        createdAt: 'desc',
-      },
+        createdAt: 'desc'
+      }
     })
 
     let nextCursor = null
@@ -50,7 +50,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       items: directMessages,
-      nextCursor,
+      nextCursor
     })
   } catch (error) {
     console.log('[DIRECT_MESSAGES_GET]', error)

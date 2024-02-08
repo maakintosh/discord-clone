@@ -23,11 +23,11 @@ export async function PATCH(
       where: {
         id: params.serverId,
         // validates if your are the owner of the server
-        profileId: profile.id,
+        profileId: profile.id
       },
       data: {
-        inviteCode: uuidv4(),
-      },
+        inviteCode: uuidv4()
+      }
     })
     return NextResponse.json(server)
   } catch (error) {

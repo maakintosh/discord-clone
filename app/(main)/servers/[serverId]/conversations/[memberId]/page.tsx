@@ -21,7 +21,7 @@ interface MemberIdPageProps {
 
 export default async function MemberIdPage({
   params,
-  searchParams,
+  searchParams
 }: MemberIdPageProps) {
   const profile = await currentUserProfile()
   if (!profile) return redirectToSignIn()
@@ -29,11 +29,11 @@ export default async function MemberIdPage({
   const currentUserMember = await db.member.findFirst({
     where: {
       profileId: profile.id,
-      serverId: params.serverId,
+      serverId: params.serverId
     },
     include: {
-      profile: true,
-    },
+      profile: true
+    }
   })
 
   if (!currentUserMember) return redirect('/')
@@ -69,7 +69,7 @@ export default async function MemberIdPage({
             apiUrl="/api/direct-messages"
             socketUrl="/api/socket/direct-messages"
             socketQuery={{
-              conversationId: conversation.id,
+              conversationId: conversation.id
             }}
             paramKey="conversationId"
             paramValue={conversation.id}
@@ -81,7 +81,7 @@ export default async function MemberIdPage({
             type={'conversation'}
             apiUrl="/api/socket/direct-messages"
             query={{
-              conversationId: conversation.id,
+              conversationId: conversation.id
             }}
             name={opponentMember.profile.name}
           />

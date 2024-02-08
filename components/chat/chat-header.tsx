@@ -21,7 +21,7 @@ export async function ChatHeader({
   name,
   channelType,
   memberRole,
-  avatarImage,
+  avatarImage
 }: ChatHeaderProps) {
   return (
     <div className="text-md flex h-12 items-center  px-3 font-semibold">
@@ -30,7 +30,7 @@ export async function ChatHeader({
 
       {type === 'conversation' && memberRole && (
         <div className="flex items-center">
-          <UserAvatar src={avatarImage} className="h-8 w-8" />
+          <UserAvatar src={avatarImage} className="size-8" />
           <p>{roleIconMap[memberRole]}</p>
         </div>
       )}

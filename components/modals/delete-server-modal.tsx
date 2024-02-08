@@ -14,7 +14,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
+  DialogTitle
 } from '@/components/ui/dialog'
 
 export function DeleteServerModal() {
@@ -51,7 +51,7 @@ export function DeleteServerModal() {
           </DialogTitle>
           <DialogDescription className="text-center">
             <div className="flex items-center justify-center gap-x-2 text-red-500">
-              <AlertTriangle className="h-5 w-5" />
+              <AlertTriangle className="size-5" />
               <p className="text-lg font-semibold">DANGER!</p>
             </div>
             You will lose all{' '}

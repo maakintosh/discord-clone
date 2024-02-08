@@ -16,20 +16,20 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
+  DialogTitle
 } from '@/components/ui/dialog'
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form'
 import { FileUploader } from '@/components/file-uploader'
 
 //TODO: allows this modal to upload file with string comment
 const formSchema = z.object({
-  fileUrl: z.string().nonempty({ message: 'At least one file is required' }),
+  fileUrl: z.string().nonempty({ message: 'At least one file is required' })
 })
 
 export function MessageFileModal() {
@@ -40,8 +40,8 @@ export function MessageFileModal() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fileUrl: '',
-    },
+      fileUrl: ''
+    }
   })
 
   const isLoading = form.formState.isSubmitting
@@ -56,12 +56,12 @@ export function MessageFileModal() {
     try {
       const url = qs.stringifyUrl({
         url: apiUrl || '',
-        query,
+        query
       })
 
       await axios.post(url, {
         ...values,
-        content: values.fileUrl,
+        content: values.fileUrl
       })
 
       handleClose()

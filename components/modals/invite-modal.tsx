@@ -13,7 +13,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
+  DialogTitle
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -79,9 +79,9 @@ export function InviteModal() {
                 size="icon"
               >
                 {isCopied ? (
-                  <Check className="h-5 w-5" />
+                  <Check className="size-5" />
                 ) : (
-                  <Copy className="h-5 w-5" />
+                  <Copy className="size-5" />
                 )}
               </Button>
             </ActionTooltip>
@@ -94,7 +94,7 @@ export function InviteModal() {
             className="text-zinc-500 "
           >
             Generate a new code
-            <RefreshCw className="ml-2 h-5 w-5" />
+            <RefreshCw className="ml-2 size-5" />
           </Button>
         </div>
       </DialogContent>

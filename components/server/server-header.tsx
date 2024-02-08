@@ -9,7 +9,7 @@ import {
   Settings,
   Trash2,
   UserPlus2,
-  Users2,
+  Users2
 } from 'lucide-react'
 
 import { useModal } from '@/hooks/use-modal-store'
@@ -19,7 +19,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 
 interface ServerHeaderProps {
@@ -41,7 +41,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
           className="text-md flex h-12 w-full items-center overflow-hidden px-3 font-semibold"
         >
           {server.name}
-          <ChevronDown className="ml-auto h-5 w-5" />
+          <ChevronDown className="ml-auto size-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 space-y-1 font-medium">
@@ -52,7 +52,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
               className="text-indigo-600 dark:text-indigo-400"
             >
               Invite Friends
-              <UserPlus2 className="ml-auto h-5 w-5" />
+              <UserPlus2 className="ml-auto size-5" />
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
@@ -61,7 +61,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
               className=""
             >
               Create Channel
-              <Hash className="ml-auto h-5 w-5" />
+              <Hash className="ml-auto size-5" />
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </>
@@ -73,14 +73,14 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
               className=""
             >
               Manage Members
-              <Users2 className="ml-auto h-5 w-5" />
+              <Users2 className="ml-auto size-5" />
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => onOpen('edit-server', { server })}
               className=""
             >
               Server Setttings
-              <Settings className="ml-auto h-5 w-5" />
+              <Settings className="ml-auto size-5" />
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
@@ -88,7 +88,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
               className="text-rose-500"
             >
               Delete Server
-              <Trash2 className="ml-auto h-5 w-5" />
+              <Trash2 className="ml-auto size-5" />
             </DropdownMenuItem>
           </>
         )}
@@ -98,7 +98,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
             className="text-rose-500"
           >
             Leave Server
-            <LogOut className="ml-auto h-5 w-5" />
+            <LogOut className="ml-auto size-5" />
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

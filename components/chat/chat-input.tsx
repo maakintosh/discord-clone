@@ -15,7 +15,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { EmojiPicker } from '@/components/emoji-picker'
@@ -28,7 +28,7 @@ interface ChatInputProps {
 }
 
 const formSchema = z.object({
-  content: z.string().nonempty({ message: 'Message cannot be empty' }),
+  content: z.string().nonempty({ message: 'Message cannot be empty' })
 })
 
 export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
@@ -38,8 +38,8 @@ export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content: '',
-    },
+      content: ''
+    }
   })
 
   const isLoading = form.formState.isSubmitting
@@ -48,7 +48,7 @@ export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
     try {
       const url = qs.stringifyUrl({
         url: apiUrl,
-        query,
+        query
       })
 
       await axios.post(url, values)
@@ -75,7 +75,7 @@ export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
                     type="button"
                     onClick={() => onOpen('message-file', { apiUrl, query })}
                     disabled={isLoading}
-                    className="absolute left-6 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-400 hover:bg-zinc-500"
+                    className="absolute left-6 top-6 flex size-8 items-center justify-center rounded-full bg-zinc-400 hover:bg-zinc-500"
                   >
                     <Plus className="text-white dark:text-black" />
                   </button>
@@ -90,7 +90,7 @@ export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {
                    text-zinc-500 dark:bg-gray-800 dark:text-zinc-300"
                     {...field}
                   />
-                  <div className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center">
+                  <div className="absolute right-6 top-6 flex size-8 items-center justify-center">
                     <EmojiPicker
                       onChange={(emoji: string) =>
                         field.onChange(`${field.value} ${emoji}`)
