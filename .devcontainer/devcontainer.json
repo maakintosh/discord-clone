@@ -36,15 +36,17 @@
         "esbenp.prettier-vscode",
         "steoates.autoimport",
         "christian-kohler.path-intellisense",
+        "ms-azuretools.vscode-docker",
         "Gruntfuggly.todo-tree",
         "mhutchie.git-graph",
         "GitHub.copilot",
         "GitHub.copilot-chat",
         "richie5um2.vscode-sort-json",
         "Prisma.prisma",
+        "shd101wyy.markdown-preview-enhanced",
         "YoavBls.pretty-ts-errors",
         "bradlc.vscode-tailwindcss",
-        "ms-azuretools.vscode-docker"
+        "ecmel.vscode-html-css"
       ]
     }
   }
