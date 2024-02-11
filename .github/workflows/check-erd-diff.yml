@@ -1,0 +1,25 @@
+# from https://dev.classmethod.jp/articles/prisma_er_diagram_auto_generation/
+name: Check ERD diff
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm install
+      - name: makeERD
+        run: |
+          npx prisma generate
+      - id: checkErdDiff
+        run: echo "changed=$(git diff --name-only prisma/ERD.md)" >> $GITHUB_OUTPUT
+      - run: echo ${{ steps.checkErdDiff.outputs.changed}}
+      - if: ${{ steps.checkErdDiff.outputs.changed != '' }}
+        run: |
+          echo "ERD.md has changed. Commit it every time after you generate a new ERD."
