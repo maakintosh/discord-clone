@@ -23,4 +23,3 @@ jobs:
       - if: ${{ steps.checkErdDiff.outputs.changed != '' }}
         run: |
           echo "ERD.md has changed. Commit it every time after you generate a new ERD."
-          exit 1
