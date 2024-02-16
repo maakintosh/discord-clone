@@ -6,6 +6,7 @@ erDiagram
 MODERATOR MODERATOR
 GUEST GUEST
         }
+    
 
 
         ChannelType {
@@ -13,82 +14,82 @@ GUEST GUEST
 VOICE VOICE
 VIDEO VIDEO
         }
-
+    
   "Profile" {
     String id "🗝️"
-    String userId
-    String name
-    String email
-    String imageUrl
-    DateTime createdAt
-    DateTime updatedAt
+    String userId 
+    String name 
+    String email 
+    String imageUrl 
+    DateTime createdAt 
+    DateTime updatedAt 
     }
-
+  
 
   "Server" {
     String id "🗝️"
-    String name
-    String imageUrl
-    String inviteCode
-    String profileId
-    DateTime createdAt
-    DateTime updatedAt
+    String name 
+    String imageUrl 
+    String inviteCode 
+    String profileId 
+    DateTime createdAt 
+    DateTime updatedAt 
     }
-
+  
 
   "Member" {
     String id "🗝️"
-    MemberRole role
-    String profileId
-    String serverId
-    DateTime createdAt
-    DateTime updatedAt
+    MemberRole role 
+    String profileId 
+    String serverId 
+    DateTime createdAt 
+    DateTime updatedAt 
     }
-
+  
 
   "Channel" {
     String id "🗝️"
-    String name
-    ChannelType type
-    String profileId
-    String serverId
-    DateTime createdAt
-    DateTime updatedAt
+    String name 
+    ChannelType type 
+    String profileId 
+    String serverId 
+    DateTime createdAt 
+    DateTime updatedAt 
     }
-
+  
 
   "Message" {
     String id "🗝️"
-    String content
-    Boolean isDeleted
+    String content 
+    Boolean isDeleted 
     String fileUrl "❓"
-    String channelId
-    String memberId
-    DateTime createdAt
-    DateTime updatedAt
+    String channelId 
+    String memberId 
+    DateTime createdAt 
+    DateTime updatedAt 
     }
-
+  
 
   "Conversation" {
     String id "🗝️"
-    String member1Id
-    String member2Id
-    DateTime createdAt
-    DateTime updatedAt
+    String member1Id 
+    String member2Id 
+    DateTime createdAt 
+    DateTime updatedAt 
     }
-
+  
 
   "DirectMessage" {
     String id "🗝️"
-    String content
-    Boolean isDeleted
+    String content 
+    Boolean isDeleted 
     String fileUrl "❓"
-    String memberId
-    String conversationId
-    DateTime createdAt
-    DateTime updatedAt
+    String memberId 
+    String conversationId 
+    DateTime createdAt 
+    DateTime updatedAt 
     }
-
+  
     "Profile" o{--}o "Server" : "servers"
     "Profile" o{--}o "Member" : "members"
     "Profile" o{--}o "Channel" : "channels"

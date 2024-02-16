@@ -37,7 +37,8 @@ export async function PATCH(
   }
 }
 export async function DELETE(
-  req: Request,
+  // Request must be passed as an argument to avoid a build error
+  _req: Request,
   { params }: { params: { serverId: string } }
 ) {
   try {

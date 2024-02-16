@@ -46,7 +46,7 @@ export function InviteModal() {
 
       const res = await axios.patch(`/api/servers/${server?.id}/invite-code`)
 
-      toast.success('New invite code generated! 👍')
+      toast.success('New invite link generated! 👍')
       onOpen('invite', { server: res.data })
     } catch (error) {
       console.log(error)
@@ -65,10 +65,12 @@ export function InviteModal() {
           </DialogTitle>
           <DialogDescription className="text-center">
             Send them this link!
+            <br />
+            They can automatically join your server. wow.
           </DialogDescription>
         </DialogHeader>
         <div className="p-2 md:p-4">
-          <Label className=" uppercase text-zinc-500">server invite code</Label>
+          <Label className=" uppercase text-zinc-500">server invite link</Label>
           <div className="flex items-center gap-x-2">
             <Input value={inviteUrl} disabled={isLoading} className="" />
             <ActionTooltip label="copy" side="bottom" align="center">
@@ -93,7 +95,7 @@ export function InviteModal() {
             size="sm"
             className="text-zinc-500 "
           >
-            Generate a new code
+            Generate a new link
             <RefreshCw className="ml-2 size-5" />
           </Button>
         </div>
