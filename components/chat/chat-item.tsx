@@ -44,7 +44,7 @@ interface ChatItemProps {
 }
 
 const formSchema = z.object({
-  content: z.string().nonempty({ message: 'Message cannot be empty' })
+  content: z.string().min(1, { message: 'Message cannot be empty' })
 })
 
 export function ChatItem({

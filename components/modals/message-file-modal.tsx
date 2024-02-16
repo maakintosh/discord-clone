@@ -29,7 +29,7 @@ import { FileUploader } from '@/components/file-uploader'
 
 //TODO: allows this modal to upload file with string comment
 const formSchema = z.object({
-  fileUrl: z.string().nonempty({ message: 'At least one file is required' })
+  fileUrl: z.string().min(1, { message: 'At least one file is required' })
 })
 
 export function MessageFileModal() {

@@ -35,9 +35,9 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 const formSchema = z.object({
   name: z
     .string()
-    .nonempty({ message: 'Channel name is required' })
+    .min(1, { message: 'Channel name is required' })
     .refine((name) => name !== 'general', {
-      message: 'New channel name cannot be general'
+      message: "New channel name cannot be 'general'"
     }),
   type: z.nativeEnum(ChannelType)
 })

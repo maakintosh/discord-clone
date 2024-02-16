@@ -30,8 +30,8 @@ import { Input } from '@/components/ui/input'
 import { FileUploader } from '@/components/file-uploader'
 
 const formSchema = z.object({
-  name: z.string().nonempty({ message: 'Server name is required' }),
-  imageUrl: z.string().nonempty({ message: 'Server image is required' })
+  name: z.string().min(1, { message: 'Server name is required' }),
+  imageUrl: z.string().min(1, { message: 'Server image is required' })
 })
 
 export function EditServerModal() {
