@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { AlertTriangle } from 'lucide-react'
 import qs from 'query-string'
@@ -19,7 +18,6 @@ import {
 } from '@/components/ui/dialog'
 
 export function DeleteMessageModal() {
-  const router = useRouter()
   const { isOpen, onClose, type, data } = useModal()
   const { apiUrl, query } = data
 

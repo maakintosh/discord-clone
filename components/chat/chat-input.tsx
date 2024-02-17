@@ -28,7 +28,7 @@ interface ChatInputProps {
 }
 
 const formSchema = z.object({
-  content: z.string().nonempty({ message: 'Message cannot be empty' })
+  content: z.string().min(1, { message: 'Message cannot be empty' })
 })
 
 export function ChatInput({ type, apiUrl, query, name }: ChatInputProps) {

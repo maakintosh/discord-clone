@@ -46,8 +46,8 @@ export function InviteModal() {
 
       const res = await axios.patch(`/api/servers/${server?.id}/invite-code`)
 
-      toast.success('New invite code generated! 👍')
       onOpen('invite', { server: res.data })
+      toast.success('New invite link generated! 👍')
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong. 😢')
@@ -61,14 +61,20 @@ export function InviteModal() {
       <DialogContent className="overflow-hidden rounded-md bg-gray-100 dark:bg-gray-800">
         <DialogHeader className="pt-6">
           <DialogTitle className="text-center text-2xl ">
-            Invite Friends
+            Invite Friends to
+            <br />
+            <span className="text-lg font-bold text-indigo-500">
+              {server?.name}
+            </span>{' '}
           </DialogTitle>
           <DialogDescription className="text-center">
             Send them this link!
+            <br />
+            They can automatically join your server. wow.
           </DialogDescription>
         </DialogHeader>
         <div className="p-2 md:p-4">
-          <Label className=" uppercase text-zinc-500">server invite code</Label>
+          <Label className=" uppercase text-zinc-500">server invite link</Label>
           <div className="flex items-center gap-x-2">
             <Input value={inviteUrl} disabled={isLoading} className="" />
             <ActionTooltip label="copy" side="bottom" align="center">
@@ -93,7 +99,7 @@ export function InviteModal() {
             size="sm"
             className="text-zinc-500 "
           >
-            Generate a new code
+            Generate a new link
             <RefreshCw className="ml-2 size-5" />
           </Button>
         </div>

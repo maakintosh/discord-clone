@@ -31,9 +31,9 @@ export function DeleteServerModal() {
       setIsLoading(true)
       await axios.delete(`/api/servers/${server?.id}`)
 
-      router.refresh()
       toast.success('Successfully deleted server! 👍')
       onClose()
+      router.push('/')
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong. 😢')

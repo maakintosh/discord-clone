@@ -5,7 +5,8 @@ import { currentUserProfile } from '@/lib/actions/current-user-profile'
 import { db } from '@/lib/db'
 
 export async function PATCH(
-  req: Request,
+  // Request must be passed as an argument to avoid a build error
+  _req: Request,
   { params }: { params: { serverId: string } }
 ) {
   try {
@@ -22,7 +23,7 @@ export async function PATCH(
     const server = await db.server.update({
       where: {
         id: params.serverId,
-        // validates if your are the owner of the server
+        // validates if you are the owner of the server
         profileId: profile.id
       },
       data: {
