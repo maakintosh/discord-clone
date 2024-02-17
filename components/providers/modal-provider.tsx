@@ -20,7 +20,7 @@ export function ModalProvider() {
   useEffect(() => {
     setIsMounted(true)
   }, [])
-  // prevents modals to be rendered on the server from causing hydration errors
+  // prevents modals rendered on the server from causing hydration errors
   if (!isMounted) return null
 
   return (

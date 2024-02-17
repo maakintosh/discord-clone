@@ -9,10 +9,7 @@ export function useOrigin() {
 
   if (!isMounted) return ''
 
-  const origin =
-    typeof window !== undefined && window.location.origin
-      ? window.location.origin
-      : ''
+  const origin = window.location.origin ? window.location.origin : ''
 
   return origin
 }
