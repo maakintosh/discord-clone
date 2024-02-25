@@ -23,10 +23,13 @@ services:
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    env_file:
-    - ../.env
-    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
     # (Adding the "ports" property to this file will not forward from a Codespace.)
+    
+    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
 
 volumes:
   postgres-data:
