@@ -1,21 +1,39 @@
+// more info: https://containers.dev/implementors/json_reference/
 {
-  "name": "discord-clone",
+  "name": "discord_clone",
+  "build": {
+    // REQUIRED when using a Dockerfile. The path is relative to the devcontainer.json file.
+    "dockerfile": "Dockerfile.dev",
+    // Path that the Docker build should be run from relative to devcontainer.json. For example, a value of ".." would allow you to reference content in sibling directories.
+    "context": ".."
+  },
   "dockerComposeFile": "docker-compose.dev.yml",
   "service": "next_app",
-  "workspaceFolder": "/workspaces/next_app",
+  // Sets the default path that devcontainer.json supporting services / tools should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Defaults to "/".
+  "workspaceFolder": "/workspaces/discord_clone",
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally. This can be used to network with other containers or with the host.
+  // Forwardind vs Publishing ports: https://containers.dev/implementors/json_reference/#publishing-vs-forwarding-ports
+  // 5555: prisma studio
+  "forwardPorts": [3000, "db:5432", 5555],
 
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
+    // https://github.com/devcontainers/features/tree/main/src/common-utils
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      // pick a different terminal theme by modifying the ZSH_THEME variable in ~/.zshrc.
+      "installOhMyZsh": true,
+      // upgrade OS packages?
+      "upgradePackages": true,
+      "username": "node"
+    },
     "ghcr.io/devcontainers-contrib/features/prisma": "latest"
   },
-
-  // Use 'forwardPorts' to make a list of ports inside the container available locally. This can be used to network with other containers or with the host.
-  // Forwardind vs Publishing ports: https://containers.dev/implementors/json_reference/#publishing-vs-forwarding-ports
-  // 5555: prisma studio
-  "forwardPorts": [5555],
 
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "npm install",
@@ -28,6 +46,21 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "always",
+          // prettier will take care of organizing imports instead of eslint
+          "source.organizeImports": "never"
+        },
+        // disable default formatters for javascript and typescript by VSCode
+        "javascript.format.enable": false,
+        "typescript.format.enable": false,
+
+        "eslint.validate": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ],
         "[prisma]": {
           "editor.defaultFormatter": "Prisma.prisma"
         }
@@ -42,13 +75,10 @@
         "mhutchie.git-graph",
         "GitHub.copilot",
         "GitHub.copilot-chat",
-        "github.vscode-github-actions",
-        "richie5um2.vscode-sort-json",
         "Prisma.prisma",
         "shd101wyy.markdown-preview-enhanced",
         "YoavBls.pretty-ts-errors",
-        "bradlc.vscode-tailwindcss",
-        "ecmel.vscode-html-css"
+        "bradlc.vscode-tailwindcss"
       ]
     }
   }

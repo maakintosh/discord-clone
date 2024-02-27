@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   next_app:
-    container_name: next_app
+    container_name: discord_clone
     user: node
 
     # db container will start before the next_app container.
@@ -20,30 +20,12 @@ services:
 
     # creats a bind mount. A bind mount is a type of volume that maps a host file or directory to a container file or directory. This is useful for development, because it allows you to edit the code on your host machine and run it in the container.
     volumes:
-      - ../:/workspaces:cached
-      - ../node_modules:/workspaces/next_app/node_modules
+      - ..:/workspaces/discord_clone:cached
+      #  install npm packages on your host machine and have them immediately available inside the Docker container. It also means that the Docker container doesn't need to have its own separate node_modules directory, which can save disk space.
+      - ../node_modules:/workspaces/discord_clone/node_modules:cached
 
     environment:
       env_file: ../.env.local
-
-    develop:
-      # The watch property specifies the files to watch for changes. When a change is detected, the action property specifies what to do.
-      watch:
-        - path: ../package.json
-          action: rebuild
-        - path: ../package-lock.json
-          action: rebuild
-        - path: ../next.config.js
-          action: rebuild
-        - path: ../tsconfig.json
-          action: rebuild
-        - path: ../.env.local
-          action: rebuild
-        - path: ../
-          #target directory in the Docker container where the files from the source directory will be synced to.
-          target: /workspaces/next_app
-          # synchronizes files between the host machine and the Docker container. This is particularly useful in development environments where you want changes made on the host to be immediately reflected in the container.
-          action: sync
 
     # Overrides default command, and keeps the container running after the "npm start" process ends.
     command: sleep infinity
@@ -71,7 +53,7 @@ services:
     ports:
       - 5432:5432
 
+# The volumes property creates a named volume managed by Docker. the volume will persist even after the container is removed.
 volumes:
-  # The volumes property creates a named volume managed by Docker. the volume will persist even after the container is removed.
   postgres-data:
-  node_modules:
+  discord_clone_node_modules:
