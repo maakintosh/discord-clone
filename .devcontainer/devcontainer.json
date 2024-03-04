@@ -1,42 +1,54 @@
 // more info: https://containers.dev/implementors/json_reference/
 {
-  "name": "discord_clone",
-  "build": {
-    // REQUIRED when using a Dockerfile. The path is relative to the devcontainer.json file.
-    "dockerfile": "Dockerfile.dev",
-    // Path that the Docker build should be run from relative to devcontainer.json. For example, a value of ".." would allow you to reference content in sibling directories.
-    "context": ".."
-  },
-  "dockerComposeFile": "docker-compose.dev.yml",
+  "name": "discord-clone",
+  "dockerComposeFile": "../docker-compose.dev.yml",
   "service": "next_app",
   // Sets the default path that devcontainer.json supporting services / tools should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Defaults to "/".
-  "workspaceFolder": "/workspaces/discord_clone",
+  "workspaceFolder": "/workspaces/discord-clone",
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally. This can be used to network with other containers or with the host.
   // Forwardind vs Publishing ports: https://containers.dev/implementors/json_reference/#publishing-vs-forwarding-ports
   // 5555: prisma studio
-  "forwardPorts": [3000, "db:5432", 5555],
+  "forwardPorts": [3000, 5432, 5555],
 
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // runs on the host machine before the container is created. ⚠️ The command is run wherever the source code is located on the host. For cloud services, this is in the cloud.
+  // "initializeCommand": "",
+
+  // finalizes container setup when a dev container is created. It and subsequent commands execute inside the container immediately after it has started for the first time. Cloud services can use this command when caching or prebuilding a container. This means that it will not typically have access to user-scoped assets or secrets.
+  // "onCreateCommand": "",
+
+  // executes inside the container after onCreateCommand whenever new content is available in the source tree during the creation process. It will execute at least once, but cloud services will also periodically execute the command to refresh cached or prebuilt containers. Like cloud services using onCreateCommand, it can only take advantage of repository and org scoped secrets or permissions.
+  // "updateContentCommand": "",
+
+  // happens after updateContentCommand and once the dev container has been assigned to a user for the first time. Cloud services can use this command to take advantage of user specific secrets and permissions.
+  "postCreateCommand": {
+    // for performance reasons, a git "dirty" indicator that tells there are uncommitted changes is disabled by default. so this git command turns it on for smaller repositories.
+    "git": "git config devcontainers-theme.show-dirty 1",
+    // this prisma command will generate the client and the schema inside the container
+    "prisma": "npx prisma db push"
+  },
+
+  // connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest",
+      "ppa": "false"
+    },
     // https://github.com/devcontainers/features/tree/main/src/common-utils
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": true,
       "configureZshAsDefaultShell": true,
-      // pick a different terminal theme by modifying the ZSH_THEME variable in ~/.zshrc.
+      // For zsh, the default theme is a standard Oh My Zsh! theme. You may pick a different one by modifying the ZSH_THEME variable in ~/.zshrc.
       "installOhMyZsh": true,
-      // upgrade OS packages?
+      "installOhMyZshConfig": true,
       "upgradePackages": true,
       "username": "node"
     },
     "ghcr.io/devcontainers-contrib/features/prisma": "latest"
   },
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "npm install",
 
   // Configure tool-specific properties.
   "customizations": {

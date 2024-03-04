@@ -1,7 +1,15 @@
 FROM node:20-bullseye-slim
 
 # any subsequent Dockerfile instructions after WORKDIR will be run in the context of this directory. sets up a directory where your application's code will be placed within the Docker container.
-WORKDIR /workspaces/discord_clone
+WORKDIR /workspaces/discord-clone
+
+# copy the package.json and package-lock.json files to the /workspaces/discord-clone directory.
+COPY package*.json ./
+RUN npm install
+
+# This is done after the npm install command to take advantage of Docker's layer caching. If the package.json and package-lock.json files haven't changed since the last build, Docker will use the cached layer for the npm install command, which will make the build faster.
+COPY . .
+
 
 # changes the ownership of the current directory (and all directories and files within it, due to the -R flag for recursive) to the node user and node group.
 # This is recommended as best practice for Node.js applications to avoid permission issues when the Node.js process tries to access files in the container. By default, Docker runs containers as the root user, but this can be a security risk and is generally not recommended.
@@ -9,18 +17,11 @@ RUN chown -R node:node ./
 # any subsequent commands (like npm install, for example) will be run as the node user, not the root user.
 USER node
 
-# copy the package.json and package-lock.json files to the /workspaces/next_app directory.
-COPY ../package*.json ./
-RUN npm install
-
-# copy the rest of the files. This is done after the npm install command to take advantage of Docker's layer caching. If the package.json and package-lock.json files haven't changed since the last build, Docker will use the cached layer for the npm install command, which will make the build faster.
-COPY ../ ./
-
 # disable Next.js telemetry collection.
 ARG NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_TELEMETRY_DISABLED=$NEXT_TELEMETRY_DISABLED
 
-# you don't need to expose the port, because the port is exposed in the docker-compose.yml file.
+# you don't need to expose the port, because the port is exposed in the docker-compose.dev.yml file.
 
 # start the development server
-CMD ["npm", "run", "dev"]
+CMD npm run dev

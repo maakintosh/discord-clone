@@ -14,7 +14,7 @@
 
 # production
 /build
-.env.prod
+.env.production
 
 # misc
 .DS_Store
@@ -26,8 +26,12 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+# .env.local is used only for storing secret keys
 .env*.local
+
+# .env is used for both development and production
 .env
+.env.development
 
 # vercel
 .vercel
