@@ -1,6 +1,8 @@
+# The FROM instruction initializes a new build stage and sets the base image for subsequent instructions as a starting point. The base image must be the first instruction in the Dockerfile.
+# an official Docker image for Node.js 20, based on the slim variant of the Debian Bullseye release.
 FROM node:20-bullseye-slim
 
-# any subsequent Dockerfile instructions after WORKDIR will be run in the context of this directory. sets up a directory where your application's code will be placed within the Docker container.
+# any subsequent Dockerfile instructions after WORKDIR will be run in the context of this directory. it sets up a directory where your application's code will be placed within the Docker container.
 WORKDIR /workspaces/discord-clone
 
 # copy the package.json and package-lock.json files to the /workspaces/discord-clone directory.

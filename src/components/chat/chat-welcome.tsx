@@ -8,11 +8,11 @@ interface ChatWelcomeProps {
 export function ChatWelcome({ type, name }: ChatWelcomeProps) {
   return (
     <div className="mb-4 flex items-center space-x-2 space-y-1 px-2">
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-transparent">
+      <div className="flex size-16 items-center justify-center rounded-full bg-transparent">
         {type === 'channel' ? (
-          <Hash className="h-12 w-12 text-zinc-500 dark:text-zinc-300" />
+          <Hash className="size-12 text-zinc-500 dark:text-zinc-300" />
         ) : (
-          <AtSign className="h-12 w-12 text-zinc-500 dark:text-zinc-300" />
+          <AtSign className="size-12 text-zinc-500 dark:text-zinc-300" />
         )}
       </div>
       <p className="text-lg text-zinc-500 dark:text-zinc-300 md:text-2xl">
