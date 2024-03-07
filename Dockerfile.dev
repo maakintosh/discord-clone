@@ -9,9 +9,8 @@ WORKDIR /workspaces/discord-clone
 COPY package*.json ./
 RUN npm install
 
-# This is done after the npm install command to take advantage of Docker's layer caching. If the package.json and package-lock.json files haven't changed since the last build, Docker will use the cached layer for the npm install command, which will make the build faster.
+# copies all of the files to workdir after the npm install command to take advantage of Docker's layer caching. If the package.json and package-lock.json files haven't changed since the last build, Docker will use the cached layer for the npm install command, which will make the build faster.
 COPY . .
-
 
 # changes the ownership of the current directory (and all directories and files within it, due to the -R flag for recursive) to the node user and node group.
 # This is recommended as best practice for Node.js applications to avoid permission issues when the Node.js process tries to access files in the container. By default, Docker runs containers as the root user, but this can be a security risk and is generally not recommended.

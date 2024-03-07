@@ -1,0 +1,49 @@
+# This Dockerfile.prod is composed by multi-stage feature using multiple FROM statements. Each FROM statement creates a new stage, and you can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image.
+FROM node:20-bullseye-slim AS base
+
+# stage1. build the application
+FROM base AS builder
+# any subsequent Dockerfile instructions after WORKDIR will be run in the context of this directory. it sets up a directory where your application's code will be placed within the Docker container.
+WORKDIR /workspaces/discord-clone
+
+# a common command used for Debian-based Linux distributions, which updates the package list and upgrades the packages to the latest versions witouht user interaction.
+RUN apt-get update && apt-get upgrade -y
+
+COPY package*.json ./
+COPY src ./src
+COPY public ./public
+COPY tsconfig.json components.json ./
+COPY *.js ./
+COPY prisma ./prisma
+
+# --frozen-lockfile option ensures that the package-lock.json file is not updated. This guarantees that the exact same dependencies are installed every time you build your Docker image. This helps to avoid inconsistencies between different builds of the same image, and between different environments(dev vs prod)
+RUN npm install --frozen-lockfile
+
+# Prisma Client needs to be generated during the build process (before build command) just because the Prisma Client is a Node.js module that is used to access the db.
+RUN npx prisma generate
+
+# disable Next.js telemetry collection.
+ARG NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=$NEXT_TELEMETRY_DISABLED
+
+RUN npm run build
+
+# stage2. run the application
+FROM base AS runner
+WORKDIR /workspaces/discord-clone
+USER node
+
+# built application on builder stage can be used in this stage to reduce the final image size.
+COPY --from=builder /workspaces/discord-clone/public ./public
+# --chown=node:node option changes the ownership of the copied files to the node user and group. This is a security best practice when running Node.js applications in Docker, as it allows the application to run without root privileges.
+COPY --from=builder --chown=node:node /workspaces/discord-clone/.next/static ./.next/static
+# copies the standalone version of the built application from the builder stage. it is .next/standalone dir that copies only the necessary files for a production deployment and can then be deployed on its own without installing node_modules. To use this feature, you should modify your next.config.js specifically. More info: https://nextjs.org/docs/app/api-reference/next-config-js/output#automatically-copying-traced-files
+COPY --from=builder --chown=node:node /workspaces/discord-clone/.next/standalone ./
+
+# disable Next.js telemetry collection.
+ENV NEXT_TELEMETRY_DISABLED=$NEXT_TELEMETRY_DISABLED
+
+# you don't need to expose the port, because the port is exposed in the docker-compose.prod.yml file.
+
+CMD ["node", "server.js"]
+# CMD ["npm", "start"]
