@@ -9,7 +9,7 @@ services:
       - db_prod
 
     build:
-      context: . # path to the Dockerfile
+      context: .
       dockerfile: Dockerfile.prod
 
     restart: always
@@ -28,6 +28,7 @@ services:
 
   db:
     container_name: db_prod
+    hostname: db_prod
     image: postgres:latest
 
     restart: unless-stopped

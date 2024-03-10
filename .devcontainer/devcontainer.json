@@ -1,7 +1,7 @@
 // more info: https://containers.dev/implementors/json_reference/
 {
   "name": "discord-clone",
-  "dockerComposeFile": "../docker-compose.dev.yml",
+  "dockerComposeFile": "docker-compose.dev.yml",
   "service": "next_app",
   // Sets the default path that devcontainer.json supporting services / tools should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Defaults to "/".
   "workspaceFolder": "/workspaces/discord-clone",
@@ -21,12 +21,7 @@
   // "updateContentCommand": "",
 
   // happens after updateContentCommand and once the dev container has been assigned to a user for the first time. Cloud services can use this command to take advantage of user specific secrets and permissions.
-  "postCreateCommand": {
-    // for performance reasons, a git "dirty" indicator that tells there are uncommitted changes is disabled by default. so this git command turns it on for smaller repositories.
-    "git": "git config devcontainers-theme.show-dirty 1",
-    // this prisma command will generate the client and the schema inside the container
-    "prisma": "npx prisma db push"
-  },
+  "postCreateCommand": "sh .devcontainer/post-create.sh",
 
   // connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"

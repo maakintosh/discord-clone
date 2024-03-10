@@ -6,7 +6,7 @@ FROM base AS builder
 # any subsequent Dockerfile instructions after WORKDIR will be run in the context of this directory. it sets up a directory where your application's code will be placed within the Docker container.
 WORKDIR /workspaces/discord-clone
 
-# a common command used for Debian-based Linux distributions, which updates the package list and upgrades the packages to the latest versions witouht user interaction.
+# common command used for Debian-based Linux distributions, which updates the package list and upgrades the packages to the latest versions witouht user interaction.
 RUN apt-get update && apt-get upgrade -y
 
 COPY package*.json ./
@@ -19,7 +19,7 @@ COPY prisma ./prisma
 # --frozen-lockfile option ensures that the package-lock.json file is not updated. This guarantees that the exact same dependencies are installed every time you build your Docker image. This helps to avoid inconsistencies between different builds of the same image, and between different environments(dev vs prod)
 RUN npm install --frozen-lockfile
 
-# Prisma Client needs to be generated during the build process (before build command) just because the Prisma Client is a Node.js module that is used to access the db.
+# Prisma Client needs to be generated during the build process (before build command) just as the Prisma Client is a Node.js module
 RUN npx prisma generate
 
 # disable Next.js telemetry collection.
