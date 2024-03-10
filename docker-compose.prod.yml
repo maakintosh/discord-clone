@@ -28,7 +28,6 @@ services:
 
   db:
     container_name: db_prod
-    hostname: db_prod
     image: postgres:latest
 
     restart: unless-stopped

@@ -6,6 +6,9 @@
   // Sets the default path that devcontainer.json supporting services / tools should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Defaults to "/".
   "workspaceFolder": "/workspaces/discord-clone",
 
+  // When using bind mount with docker-outside-of-docker approach, the directory to mount must be specified by the host path. This is because the Docker daemon inside the container does not have access to the host's filesystem. This environment variable allows you to refer to the Workspace host path.
+  "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" },
+
   // Use 'forwardPorts' to make a list of ports inside the container available locally. This can be used to network with other containers or with the host.
   // Forwardind vs Publishing ports: https://containers.dev/implementors/json_reference/#publishing-vs-forwarding-ports
   // 5555: prisma studio
@@ -28,6 +31,10 @@
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
+    // docker-outside-docker approach enables using a forwarded Docker socket within a container to run Docker commands such as build and publish to deploy production image.
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest"
+    },
     "ghcr.io/devcontainers/features/git:1": {
       "version": "latest",
       "ppa": "false"
