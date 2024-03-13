@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  next_app:
+  next_app_prod:
     container_name: next_app_prod
 
     # db container will start before the next_app container.
@@ -14,21 +14,20 @@ services:
 
     restart: always
 
-    # port mapping allows the app running in the container to access running db container and to be accessed from browser.
-    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. (Adding the "ports" property to this file will not forward from a Codespace.)
+    # This configuration is mapping the port 3000 of the Docker host (the machine running the Docker daemon, left) to the port 3000 of the Docker container (right).
     ports:
-      - 3000:3000
+      # The 0.0.0.0 before the first colon is specifying the network interface on the Docker host where the port is exposed. 0.0.0.0 means all IPv4 addresses on the local machine. In other words, the application listening on port 10000 inside the Docker container, can be accessed via port 10000 on any network interface of the Docker host.
+      - 0.0.0.0:10000:10000
 
     env_file:
       - .env.production
 
-    # The network_mode property specifies the network mode for the container. The service:db value tells Docker to use the same network as the db container.
-    # Runs next_app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    network_mode: service:db
+    networks:
+      - next_app_prod_network
 
-  db:
+  db_prod:
     container_name: db_prod
-    image: postgres:latest
+    image: postgres:16
 
     restart: unless-stopped
 
@@ -37,8 +36,13 @@ services:
 
     env_file:
       - .env.production
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
+
+    networks:
+      - next_app_prod_network
 
 volumes:
   postgres-data:
+
+networks:
+  next_app_prod_network:
+    driver: bridge

@@ -1,5 +1,6 @@
 # This Dockerfile.prod is composed by multi-stage feature using multiple FROM statements. Each FROM statement creates a new stage, and you can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image.
-FROM node:20-bullseye-slim AS base
+# Render.com forces images to be built with the platform linux/amd64. https://docs.render.com/deploy-an-image#image-requirements
+FROM --platform=linux/amd64 node:20-bullseye-slim AS base
 
 # stage1. build the application
 FROM base AS builder
@@ -35,10 +36,10 @@ USER node
 
 # built application on builder stage can be used in this stage to reduce the final image size.
 COPY --from=builder /workspaces/discord-clone/public ./public
-# --chown=node:node option changes the ownership of the copied files to the node user and group. This is a security best practice when running Node.js applications in Docker, as it allows the application to run without root privileges.
-COPY --from=builder --chown=node:node /workspaces/discord-clone/.next/static ./.next/static
 # copies the standalone version of the built application from the builder stage. it is .next/standalone dir that copies only the necessary files for a production deployment and can then be deployed on its own without installing node_modules. To use this feature, you should modify your next.config.js specifically. More info: https://nextjs.org/docs/app/api-reference/next-config-js/output#automatically-copying-traced-files
 COPY --from=builder --chown=node:node /workspaces/discord-clone/.next/standalone ./
+# --chown=node:node option changes the ownership of the copied files to the node user and group. This is a security best practice when running Node.js applications in Docker, as it allows the application to run without root privileges.
+COPY --from=builder --chown=node:node /workspaces/discord-clone/.next/static ./.next/static
 
 # disable Next.js telemetry collection.
 ENV NEXT_TELEMETRY_DISABLED=$NEXT_TELEMETRY_DISABLED

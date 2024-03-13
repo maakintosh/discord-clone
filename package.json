@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "docker:login": "docker login --username maakintosh --password $LOGIN_GHCR_PAT ghcr.io",
+    "docker:build": "docker build --file Dockerfile.prod . --tag ghcr.io/maakintosh/discord-clone:latest",
+    "docker:push": "docker push ghcr.io/maakintosh/discord-clone:latest",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
