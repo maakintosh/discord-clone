@@ -6,10 +6,9 @@ generator client {
 }
 
 generator erd {
-  provider = "prisma-erd-generator"
-  
-  output = "ERD.md"
-  theme = "dark"
+  provider                  = "prisma-erd-generator"
+  output                    = "ERD.md"
+  theme                     = "dark"
   includeRelationFromFields = true
   // You won't always need to generate a new ERD. For instance, when you are building your docker containers you often run prisma generate and if this generator is included, odds are you aren't relying on an updated ERD inside your docker container. It also adds additional space to the container because of dependencies such as puppeteer. There are two ways to disable this ERD generator.
   // disabled = true

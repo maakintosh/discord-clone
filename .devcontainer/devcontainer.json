@@ -1,12 +1,12 @@
 // more info: https://containers.dev/implementors/json_reference/
 {
   "name": "discord-clone",
-  "dockerComposeFile": "docker-compose.dev.yml",
+  "dockerComposeFile": "docker-compose.dev.yaml",
   "service": "next_app",
   // Sets the default path that devcontainer.json supporting services / tools should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Defaults to "/".
   "workspaceFolder": "/workspaces/discord-clone",
 
-  // When using bind mount with docker-outside-of-docker feature, the directory to mount must be specified by the host path. This is because the Docker daemon inside the container does not have access to the host's filesystem. This environment variable allows you to refer to the Workspace host path.
+  // When using bind mount with docker-outside-of-docker feature, the directory to mount must be specified by the host path, because the Docker daemon inside the container does not have access to the host's filesystem. This environment variable allows you to refer to the Workspace host path.
   "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally. This can be used to network with other containers or with the host.

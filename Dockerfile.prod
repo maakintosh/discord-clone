@@ -32,19 +32,16 @@ RUN npm run build
 # stage2. run the application
 FROM base AS runner
 WORKDIR /workspaces/discord-clone
+
 USER node
 
-# built application on builder stage can be used in this stage to reduce the final image size.
-COPY --from=builder /workspaces/discord-clone/public ./public
-# copies the standalone version of the built application from the builder stage. it is .next/standalone dir that copies only the necessary files for a production deployment and can then be deployed on its own without installing node_modules. To use this feature, you should modify your next.config.js specifically. More info: https://nextjs.org/docs/app/api-reference/next-config-js/output#automatically-copying-traced-files
-COPY --from=builder --chown=node:node /workspaces/discord-clone/.next/standalone ./
-# --chown=node:node option changes the ownership of the copied files to the node user and group. This is a security best practice when running Node.js applications in Docker, as it allows the application to run without root privileges.
-COPY --from=builder --chown=node:node /workspaces/discord-clone/.next/static ./.next/static
+COPY --from=builder --chown=node:node /workspaces/discord-clone/package*.json ./
+COPY --from=builder --chown=node:node /workspaces/discord-clone/node_modules ./node_modules
+COPY --from=builder --chown=node:node /workspaces/discord-clone/.next ./.next
+COPY --from=builder --chown=node:node /workspaces/discord-clone/public ./public
 
 # disable Next.js telemetry collection.
+ARG NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_TELEMETRY_DISABLED=$NEXT_TELEMETRY_DISABLED
 
-# you don't need to expose the port, because the port is exposed in the docker-compose.prod.yml file.
-
-CMD ["node", "server.js"]
-# CMD ["npm", "start"]
+CMD npm run start

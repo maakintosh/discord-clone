@@ -1,33 +1,16 @@
-# Include any files or directories that you don't want to be copied to your container here (e.g., local build artifacts, temporary files, etc.).
-#
-# For more help, visit the .dockerignore file reference guide at
-# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+# https://docs.docker.com/build/building/context/#dockerignore-files
 
-**/.classpath
-**/.dockerignore
-**/.env*
-**/.git
-**/.gitignore
-**/.project
-**/.settings
-**/.toolstarget
-**/.vs
-**/.vscode
-**/.next
-**/.cache
-**/*.*proj.user
-**/*.dbmdl
-**/*.jfm
-**/charts
-**/docker-compose*
-**/compose*
-**/Dockerfile*
-**/node_modules
-**/npm-debug.log
-**/obj
-**/secrets.dev.yaml
-**/values.dev.yaml
-**/build
-**/dist
-LICENSE
-README.md
+# 1. Ignore everything at the root of the build context
+**
+# Generally, exclude:
+# sensitive information such as env variables for security reasons. Instead, you should pass it at runtime by using docker run -e or by Docker Compose env_file field.
+# node_modules directory from your local system to avoid potential issues with native modules. If you're building a Docker image for a Node.js application, you'll typically run npm install instead.
+
+# 2. Include specific files and directories
+!package*.json
+!src/
+!public/
+!tsconfig.json
+!components.json
+!*.js
+!prisma/
