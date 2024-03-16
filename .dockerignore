@@ -1,0 +1,16 @@
+# https://docs.docker.com/build/building/context/#dockerignore-files
+
+# 1. Ignore everything at the root of the build context
+**
+# Generally, exclude:
+# sensitive information such as env variables for security reasons. Instead, you should pass it at runtime by using docker run -e or by Docker Compose env_file field.
+# node_modules directory from your local system to avoid potential issues with native modules. If you're building a Docker image for a Node.js application, you'll typically run npm install instead.
+
+# 2. Include specific files and directories
+!package*.json
+!src/
+!public/
+!tsconfig.json
+!components.json
+!*.js
+!prisma/

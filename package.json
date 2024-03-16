@@ -4,8 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "docker:build": "docker build --file Dockerfile.prod --tag ghcr.io/maakintosh/discord-clone:latest .",
+    "docker:login": "docker login --username maakintosh --password $LOGIN_GHCR_PAT ghcr.io",
+    "docker:push": "docker push ghcr.io/maakintosh/discord-clone:latest",
+    "docker:up": "docker-compose --file docker-compose.prod.yaml up --build -d",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "lint": "next lint",
     "prepare": "husky install"
   },
@@ -54,6 +58,7 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.46.1",
     "react-hot-toast": "^2.4.1",
+    "sharp": "^0.33.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
     "tailwind-merge": "^1.14.0",

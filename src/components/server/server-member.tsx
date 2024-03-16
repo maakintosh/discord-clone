@@ -27,7 +27,7 @@ export function ServerMember({ member }: ServerSidebarProps) {
       className="group flex w-full items-center justify-start rounded-md px-2 hover:bg-gray-300 dark:hover:bg-gray-700"
     >
       <div className="flex items-center">
-        <UserAvatar src={member.profile.imageUrl} className="h-7 w-7" />
+        <UserAvatar src={member.profile.imageUrl} className="size-7" />
         <div className="flex items-center text-sm">
           <p>{roleIconMap[member.role]}</p>
           <p

@@ -1,0 +1,47 @@
+# This Dockerfile.prod is composed by multi-stage feature using multiple FROM statements. Each FROM statement creates a new stage, and you can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image.
+# Render.com forces images to be built with the platform linux/amd64. https://docs.render.com/deploy-an-image#image-requirements
+FROM --platform=linux/amd64 node:20-bullseye-slim AS base
+
+# stage1. build the application
+FROM base AS builder
+# any subsequent Dockerfile instructions after WORKDIR will be run in the context of this directory. it sets up a directory where your application's code will be placed within the Docker container.
+WORKDIR /workspaces/discord-clone
+
+# common command used for Debian-based Linux distributions, which updates the package list and upgrades the packages to the latest versions witouht user interaction.
+RUN apt-get update && apt-get upgrade -y
+
+COPY package*.json ./
+COPY src ./src
+COPY public ./public
+COPY tsconfig.json components.json ./
+COPY *.js ./
+COPY prisma ./prisma
+
+# --frozen-lockfile option ensures that the package-lock.json file is not updated. This guarantees that the exact same dependencies are installed every time you build your Docker image. This helps to avoid inconsistencies between different builds of the same image, and between different environments(dev vs prod)
+RUN npm install --frozen-lockfile
+
+# Prisma Client needs to be generated during the build process (before build command) just as the Prisma Client is a Node.js module
+RUN npx prisma generate
+
+# disable Next.js telemetry collection.
+ARG NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=$NEXT_TELEMETRY_DISABLED
+
+RUN npm run build
+
+# stage2. run the application
+FROM base AS runner
+WORKDIR /workspaces/discord-clone
+
+USER node
+
+COPY --from=builder --chown=node:node /workspaces/discord-clone/package*.json ./
+COPY --from=builder --chown=node:node /workspaces/discord-clone/node_modules ./node_modules
+COPY --from=builder --chown=node:node /workspaces/discord-clone/.next ./.next
+COPY --from=builder --chown=node:node /workspaces/discord-clone/public ./public
+
+# disable Next.js telemetry collection.
+ARG NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=$NEXT_TELEMETRY_DISABLED
+
+CMD npm run start

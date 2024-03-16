@@ -34,7 +34,7 @@ export function MediaRoom({ chatId, isVideo, isAudio }: MediaRoomProps) {
   if (!token) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center ">
-        <Loader2 className="my-4 h-8 w-8 animate-spin text-zinc-500" />
+        <Loader2 className="my-4 size-8 animate-spin text-zinc-500" />
         <p className="text-zinc-500">Loading...</p>
       </div>
     )

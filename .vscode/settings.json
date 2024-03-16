@@ -2,6 +2,21 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    // prettier will take care of organizing imports instead of eslint
+    "source.organizeImports": "never"
+  },
+  // disable default formatters for javascript and typescript by VSCode
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   }

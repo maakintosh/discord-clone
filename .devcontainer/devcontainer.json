@@ -1,23 +1,56 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node-postgres
+// more info: https://containers.dev/implementors/json_reference/
 {
   "name": "discord-clone",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "dockerComposeFile": "docker-compose.dev.yaml",
+  "service": "next_app",
+  // Sets the default path that devcontainer.json supporting services / tools should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Defaults to "/".
+  "workspaceFolder": "/workspaces/discord-clone",
 
-  // Features to add to the dev container. More info: https://containers.dev/features.
-  "features": {
-    "ghcr.io/devcontainers-contrib/features/prisma": "latest"
-  },
+  // When using bind mount with docker-outside-of-docker feature, the directory to mount must be specified by the host path, because the Docker daemon inside the container does not have access to the host's filesystem. This environment variable allows you to refer to the Workspace host path.
+  "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally. This can be used to network with other containers or with the host.
   // Forwardind vs Publishing ports: https://containers.dev/implementors/json_reference/#publishing-vs-forwarding-ports
   // 5555: prisma studio
-  "forwardPorts": [5555],
+  "forwardPorts": [3000, 5432, 5555],
 
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "npm install",
+  // runs on the host machine before the container is created. ⚠️ The command is run wherever the source code is located on the host. For cloud services, this is in the cloud.
+  // "initializeCommand": "",
+
+  // finalizes container setup when a dev container is created. It and subsequent commands execute inside the container immediately after it has started for the first time. Cloud services can use this command when caching or prebuilding a container. This means that it will not typically have access to user-scoped assets or secrets.
+  // "onCreateCommand": "",
+
+  // executes inside the container after onCreateCommand whenever new content is available in the source tree during the creation process. It will execute at least once, but cloud services will also periodically execute the command to refresh cached or prebuilt containers. Like cloud services using onCreateCommand, it can only take advantage of repository and org scoped secrets or permissions.
+  // "updateContentCommand": "",
+
+  // happens after updateContentCommand and once the dev container has been assigned to a user for the first time. Cloud services can use this command to take advantage of user specific secrets and permissions.
+  "postCreateCommand": "sh .devcontainer/post-create.sh",
+
+  // connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    // docker-outside-docker feature enables using a forwarded Docker socket within a container to run Docker commands such as build and publish to deploy production image.
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest",
+      "ppa": "false"
+    },
+    // https://github.com/devcontainers/features/tree/main/src/common-utils
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      // For zsh, the default theme is a standard Oh My Zsh! theme. You may pick a different one by modifying the ZSH_THEME variable in ~/.zshrc.
+      "installOhMyZsh": true,
+      "installOhMyZshConfig": true,
+      "upgradePackages": true,
+      "username": "node"
+    },
+    "ghcr.io/devcontainers-contrib/features/prisma": "latest"
+  },
 
   // Configure tool-specific properties.
   "customizations": {
@@ -27,6 +60,21 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "always",
+          // prettier will take care of organizing imports instead of eslint
+          "source.organizeImports": "never"
+        },
+        // disable default formatters for javascript and typescript by VSCode
+        "javascript.format.enable": false,
+        "typescript.format.enable": false,
+
+        "eslint.validate": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ],
         "[prisma]": {
           "editor.defaultFormatter": "Prisma.prisma"
         }
@@ -42,16 +90,11 @@
         "GitHub.copilot",
         "GitHub.copilot-chat",
         "github.vscode-github-actions",
-        "richie5um2.vscode-sort-json",
         "Prisma.prisma",
         "shd101wyy.markdown-preview-enhanced",
         "YoavBls.pretty-ts-errors",
-        "bradlc.vscode-tailwindcss",
-        "ecmel.vscode-html-css"
+        "bradlc.vscode-tailwindcss"
       ]
     }
   }
-
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
 }
