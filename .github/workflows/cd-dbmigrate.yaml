@@ -39,7 +39,7 @@ jobs:
         run: npx prisma migrate deploy --schema=./prisma/schema.prisma
         env:
           EXTERNAL_DATABASE_URL: ${{ secrets.EXTERNAL_DATABASE_URL }}
-# TODO: strategy for handling migration failures:
+# TODO: prepare strategy for handling migration failures:
 # - Backup: Always backup your database before running migrations.
 # - Rollback: If a migration fails, you should rollback the migration and restore the backup. Always test your migrations in a staging environment before running them in production.
 # - Monitoring: Monitor your application and database performance after running migrations.
