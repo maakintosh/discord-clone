@@ -17,7 +17,7 @@ COPY tsconfig.json components.json ./
 COPY *.js ./
 COPY prisma ./prisma
 
-# --frozen-lockfile option ensures that the package-lock.json file is not updated. This guarantees that the exact same dependencies are installed every time you build your Docker image. This helps to avoid inconsistencies between different builds of the same image, and between different environments(dev vs prod)
+# --frozen-lockfile option ensures that the package-lock.json file is not updated. This guarantees that the exact same dependencies are installed every time you build your Docker image. This helps to avoid inconsistencies between different builds of the same image, and between different environments(dev vs prod).
 RUN npm install --frozen-lockfile
 
 # Prisma Client needs to be generated during the build process (before build command) just as the Prisma Client is a Node.js module
@@ -35,10 +35,7 @@ WORKDIR /workspaces/discord-clone
 
 USER node
 
-COPY --from=builder --chown=node:node /workspaces/discord-clone/package*.json ./
-COPY --from=builder --chown=node:node /workspaces/discord-clone/node_modules ./node_modules
-COPY --from=builder --chown=node:node /workspaces/discord-clone/.next ./.next
-COPY --from=builder --chown=node:node /workspaces/discord-clone/public ./public
+COPY --from=builder --chown=node:node /workspaces/discord-clone/ ./
 
 # disable Next.js telemetry collection.
 ARG NEXT_TELEMETRY_DISABLED=1

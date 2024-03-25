@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  next_app_test:
+    container_name: next_app_test
+
+    # db container will start before the next_app container.
+    depends_on:
+      - db_test
+
+    build:
+      # On the otehr hand, your Dockerfile path does not need to be modified for Docker-outside-of-Docker (DooD), because all the paths in the Dockerfile are relative to this build context.
+      # where the image is built from
+      context: .
+      # the path to the Dockerfile to use for building the image
+      dockerfile: Dockerfile.prod
+
+    restart: always
+
+    # This configuration is mapping the port 10000 of the Docker host (the machine running the Docker daemon, left) to the port 10000 of the Docker container (right).
+    ports:
+      # The 0.0.0.0 before the first colon is specifying the network interface on the Docker host where the port is exposed. 0.0.0.0 means all IPv4 addresses on the local machine. In other words, the application listening on port 10000 inside the Docker container, can be accessed via port 10000 on any network interface of the Docker host.
+      - 0.0.0.0:10000:10000
+
+    env_file:
+      - .env.production
+
+    networks:
+      - next_app_test_network
+
+  db_test:
+    container_name: db_test
+    image: postgres:16
+
+    restart: always
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    env_file:
+      - .env.production
+
+    networks:
+      - next_app_test_network
+
+volumes:
+  postgres-data:
+
+networks:
+  next_app_test_network:
+    driver: bridge

@@ -8,18 +8,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: npm install
-      - name: makeERD
-        run: |
-          npx prisma generate
+
+      # Cache npm dependencies to speed up the workflow runtime
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # npm ci is faster and more reliable for CI/CD workflows because it only installs dependencies specified in package-lock.json.
+      - run: npm ci
+
+      - name: generate Entity Relationship Diagram
+        run: npx prisma generate
+
+      # checks if there are any changes in the prisma/ERD.md file. It uses git diff --name-only prisma/ERD.md to get the names of changed files and stores the result in the changed output variable.
       - id: checkErdDiff
         run: echo "changed=$(git diff --name-only prisma/ERD.md)" >> $GITHUB_OUTPUT
+
+      # prints the value of the changed output variable.
       - run: echo ${{ steps.checkErdDiff.outputs.changed}}
+
+      # if the ERD.md file has changed, prints a message as below.
       - if: ${{ steps.checkErdDiff.outputs.changed != '' }}
         run: |
           echo "ERD.md has changed. Commit it every time after you generate a new ERD."

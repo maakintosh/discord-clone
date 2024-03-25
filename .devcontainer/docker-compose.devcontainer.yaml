@@ -12,11 +12,11 @@ services:
     # when using Docker-outside-of-Docker (DooD), you need to ensure that the paths you're using in your Dockerfile and docker-compose file are accessible from the Docker daemon running on the host machine. this is why the LOCAL_WORKSPACE_FOLDER environment variable is used to refer to the Workspace host path. (defined in the .devcontainer/devcontainer.json file.)
     # The default value .. is used if its env variable is not set, so that the docker-compose.yaml file can work when it is run outside of the container.
     build:
-      # On the otehr hand, your Dockerfile does not need to be modified for Docker-outside-of-Docker (DooD), because all the paths in the Dockerfile are relative to this build context.
+      # On the otehr hand, your Dockerfile path does not need to be modified for Docker-outside-of-Docker (DooD), because all the paths in the Dockerfile are relative to this build context.
       # where the image is built from.
       context: ${LOCAL_WORKSPACE_FOLDER:-..}
       # the path to the Dockerfile to use for building the image
-      dockerfile: .devcontainer/Dockerfile.dev
+      dockerfile: .devcontainer/Dockerfile.devcontainer
 
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. (Adding the "ports" property to this file will not forward from a Codespace.)
     # ports:

@@ -1,7 +1,7 @@
 // more info: https://containers.dev/implementors/json_reference/
 {
   "name": "discord-clone",
-  "dockerComposeFile": "docker-compose.dev.yaml",
+  "dockerComposeFile": "docker-compose.devcontainer.yaml",
   "service": "next_app",
   // Sets the default path that devcontainer.json supporting services / tools should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Defaults to "/".
   "workspaceFolder": "/workspaces/discord-clone",

@@ -33,7 +33,7 @@ yarn-error.log*
 .env
 .env.development
 
-# vercel
+# IaC
 .vercel
 
 # typescript
