@@ -1,0 +1,78 @@
+# Render Blueprints (IaC) (https://docs.render.com/infrastructure-as-code)
+# Blueprints are Render’s infrastructure-as-code (IaC) model for defining, deploying, and managing multiple resources on render platform with a single render.yaml file. and it acts as the single source of truth for configuring an interconnected set of services, databases, and environment groups. Whenever you update a Blueprint, render automatically redeploys any affected services to apply the new configuration (you can disable this).
+
+# https://docs.render.com/blueprint-spec
+# List all services *except* PostgreSQL databases here
+services:
+  # A web service that pulls a prebuild image from registry (runtime: image).
+  - name: chatdemo
+    type: web
+    runtime: image
+    image:
+      url: ghcr.io/maakintosh/discord-clone:latest
+      # Provide creds only if you’re pulling a private image. Add registry credentials in the Render Dashboard from your Account Settings
+      # creds:
+      #   fromRegistryCreds:
+      #     # The name of a credential you've added to your account
+      #     name: my-credentials
+
+    # buildCommand: # Required for non-Docker-based services.
+    # startCommand: # Required for non-Docker-based services.
+
+    # In all cases, provide the service’s name, along with the property or envVarKey to use.
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chatdemo_db
+          # PostgreSQL and Redis only. The URL for connecting to the data store over the private network.
+          property: connectionString
+      - key: EXTERNAL_DATABASE_URL
+        sync: false
+
+      # you can define secret credentials such an API key or access token with sync: false
+      - key: LOGIN_GHCR_PAT
+        sync: false
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      - key: PORT
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL
+        sync: false
+      - key: NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
+        sync: false
+      - key: NEXT_PUBLIC_CLERK_SIGN_IN_URL
+        sync: false
+      - key: NEXT_PUBLIC_CLERK_SIGN_UP_URL
+        sync: false
+      - key: UPLOADTHING_APP_ID
+        sync: false
+      - key: UPLOADTHING_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_LIVEKIT_URL
+        sync: false
+      - key: LIVEKIT_API_KEY
+        sync: false
+      - key: LIVEKIT_API_SECRET
+        sync: false
+
+# List all PostgreSQL databases here
+databases:
+  # A database with a read replica
+  - name: chatdemo_db
+    databaseName: chatdemo_db # Optional
+    plan: free
+    postgresMajorVersion: 16
+    region: singapore
+    user: admin123 # Optional
+    # controls which IP addresses can access your PostgreSQL databases and Redis instances from outside Render’s network. this field is required for Redis instances. If you omit this field for a PostgreSQL database, any source with valid credentials can access the database. These rules apply to connections using your database’s external URL. Your Render services in the same region as your database can always connect using your database’s internal URL.
+    ipAllowList:
+      # explicitly allows external connections from everywhere
+      - source: 0.0.0.0/0
+        description: everywhere
+    # If you provide an empty list (e.g., readReplicas: []), Render destroys any existing replica and does not create a new replica.
+    readReplicas:
+      - name: chatdemo_db_replica
