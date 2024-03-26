@@ -75,6 +75,3 @@ databases:
       # explicitly allows external connections from everywhere
       - source: 0.0.0.0/0
         description: everywhere
-    # If you provide an empty list (e.g., readReplicas: []), Render destroys any existing replica and does not create a new replica.
-    readReplicas:
-      - name: chatdemo_db_replica
