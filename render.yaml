@@ -21,17 +21,19 @@ services:
 
     # In all cases, provide the service’s name, along with the property or envVarKey to use.
     envVars:
+      # An internal URL for connections from your other Render services hosted in the same region. Always use this one if you can.
       - key: DATABASE_URL
         fromDatabase:
           name: chatdemo_db
           # PostgreSQL and Redis only. The URL for connecting to the data store over the private network.
           property: connectionString
+      # An external URL for connections from everything else, slower because they traverse the public internet
       - key: EXTERNAL_DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: chatdemo_db
+          property: connectionString
 
       # you can define secret credentials such an API key or access token with sync: false
-      - key: LOGIN_GHCR_PAT
-        sync: false
       - key: NEXT_PUBLIC_SITE_URL
         sync: false
       - key: PORT
