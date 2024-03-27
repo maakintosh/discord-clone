@@ -16,7 +16,7 @@ import { ToastProvider } from '@/components/providers/toast-provider'
 const font = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'TeamChat',
+  title: 'Chatdemo',
   description:
     'discord-like chat app built with Next13, shadcn/ui, ClerkAuth, Prisma, Socket.io, react-query etc.'
 }

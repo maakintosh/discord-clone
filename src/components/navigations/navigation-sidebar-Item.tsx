@@ -24,7 +24,7 @@ export function NavigationSidebarItem({
     <ActionTooltip label={name} side="right" align="center">
       <button
         onClick={() => router.push(`/servers/${id}`)}
-        className="group relative flex items-center "
+        className="group relative flex items-center"
       >
         {/* active indication bar */}
         <div
