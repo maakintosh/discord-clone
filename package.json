@@ -7,7 +7,7 @@
     "docker:build": "docker build --file Dockerfile.prod --tag ghcr.io/maakintosh/discord-clone:latest .",
     "docker:login": "docker login --username maakintosh --password $LOGIN_GHCR_PAT ghcr.io",
     "docker:push": "docker push ghcr.io/maakintosh/discord-clone:latest",
-    "docker:test:up": "docker-compose --file docker-compose.test.yaml up --build -d",
+    "docker:test:up": "docker-compose --file docker-compose.test.yaml up -d",
     "docker:test:down": "docker-compose --file docker-compose.test.yaml down",
     "docker:test:migrate": "docker exec next_app_test npx prisma migrate deploy",
     "build": "next build",
