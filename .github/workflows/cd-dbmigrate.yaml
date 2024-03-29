@@ -34,6 +34,8 @@ jobs:
           file: Dockerfile.prod
           # automatically replaces github.repository with the current repository's owner and name, as 'ghcr.io/${GITHUB_USERNAME}/${REPOSITORY_NAME}:latest'.
           tags: ghcr.io/${{ github.repository}}:latest
+          # explictly required to push the image to ghcr.io.
+          push: true
 
       # Prisma recommends running migrations to production as part of your CI/CD pipeline
       - name: Apply all pending migrations to the production database
