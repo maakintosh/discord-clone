@@ -15,11 +15,11 @@ interface MediaRoomProps {
 
 export function MediaRoom({ chatId, isVideo, isAudio }: MediaRoomProps) {
   const { user } = useUser()
-  const name = `${user?.firstName} ${user?.lastName}`
   const [token, setToken] = useState('')
 
   useEffect(() => {
     if (!user?.firstName || !user?.lastName) return
+    const name = `${user.firstName} ${user.lastName}`
     ;(async () => {
       try {
         const res = await fetch(`/api/livekit?room=${chatId}&username=${name}`)
@@ -29,9 +29,9 @@ export function MediaRoom({ chatId, isVideo, isAudio }: MediaRoomProps) {
         console.log(error)
       }
     })()
-  }, [chatId, name, user?.firstName, user?.lastName])
+  }, [chatId, user?.firstName, user?.lastName])
 
-  if (!token) {
+  if (token === '') {
     return (
       <div className="flex flex-1 flex-col items-center justify-center ">
         <Loader2 className="my-4 size-8 animate-spin text-zinc-500" />
@@ -48,7 +48,6 @@ export function MediaRoom({ chatId, isVideo, isAudio }: MediaRoomProps) {
       connect={true}
       serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
       data-lk-theme="default"
-      style={{ height: '100dvh' }}
     >
       <VideoConference />
     </LiveKitRoom>
