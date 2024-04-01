@@ -45,7 +45,7 @@ export function MediaRoom({ chatId, isVideo, isAudio }: MediaRoomProps) {
       video={isVideo}
       audio={isAudio}
       token={token}
-      connectOptions={{ autoSubscribe: false }}
+      connect={true}
       serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
       data-lk-theme="default"
       style={{ height: '100dvh' }}
