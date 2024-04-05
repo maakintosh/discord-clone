@@ -11,7 +11,7 @@
     "docker:test:down": "docker-compose --file docker-compose.test.yaml down",
     "docker:test:migrate": "docker exec next_app_test npx prisma migrate deploy",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start",
     "lint": "next lint",
     "prepare": "husky install"
   },

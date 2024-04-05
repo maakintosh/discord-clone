@@ -36,8 +36,6 @@ services:
       # you can define secret credentials such an API key or access token with sync: false
       - key: NEXT_PUBLIC_SITE_URL
         sync: false
-      - key: PORT
-        sync: false
       - key: CLERK_SECRET_KEY
         sync: false
       - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
