@@ -52,8 +52,6 @@ services:
         sync: false
       - key: UPLOADTHING_SECRET
         sync: false
-      - key: UPLOADTHING_URL
-        sync: false
       - key: NEXT_PUBLIC_LIVEKIT_URL
         sync: false
       - key: LIVEKIT_API_KEY
