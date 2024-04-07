@@ -49,7 +49,8 @@ export function MediaRoom({ chatId, isVideo, isAudio }: MediaRoomProps) {
       audio={isAudio}
       token={token}
       connect={true}
-      serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL!}
+      // hardcode websocket livekit server to forcefully solve disconnection error in production. help me. please.
+      serverUrl={`wss://chatdemo-cf42j8sr.livekit.cloud`}
       data-lk-theme="default"
     >
       <VideoConference />
