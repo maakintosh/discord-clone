@@ -49,7 +49,7 @@ export function MediaRoom({ chatId, isVideo, isAudio }: MediaRoomProps) {
       audio={isAudio}
       token={token}
       connect={true}
-      serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
+      serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL!}
       data-lk-theme="default"
     >
       <VideoConference />
