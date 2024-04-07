@@ -35,6 +35,7 @@ export async function GET(req: NextRequest) {
     canSubscribe: true
   })
 
+  // forcefully use "await" to fix livekit disconnecting issue
   const token = await at.toJwt()
   return NextResponse.json({ token })
 }
