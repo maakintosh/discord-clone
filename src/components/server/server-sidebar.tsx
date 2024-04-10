@@ -19,7 +19,7 @@ interface ServerSidebarProps {
 
 export async function ServerSidebar({ serverId }: ServerSidebarProps) {
   const profile = await currentUserProfile()
-  if (!profile) redirect('/')
+  if (!profile) redirect('/servers')
 
   const server = await db.server.findUnique({
     where: {
@@ -42,7 +42,7 @@ export async function ServerSidebar({ serverId }: ServerSidebarProps) {
     }
   })
 
-  if (!server) redirect('/')
+  if (!server) redirect('/servers')
 
   const members = server.members.filter(
     (member) => member.profileId !== profile!.id

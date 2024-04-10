@@ -36,7 +36,7 @@ export default async function MemberIdPage({
     }
   })
 
-  if (!currentUserMember) return redirect('/')
+  if (!currentUserMember) return redirect('/servers')
 
   const conversation = await findOrCreateNewConversation(
     currentUserMember.id,

@@ -39,12 +39,14 @@ export function ServerSearchbar({ searchData }: ServerSearchbarProps) {
 
   useEffect(() => {
     function commandK(e: KeyboardEvent) {
+      // if pressed command + k
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         setIsOpen(!isOpen)
       }
     }
 
+    // adding an event listener to the document object, which triggers the commandK function every time a keydown event occurs
     document.addEventListener('keydown', commandK)
 
     return () => document.removeEventListener('keydown', commandK)

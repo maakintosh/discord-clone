@@ -33,7 +33,7 @@ export function DeleteServerModal() {
 
       toast.success('Successfully deleted server! 👍')
       onClose()
-      router.push('/')
+      router.push('/servers')
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong. 😢')

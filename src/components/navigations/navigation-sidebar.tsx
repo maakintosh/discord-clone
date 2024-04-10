@@ -14,7 +14,7 @@ export async function NavigationSidebar() {
   const profile = await currentUserProfile()
 
   if (!profile) {
-    return redirect('/')
+    return redirect('/servers')
   }
 
   const servers = await db.server.findMany({
