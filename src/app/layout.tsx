@@ -33,6 +33,9 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
+        <head>
+          <link rel="icon" type="image/svg+xml" href="/project-icon.svg" />
+        </head>
         <body className={cn(font.className, 'bg-gray-300/70 dark:bg-gray-700')}>
           <ThemeProvider
             attribute="class"
