@@ -1,3 +1,5 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { UserButton } from '@clerk/nextjs'
 
@@ -7,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { ModeToggle } from '@/components/mode-toggle'
 
+import { ActionTooltip } from '../action-tooltip'
 import { NavigationAction } from './navigation-action'
 import { NavigationSidebarItem } from './navigation-sidebar-Item'
 
@@ -52,6 +55,19 @@ export async function NavigationSidebar() {
             }
           }}
         />
+        <ActionTooltip label="about" side="right" align="center">
+          <Link
+            href="/"
+            className="relative size-12 items-center overflow-hidden rounded-full"
+          >
+            <Image
+              src="/project-icon.svg"
+              alt="project-icon"
+              fill
+              className="object-cover"
+            />
+          </Link>
+        </ActionTooltip>
       </div>
     </div>
   )
