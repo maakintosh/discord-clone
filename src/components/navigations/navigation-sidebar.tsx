@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { ModeToggle } from '@/components/mode-toggle'
 
 import { ActionTooltip } from '../action-tooltip'
+import { GithubButton } from './github-button'
 import { NavigationAction } from './navigation-action'
 import { NavigationSidebarItem } from './navigation-sidebar-Item'
 
@@ -45,16 +46,9 @@ export async function NavigationSidebar() {
           </div>
         ))}
       </ScrollArea>
-      <div className="mt-auto flex flex-col items-center gap-y-2">
+      <div className="mt-auto flex flex-col justify-center gap-y-2">
         <ModeToggle />
-        <UserButton
-          afterSignOutUrl="/"
-          appearance={{
-            elements: {
-              avatarBox: 'h-12 w-12 rounded-full overflow-hidden'
-            }
-          }}
-        />
+        <GithubButton />
         <ActionTooltip label="about" side="right" align="center">
           <Link
             href="/"
@@ -68,6 +62,14 @@ export async function NavigationSidebar() {
             />
           </Link>
         </ActionTooltip>
+        <UserButton
+          afterSignOutUrl="/"
+          appearance={{
+            elements: {
+              avatarBox: 'h-12 w-12 rounded-full overflow-hidden'
+            }
+          }}
+        />
       </div>
     </div>
   )

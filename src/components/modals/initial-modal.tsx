@@ -34,8 +34,10 @@ const formSchema = z.object({
 })
 
 export function InitialModal() {
-  const [isMounted, setIsMounted] = useState(false)
   const router = useRouter()
+  
+  // setting up the same avoiding hydration error tip used in the ModalProvider, as this modal is not in it
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
     setIsMounted(true)
