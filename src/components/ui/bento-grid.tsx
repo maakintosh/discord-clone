@@ -24,8 +24,7 @@ export const BentoGrid = ({
 export const BentoGridItem = ({
   title,
   description,
-  header,
-  icon,
+  component,
   className
 }: BentoGridItemProps) => {
   return (
@@ -35,9 +34,8 @@ export const BentoGridItem = ({
         className
       )}
     >
-      {header}
+      {component}
       <div className="transition duration-200 group-hover/bento:translate-x-2">
-        {icon}
         <div className="my-2 font-sans text-lg font-bold text-neutral-600 dark:text-neutral-200">
           {title}
         </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { Code2, FolderKanban } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -13,8 +13,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export function GithubButton() {
-  const router = useRouter()
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,24 +24,30 @@ export function GithubButton() {
           <Image src="/github.png" alt="Github" fill className="object-cover" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-24 space-y-1 font-medium">
-        <DropdownMenuItem
-          onClick={() =>
-            router.push('https://github.com/maakintosh/discord-clone')
-          }
-          className=""
-        >
-          Code
-          <Code2 className="ml-auto size-5" />
+      <DropdownMenuContent className="w-8 space-y-1 font-medium">
+        <DropdownMenuItem>
+          <Link
+            href={'https://github.com/maakintosh/discord-clone'}
+            target="_blank"
+            className="w-full"
+          >
+            <div className="flex items-center justify-between">
+              Code
+              <Code2 />
+            </div>
+          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() =>
-            router.push('https://github.com/users/maakintosh/projects/6')
-          }
-          className=""
-        >
-          Project
-          <FolderKanban className="ml-auto size-5" />
+        <DropdownMenuItem>
+          <Link
+            href={'https://github.com/users/maakintosh/projects/6'}
+            target="_blank"
+            className="w-full"
+          >
+            <div className="flex items-center justify-between">
+              Project
+              <FolderKanban />
+            </div>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

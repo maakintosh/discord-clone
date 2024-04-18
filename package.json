@@ -47,6 +47,7 @@
     "clsx": "^2.1.0",
     "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
+    "embla-carousel-react": "^8.0.2",
     "emoji-mart": "^5.5.2",
     "framer-motion": "^11.0.28",
     "livekit-client": "^1.14.4",
