@@ -19,21 +19,23 @@ export const carouselItems: CarouselItemProps[] = [
       <Image
         src="/screenshots/create-server.png"
         alt="create-server"
-        fill
-        className="object-cover"
+        height={256}
+        width={256}
+        className="aspect-square w-full overflow-hidden rounded-lg border border-zinc-700 object-cover"
       />
     )
   },
   {
     title: '2. Invite friends 💌',
-    description: 'send them the invite link to make them srver members!',
+    description: 'send them the invite link to welcome server members!',
     icon: <UserPlus2 />,
     component: (
       <Image
         src="/screenshots/invite-friends.png"
         alt="invite-friends"
-        fill
-        className="object-cover"
+        height={256}
+        width={256}
+        className="aspect-square w-full overflow-hidden rounded-lg border border-zinc-700 object-cover"
       />
     )
   },
@@ -45,8 +47,9 @@ export const carouselItems: CarouselItemProps[] = [
       <Image
         src="/screenshots/chatdemo-app.png"
         alt="chatdemo-app"
-        fill
-        className="object-cover"
+        height={256}
+        width={256}
+        className="aspect-square w-full overflow-hidden rounded-lg border border-zinc-700 object-cover"
       />
     )
   }

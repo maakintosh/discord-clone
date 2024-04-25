@@ -14,54 +14,58 @@ export type BentoGridItemProps = {
 export const bentoGridItems: BentoGridItemProps[] = [
   {
     title: 'Real-time Chat ⚡️',
-    description: 'send and receive messages instantly without refreshing page',
+    description: 'send and receive messages instantly without refreshing page!',
     component: (
       <Image
-        src="/screenshots/create-server.png"
-        width={200}
-        height={200}
+        src="/screenshots/chatdemo-app.png"
+        height={256}
+        width={256}
+        className="aspect-square w-full overflow-hidden rounded-lg border border-zinc-300 object-cover dark:border-zinc-700"
         alt="create-server"
       />
     )
   },
   {
     title: 'Video 🖥️ / Voice 🎙️ channel',
-    description: 'start or join video/voice call',
+    description: 'start or join video/voice call!',
     component: (
       <Image
-        src="/screenshots/create-server.png"
-        width={200}
-        height={200}
+        src="/screenshots/video-voice-chat.png"
+        height={256}
+        width={256}
+        className="w-full overflow-hidden rounded-lg border border-zinc-300 object-cover dark:border-zinc-700"
         alt="create-server"
       />
     )
   },
   {
     title: '1on1 DM 🤝',
-    description: 'have a talk directly with members',
+    description: 'send direct-messages to server member!',
     component: (
       <Image
-        src="/screenshots/create-server.png"
-        width={200}
-        height={200}
+        src="/screenshots/1on1-dm.png"
+        height={256}
+        width={256}
+        className="aspect-square w-full overflow-hidden rounded-lg border border-zinc-300 object-cover dark:border-zinc-700"
         alt="create-server"
       />
     )
   },
   {
-    title: 'Upload images 🏞️ or PDFs 📑',
-    description: 'you can upload less than 2MB files',
+    title: 'Upload images 🏞️ or PDFs 📄',
+    description: 'you can upload less than 2MB files!',
     component: (
       <Image
-        src="/screenshots/create-server.png"
-        width={200}
-        height={200}
+        src="/screenshots/upload-file.png"
+        height={256}
+        width={256}
+        className="aspect-square w-full overflow-hidden rounded-lg border border-zinc-300 object-cover dark:border-zinc-700"
         alt="create-server"
       />
     )
   },
   {
-    title: 'Manage your server members 👥',
+    title: 'Manage server members 👥',
     description:
       'the creater of the server (ADMIN) can assign "role" to each member',
     component: ServerMembersBentoComponent(),
@@ -72,22 +76,22 @@ export const bentoGridItems: BentoGridItemProps[] = [
 function ServerMembersBentoComponent() {
   const firstVariants = {
     initial: {
-      x: 20,
-      rotate: -5
-    },
-    hover: {
       x: 0,
       rotate: 0
+    },
+    hover: {
+      x: -30,
+      rotate: -10
     }
   }
   const secondVariants = {
     initial: {
-      x: -20,
-      rotate: 5
-    },
-    hover: {
       x: 0,
       rotate: 0
+    },
+    hover: {
+      x: 30,
+      rotate: 10
     }
   }
   return (
@@ -95,39 +99,44 @@ function ServerMembersBentoComponent() {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex size-full min-h-[6rem] flex-1 flex-row space-x-2"
+      className="flex size-full flex-1 justify-between gap-2 max-sm:flex-col md:col-span-2"
     >
-      <motion.div
-        variants={firstVariants}
-        className="flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-white p-2 dark:border-white/[0.1] dark:bg-black"
-      >
-        <User2 className="size-8 text-zinc-500" />
-        <Badge variant={'guest'}>GUEST</Badge>
-        <ul className="mt-2 gap-y-1 text-center text-xs font-semibold text-neutral-500 sm:text-sm">
-        </ul>
-      </motion.div>
-      <motion.div className="relative z-20 flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-white p-2 dark:border-white/[0.1] dark:bg-black">
-        <ShieldAlert className="size-8 text-emerald-500 " />
-        <Badge variant={'admin'}>ADMIN</Badge>
-        <ul className="mt-2 gap-y-1 text-center text-xs font-semibold text-neutral-500 sm:text-sm">
-          <li>invite friends</li>
-          <li>create channel</li>
-          <li>delete comment</li>
-          <li>manage members</li>
-          <li>server settings</li>
-          <li>delete server</li>
-        </ul>
-      </motion.div>
+      <div className="flex size-full flex-col justify-center md:w-2/5">
+        <motion.div
+          variants={firstVariants}
+          className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 dark:border-zinc-700 dark:bg-black"
+        >
+          <User2 className="size-8 text-zinc-500" />
+          <Badge variant={'guest'}>GUEST</Badge>
+          <ul className="mt-2 gap-y-1 text-center text-sm font-semibold text-neutral-500"></ul>
+        </motion.div>
+        <motion.div
+          variants={firstVariants}
+          className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 dark:border-zinc-700 dark:bg-black"
+        >
+          <Shield className="size-8 text-indigo-500" />
+          <Badge variant={'moderator'}>MODERATOR</Badge>
+          <ul className="mt-2 gap-y-1 text-center text-sm font-semibold text-neutral-500">
+            <li>invite friends</li>
+            <li>create channel</li>
+            <li>delete comment</li>
+          </ul>
+        </motion.div>
+      </div>
       <motion.div
         variants={secondVariants}
-        className="flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-white p-2 dark:border-white/[0.1] dark:bg-black"
+        className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 dark:border-zinc-700 dark:bg-black md:w-3/5"
       >
-        <Shield className="size-8 text-indigo-500" />
-        <Badge variant={'moderator'}>MODERATOR</Badge>
-        <ul className="mt-2 gap-y-1 text-center text-xs font-semibold text-neutral-500 sm:text-sm">
+        <ShieldAlert className="size-8 text-emerald-500 " />
+        <Badge variant={'admin'}>ADMIN</Badge>
+        <ul className="mt-2 gap-y-1 text-center text-sm font-semibold text-neutral-500">
           <li>invite friends</li>
           <li>create channel</li>
           <li>delete comment</li>
+          <li className="text-emerald-500 ">change member role</li>
+          <li className="text-emerald-500 ">kickout members</li>
+          <li className="text-emerald-500 ">server settings</li>
+          <li className="text-emerald-500 ">delete server</li>
         </ul>
       </motion.div>
     </motion.div>
