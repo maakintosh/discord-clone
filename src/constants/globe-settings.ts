@@ -2,11 +2,11 @@ import { GlobeConfig } from '@/components/ui/globe'
 
 export const globeConfig: GlobeConfig = {
   pointSize: 4,
-  globeColor: '#210A8B',
+  globeColor: '#344476',
   showAtmosphere: true,
   atmosphereColor: '#FFFFFF',
   atmosphereAltitude: 0.1,
-  emissive: '#210A8B',
+  emissive: '#344476',
   emissiveIntensity: 0.1,
   shininess: 0.9,
   polygonColor: '#00FF90',

@@ -23,6 +23,8 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { ModeToggle } from '@/components/mode-toggle'
+import { GithubButton } from '@/components/navigations/github-button'
 
 export default function RootLandingPage() {
   const World = dynamic(
@@ -34,22 +36,33 @@ export default function RootLandingPage() {
 
   return (
     <div className="bg-gray-300/70 dark:bg-gray-900">
-      <div className="container max-w-screen-lg py-[2rem]">
-        <header></header>
-        <main className="">
-          <div className="mb-40 flex">
-            <h1>Chatdemo</h1>
-            <Image
-              src="/project-icon.svg"
-              alt="project-icon"
-              height={100}
-              width={100}
-            />
-            <Link href={'/servers'}>Get Started!</Link>
+      <div className="container min-h-screen max-w-screen-lg">
+        {/* sticky header */}
+        <header className="bg-inherit/50 sticky top-0 z-30 w-full rounded-xl  backdrop-blur">
+          <div className="flex h-16 items-center justify-between p-2 ">
+            <div className="mr-auto flex items-center gap-x-1">
+              <Image
+                src="/project-icon.svg"
+                alt="project-icon"
+                height={48}
+                width={48}
+              />
+              <h1 className="h-full font-mono text-lg font-bold">Chatdemo</h1>
+            </div>
+            <div className="flex flex-row-reverse items-center justify-between gap-x-1 md:gap-x-3">
+              <Link href={'/servers'} className="h-10 w-16">
+                <div className="text-md flex size-full items-center justify-center rounded-lg bg-indigo-600 text-white hover:bg-indigo-500">
+                  Start!
+                </div>
+              </Link>
+              <ModeToggle />
+              <GithubButton />
+            </div>
           </div>
-
+        </header>
+        <main className="py-8">
           {/* globe hero section  */}
-          <section className="mb-40 h-full md:h-[40rem]">
+          <section className="mt-24 h-full md:h-[40rem]">
             <h1 className="text-center ">
               <span className="text-2xl italic md:text-4xl">
                 text, talk, upload
@@ -59,17 +72,17 @@ export default function RootLandingPage() {
                 in Real-time
               </span>
             </h1>
-            <div className="h-80 w-full md:h-full">
+            <div className="h-96 w-full md:h-full">
               <World data={sampleArcs} globeConfig={globeConfig} />
             </div>
           </section>
 
           {/* bento-grid features section */}
-          <section className="mb-40">
+          <section className="mt-60">
             <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
               Features
             </h2>
-            <div className="grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {bentoGridItems.map((item, i) => (
                 // AceternityUI
                 <CardContainer3d
@@ -117,7 +130,7 @@ export default function RootLandingPage() {
           </section>
 
           {/* carousel how-to-start section */}
-          <section className="mb-40">
+          <section className="mt-60">
             <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
               How to Start
             </h2>
