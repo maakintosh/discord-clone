@@ -20,7 +20,7 @@ export const globeConfig: GlobeConfig = {
   maxRings: 3,
   initialPosition: { lat: 22.3193, lng: 114.1694 },
   autoRotate: true,
-  autoRotateSpeed: 0.8
+  autoRotateSpeed: 5
 }
 
 export const colors = [

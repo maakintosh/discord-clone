@@ -62,18 +62,28 @@ export default function RootLandingPage() {
         </header>
         <main className="relative py-8 bg-grid-black/[0.1] dark:bg-grid-white/[0.1]">
           {/* Radial gradient for the container to give a faded look */}
-          <div className="pointer-events-none absolute inset-0 flex items-start justify-center bg-gray-300/70 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] dark:bg-gray-900"></div>
+          <div className="pointer-events-none absolute inset-0 flex items-stretch justify-center bg-gray-300/70 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] dark:bg-gray-900"></div>
 
           {/* globe hero section  */}
-          <section className="z-20 mt-24 h-full md:h-[40rem]">
-            <h1 className="text-center ">
-              <span className="text-2xl italic md:text-4xl">
-                text, talk, upload
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-indigo-500 to-teal-500 bg-clip-text text-center text-4xl font-bold text-transparent md:text-6xl">
-                in Real-time
-              </span>
+          <section className="mt-48 h-full md:h-[40rem]">
+            <h1 className="absolute inset-x-0 z-20 text-center">
+              {/* AceternityUI */}
+              <CardContainer3d
+                containerClassName="size-full"
+                className="size-full flex-col"
+              >
+                <CardItem3d as={'span'} translateY={10} translateZ={160}>
+                  <span className="text-2xl italic md:text-4xl">
+                    text, talk, upload
+                  </span>
+                </CardItem3d>
+                <br />
+                <CardItem3d as={'span'} translateY={-20} translateZ={200}>
+                  <span className="bg-gradient-to-r from-indigo-500 to-teal-500 bg-clip-text text-center text-4xl font-bold text-transparent md:text-6xl">
+                    in Real-time
+                  </span>
+                </CardItem3d>
+              </CardContainer3d>
             </h1>
             <div className="h-96 w-full md:h-full">
               <World data={sampleArcs} globeConfig={globeConfig} />
@@ -81,7 +91,7 @@ export default function RootLandingPage() {
           </section>
 
           {/* bento-grid features section */}
-          <section className="z-20 mt-60">
+          <section className="mt-60">
             <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
               Features
             </h2>
@@ -133,7 +143,7 @@ export default function RootLandingPage() {
           </section>
 
           {/* carousel how-to-start section */}
-          <section className="z-20 mt-60">
+          <section className="mt-60">
             <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
               How to Start
             </h2>
