@@ -104,7 +104,7 @@ function ServerMembersBentoComponent() {
       <div className="flex size-full flex-col justify-center md:w-2/5">
         <motion.div
           variants={firstVariants}
-          className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 dark:border-zinc-700 dark:bg-black"
+          className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 bg-dot-black/[0.3] dark:border-zinc-700 dark:bg-black dark:bg-dot-white/[0.3]"
         >
           <User2 className="size-8 text-zinc-500" />
           <Badge variant={'guest'}>GUEST</Badge>
@@ -112,7 +112,7 @@ function ServerMembersBentoComponent() {
         </motion.div>
         <motion.div
           variants={firstVariants}
-          className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 dark:border-zinc-700 dark:bg-black"
+          className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 bg-dot-black/[0.3] dark:border-zinc-700 dark:bg-black dark:bg-dot-white/[0.3]"
         >
           <Shield className="size-8 text-indigo-500" />
           <Badge variant={'moderator'}>MODERATOR</Badge>
@@ -125,7 +125,7 @@ function ServerMembersBentoComponent() {
       </div>
       <motion.div
         variants={secondVariants}
-        className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 dark:border-zinc-700 dark:bg-black md:w-3/5"
+        className="flex size-full flex-col items-center justify-center rounded-2xl border border-zinc-300 bg-white p-2 bg-dot-black/[0.3] dark:border-zinc-700 dark:bg-black dark:bg-dot-white/[0.3] md:w-3/5"
       >
         <ShieldAlert className="size-8 text-emerald-500 " />
         <Badge variant={'admin'}>ADMIN</Badge>

@@ -60,9 +60,12 @@ export default function RootLandingPage() {
             </div>
           </div>
         </header>
-        <main className="py-8">
+        <main className="relative py-8 bg-grid-black/[0.1] dark:bg-grid-white/[0.1]">
+          {/* Radial gradient for the container to give a faded look */}
+          <div className="pointer-events-none absolute inset-0 flex items-start justify-center bg-gray-300/70 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] dark:bg-gray-900"></div>
+
           {/* globe hero section  */}
-          <section className="mt-24 h-full md:h-[40rem]">
+          <section className="z-20 mt-24 h-full md:h-[40rem]">
             <h1 className="text-center ">
               <span className="text-2xl italic md:text-4xl">
                 text, talk, upload
@@ -78,7 +81,7 @@ export default function RootLandingPage() {
           </section>
 
           {/* bento-grid features section */}
-          <section className="mt-60">
+          <section className="z-20 mt-60">
             <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
               Features
             </h2>
@@ -130,7 +133,7 @@ export default function RootLandingPage() {
           </section>
 
           {/* carousel how-to-start section */}
-          <section className="mt-60">
+          <section className="z-20 mt-60">
             <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
               How to Start
             </h2>
