@@ -9,6 +9,7 @@ import { globeConfig, sampleArcs } from '@/constants/globe-settings'
 
 import { cn } from '@/lib/utils'
 import { CardContainer3d, CardItem3d } from '@/components/ui/3d-card'
+import { AuroraBackground } from '@/components/ui/aurora-background'
 import {
   Card,
   CardContent,
@@ -60,34 +61,50 @@ export default function RootLandingPage() {
             </div>
           </div>
         </header>
-        <main className="relative py-8 bg-grid-black/[0.1] dark:bg-grid-white/[0.1]">
+
+        {/* main content */}
+        <main className="relative pb-8 bg-grid-black/[0.1] dark:bg-grid-white/[0.1]">
           {/* Radial gradient for the container to give a faded look */}
           <div className="pointer-events-none absolute inset-0 flex items-stretch justify-center bg-gray-300/70 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] dark:bg-gray-900"></div>
 
           {/* globe hero section  */}
-          <section className="mt-48 h-full md:h-[40rem]">
-            <h1 className="absolute inset-x-0 z-20 text-center">
-              {/* AceternityUI */}
-              <CardContainer3d
-                containerClassName="size-full"
-                className="size-full flex-col"
-              >
-                <CardItem3d as={'span'} translateY={10} translateZ={160}>
-                  <span className="text-2xl italic md:text-4xl">
-                    text, talk, upload
-                  </span>
-                </CardItem3d>
-                <br />
-                <CardItem3d as={'span'} translateY={-20} translateZ={200}>
-                  <span className="bg-gradient-to-r from-indigo-500 to-teal-500 bg-clip-text text-center text-4xl font-bold text-transparent md:text-6xl">
-                    in Real-time
-                  </span>
-                </CardItem3d>
-              </CardContainer3d>
-            </h1>
-            <div className="h-96 w-full md:h-full">
-              <World data={sampleArcs} globeConfig={globeConfig} />
-            </div>
+          <section className="">
+            <AuroraBackground className="bg-transparent dark:bg-transparent">
+              <div className="relative flex h-full flex-col items-center justify-center">
+                <h1 className=" absolute z-10 text-center ">
+                  {/* AceternityUI */}
+                  <CardContainer3d
+                    containerClassName="size-full"
+                    className="size-full flex-col"
+                  >
+                    <CardItem3d
+                      as={'span'}
+                      rotateZ={-10}
+                      translateY={10}
+                      translateZ={200}
+                    >
+                      <span className="text-2xl italic text-white md:text-4xl">
+                        text, talk, upload
+                      </span>
+                    </CardItem3d>
+                    <br />
+                    <CardItem3d
+                      as={'span'}
+                      rotateZ={-10}
+                      translateY={-20}
+                      translateZ={240}
+                    >
+                      <span className="bg-gradient-to-r from-indigo-500 to-teal-500 bg-clip-text text-center text-4xl font-bold text-transparent md:text-6xl">
+                        in Real-time
+                      </span>
+                    </CardItem3d>
+                  </CardContainer3d>
+                </h1>
+                <div className="h-96 w-full md:h-[44rem]">
+                  <World data={sampleArcs} globeConfig={globeConfig} />
+                </div>
+              </div>
+            </AuroraBackground>
           </section>
 
           {/* bento-grid features section */}
