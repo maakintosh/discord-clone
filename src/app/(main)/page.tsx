@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { bentoGridItems } from '@/constants/bento-item-map'
 import { carouselItems } from '@/constants/carousel-item-map'
 import { globeConfig, sampleArcs } from '@/constants/globe-settings'
+import Autoplay from 'embla-carousel-autoplay'
 
 import { cn } from '@/lib/utils'
 import { CardContainer3d, CardItem3d } from '@/components/ui/3d-card'
@@ -20,9 +21,7 @@ import {
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
+  CarouselItem
 } from '@/components/ui/carousel'
 import { ModeToggle } from '@/components/mode-toggle'
 import { GithubButton } from '@/components/navigations/github-button'
@@ -36,37 +35,40 @@ export default function RootLandingPage() {
   )
 
   return (
-    <div className="bg-gray-300/70 dark:bg-gray-900">
-      <div className="container min-h-screen max-w-screen-lg">
-        {/* sticky header */}
-        <header className="bg-inherit/50 sticky top-0 z-30 w-full rounded-xl  backdrop-blur">
-          <div className="flex h-16 items-center justify-between p-2 ">
-            <div className="mr-auto flex items-center gap-x-1">
-              <Image
-                src="/project-icon.svg"
-                alt="project-icon"
-                height={48}
-                width={48}
-              />
-              <h1 className="h-full font-mono text-lg font-bold">Chatdemo</h1>
-            </div>
-            <div className="flex flex-row-reverse items-center justify-between gap-x-1 md:gap-x-3">
-              <Link href={'/servers'} className="h-10 w-16">
-                <div className="text-md flex size-full items-center justify-center rounded-lg bg-indigo-600 text-white hover:bg-indigo-500">
-                  Start!
-                </div>
-              </Link>
-              <ModeToggle />
-              <GithubButton />
-            </div>
+    <div className="relative flex min-h-screen flex-col bg-gray-300/70 bg-grid-black/[0.1] dark:bg-gray-900 dark:bg-grid-white/[0.1]">
+      {/* Radial gradient for the container to give a faded look */}
+      <div className="pointer-events-none absolute inset-0 flex items-stretch justify-center bg-gray-300/70 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] dark:bg-gray-900"></div>
+
+      {/* sticky header */}
+      <header className="bg-inherit/50 fixed top-0 z-50 w-full rounded-xl backdrop-blur">
+        <div className="container flex h-14 max-w-screen-lg items-center justify-between py-2 ">
+          <div className="mr-auto flex items-center">
+            <Image
+              src="/project-icon.svg"
+              alt="project-icon"
+              height={40}
+              width={40}
+              className="mr-1 hidden md:flex"
+            />
+            <h1 className="font-mono text-base font-bold md:text-lg">
+              Chatdemo
+            </h1>
           </div>
-        </header>
+          <div className="flex flex-row-reverse items-center justify-between gap-x-1 md:gap-x-3">
+            <Link href={'/servers'} className="h-10 w-16">
+              <div className="text-md flex size-full items-center justify-center rounded-lg bg-indigo-600 text-white hover:bg-indigo-500">
+                Start!
+              </div>
+            </Link>
+            <ModeToggle />
+            <GithubButton />
+          </div>
+        </div>
+      </header>
 
-        {/* main content */}
-        <main className="relative pb-8 bg-grid-black/[0.1] dark:bg-grid-white/[0.1]">
-          {/* Radial gradient for the container to give a faded look */}
-          <div className="pointer-events-none absolute inset-0 flex items-stretch justify-center bg-gray-300/70 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] dark:bg-gray-900"></div>
-
+      {/* main content */}
+      <main className="">
+        <div className="container relative max-w-screen-lg ">
           {/* globe hero section  */}
           <section className="">
             <AuroraBackground className="bg-transparent dark:bg-transparent">
@@ -166,9 +168,13 @@ export default function RootLandingPage() {
             </h2>
             <Carousel
               opts={{
-                align: 'start',
-                loop: false
+                align: 'start'
               }}
+              plugins={[
+                Autoplay({
+                  delay: 5000
+                })
+              ]}
             >
               <CarouselContent>
                 {carouselItems.map((item, i) => (
@@ -210,13 +216,35 @@ export default function RootLandingPage() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
             </Carousel>
           </section>
-        </main>
-        <footer></footer>
-      </div>
+        </div>
+      </main>
+      <footer>
+        <div className="container flex max-w-screen-lg flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+          <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+            Built by{' '}
+            <Link
+              href="https://twitter.com/maakintosh"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              maakintosh
+            </Link>
+            . The source code is available on{' '}
+            <Link
+              href="https://github.com/maakintosh/discord-clone"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              GitHub
+            </Link>
+            .
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }
