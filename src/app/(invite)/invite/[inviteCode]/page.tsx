@@ -17,10 +17,10 @@ export default async function InvitePage({ params }: InvitePageProps) {
   }
 
   if (!params.inviteCode) {
-    redirect('/')
+    redirect('/servers')
   }
 
-  // checks if the user is already a member of the server and redirects them to the server
+  // checks if the user is already a member of the server, then redirects them to the server if they are
   const existingServer = await db.server.findFirst({
     where: {
       inviteCode: params.inviteCode,

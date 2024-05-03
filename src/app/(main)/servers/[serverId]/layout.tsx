@@ -26,7 +26,7 @@ export default async function ServerIdLayout({
     }
   })
 
-  if (!server) redirect('/')
+  if (!server) redirect('/servers')
 
   return (
     <div className="h-full">

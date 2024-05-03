@@ -33,7 +33,7 @@ export default async function ChannelIdPage({ params }: ChannelIdPageProps) {
     }
   })
 
-  if (!channel || !currentUserMember) return redirect('/')
+  if (!channel || !currentUserMember) return redirect('/servers')
 
   return (
     <div className=" flex h-full flex-col">

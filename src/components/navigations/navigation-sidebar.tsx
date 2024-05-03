@@ -1,3 +1,5 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { UserButton } from '@clerk/nextjs'
 
@@ -7,6 +9,8 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { ModeToggle } from '@/components/mode-toggle'
 
+import { ActionTooltip } from '../action-tooltip'
+import { GithubButton } from './github-button'
 import { NavigationAction } from './navigation-action'
 import { NavigationSidebarItem } from './navigation-sidebar-Item'
 
@@ -14,7 +18,7 @@ export async function NavigationSidebar() {
   const profile = await currentUserProfile()
 
   if (!profile) {
-    return redirect('/')
+    return redirect('/servers')
   }
 
   const servers = await db.server.findMany({
@@ -42,8 +46,22 @@ export async function NavigationSidebar() {
           </div>
         ))}
       </ScrollArea>
-      <div className="mt-auto flex flex-col items-center gap-y-2">
+      <div className="mt-auto flex flex-col justify-center gap-y-2">
         <ModeToggle />
+        <GithubButton />
+        <ActionTooltip label="about" side="right" align="center">
+          <Link
+            href="/"
+            className="relative size-12 items-center overflow-hidden rounded-full"
+          >
+            <Image
+              src="/project-icon.svg"
+              alt="project-icon"
+              fill
+              className="object-cover"
+            />
+          </Link>
+        </ActionTooltip>
         <UserButton
           afterSignOutUrl="/"
           appearance={{
