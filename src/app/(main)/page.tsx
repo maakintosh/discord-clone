@@ -23,7 +23,7 @@ import {
   CarouselContent,
   CarouselItem
 } from '@/components/ui/carousel'
-import { Spotlight } from '@/components/ui/Spotlightl'
+import { Spotlight } from '@/components/ui/spotlight'
 import { ModeToggle } from '@/components/mode-toggle'
 import { GithubButton } from '@/components/navigations/github-button'
 
