@@ -36,7 +36,7 @@ export default function RootLandingPage() {
   )
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-gray-300/70 bg-grid-black/[0.1] dark:bg-gray-900 dark:bg-grid-white/[0.1]">
+    <div className="relative flex flex-col bg-gray-300/70 bg-grid-black/[0.1] dark:bg-gray-900 dark:bg-grid-white/[0.1]">
       {/* Radial gradient for the container to give a faded look */}
       <div className="pointer-events-none absolute inset-0 flex items-stretch justify-center bg-gray-300/70 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] dark:bg-gray-900"></div>
 
@@ -69,104 +69,104 @@ export default function RootLandingPage() {
 
       {/* main content */}
       <main className="">
-        <div className="container relative max-w-screen-lg ">
-          {/* globe hero section  */}
-          <section className="">
-            <AuroraBackground className="bg-transparent dark:bg-transparent">
-              <div className="relative flex h-full flex-col items-center justify-center">
-                <h1 className=" absolute z-10 text-center ">
-                  {/* AceternityUI */}
-                  <CardContainer3d
-                    containerClassName="size-full"
-                    className="size-full flex-col"
+        {/* globe hero section  */}
+        <section className="">
+          <AuroraBackground className="">
+            <div className="container relative flex h-full max-w-screen-lg flex-col items-center justify-center">
+              <h1 className=" absolute z-10 text-center ">
+                {/* AceternityUI */}
+                <CardContainer3d
+                  containerClassName="size-full"
+                  className="size-full flex-col"
+                >
+                  <CardItem3d
+                    as={'span'}
+                    rotateZ={-10}
+                    translateY={10}
+                    translateZ={200}
                   >
-                    <CardItem3d
-                      as={'span'}
-                      rotateZ={-10}
-                      translateY={10}
-                      translateZ={200}
-                    >
-                      <span className="text-2xl italic text-white md:text-4xl">
-                        text, talk, upload
-                      </span>
-                    </CardItem3d>
-                    <br />
-                    <CardItem3d
-                      as={'span'}
-                      rotateZ={-10}
-                      translateY={-20}
-                      translateZ={240}
-                    >
-                      <span className="bg-gradient-to-r from-indigo-500 to-teal-500 bg-clip-text text-center text-4xl font-bold text-transparent md:text-6xl">
-                        in Real-time
-                      </span>
-                    </CardItem3d>
-                  </CardContainer3d>
-                </h1>
-                <div className="h-96 w-full md:h-[44rem]">
-                  <World data={sampleArcs} globeConfig={globeConfig} />
-                </div>
-              </div>
-            </AuroraBackground>
-          </section>
-
-          {/* bento-grid features section */}
-          <section className="mt-60">
-            <div className="relative">
-              <Spotlight className="-top-40 md:-top-60" fill="white" />
-              <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
-                Features
-              </h2>
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                {bentoGridItems.map((item, i) => (
-                  // AceternityUI
-                  <CardContainer3d
-                    key={i}
-                    containerClassName={cn('row-span-1', item.className)}
-                    className="size-full"
+                    <span className="text-2xl italic text-white md:text-4xl">
+                      text, talk, upload
+                    </span>
+                  </CardItem3d>
+                  <br />
+                  <CardItem3d
+                    as={'span'}
+                    rotateZ={-10}
+                    translateY={-20}
+                    translateZ={240}
                   >
-                    {/* shadcnUI */}
-                    <Card
-                      className={cn(
-                        'row-span-1 flex size-full flex-col justify-between border border-zinc-300 [transform-style:preserve-3d] hover:shadow-2xl dark:border-zinc-700 [&>*]:[transform-style:preserve-3d]',
-                        item.className
-                      )}
-                    >
-                      <CardHeader>
-                        {/* AceternityUI */}
-                        <CardItem3d
-                          rotateZ={-5}
-                          translateY={-20}
-                          translateZ={120}
-                        >
-                          <CardTitle>{item.title}</CardTitle>
-                        </CardItem3d>
-                        <CardItem3d
-                          rotateZ={-5}
-                          translateY={-20}
-                          translateZ={120}
-                        >
-                          <CardDescription>{item.description}</CardDescription>
-                        </CardItem3d>
-                      </CardHeader>
-                      <div>
-                        {/* AceternityUI */}
-                        <CardItem3d as={'div'} rotateZ={5} translateZ={160}>
-                          {/* shadcnUI */}
-                          <CardContent className="w-full">
-                            {item.component}
-                          </CardContent>
-                        </CardItem3d>
-                      </div>
-                    </Card>
-                  </CardContainer3d>
-                ))}
+                    <span className="bg-gradient-to-r from-indigo-500 to-teal-500 bg-clip-text text-center text-4xl font-bold text-transparent md:text-6xl">
+                      in Real-time
+                    </span>
+                  </CardItem3d>
+                </CardContainer3d>
+              </h1>
+              <div className="h-96 w-full md:h-[44rem]">
+                <World data={sampleArcs} globeConfig={globeConfig} />
               </div>
             </div>
-          </section>
+          </AuroraBackground>
+        </section>
 
-          {/* carousel how-to-start section */}
-          <section className="mt-60">
+        {/* bento-grid features section */}
+        <section className="pt-60">
+          <div className="container relative max-w-screen-lg">
+            <Spotlight className="-top-60 hidden dark:inline" fill="white" />
+            <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
+              Features
+            </h2>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+              {bentoGridItems.map((item, i) => (
+                // AceternityUI
+                <CardContainer3d
+                  key={i}
+                  containerClassName={cn('row-span-1', item.className)}
+                  className="size-full"
+                >
+                  {/* shadcnUI */}
+                  <Card
+                    className={cn(
+                      'row-span-1 flex size-full flex-col justify-between border border-zinc-300 [transform-style:preserve-3d] hover:shadow-2xl dark:border-zinc-700 [&>*]:[transform-style:preserve-3d]',
+                      item.className
+                    )}
+                  >
+                    <CardHeader>
+                      {/* AceternityUI */}
+                      <CardItem3d
+                        rotateZ={-5}
+                        translateY={-20}
+                        translateZ={120}
+                      >
+                        <CardTitle>{item.title}</CardTitle>
+                      </CardItem3d>
+                      <CardItem3d
+                        rotateZ={-5}
+                        translateY={-20}
+                        translateZ={120}
+                      >
+                        <CardDescription>{item.description}</CardDescription>
+                      </CardItem3d>
+                    </CardHeader>
+                    <div>
+                      {/* AceternityUI */}
+                      <CardItem3d as={'div'} rotateZ={5} translateZ={160}>
+                        {/* shadcnUI */}
+                        <CardContent className="w-full">
+                          {item.component}
+                        </CardContent>
+                      </CardItem3d>
+                    </div>
+                  </Card>
+                </CardContainer3d>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* carousel how-to-start section */}
+        <section className="pt-60">
+          <div className="container max-w-screen-lg ">
             <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
               How to Start
             </h2>
@@ -221,8 +221,8 @@ export default function RootLandingPage() {
                 ))}
               </CarouselContent>
             </Carousel>
-          </section>
-        </div>
+          </div>
+        </section>
       </main>
       <footer>
         <div className="container flex max-w-screen-lg flex-col items-center justify-between gap-4 md:h-24 md:flex-row">

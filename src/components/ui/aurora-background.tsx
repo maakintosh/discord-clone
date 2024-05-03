@@ -18,12 +18,12 @@ export const AuroraBackground = ({
   return (
     <div
       className={cn(
-        'transition-bg relative h-[100vh] bg-zinc-50  text-slate-950 dark:bg-zinc-900',
+        'transition-bg relative h-[100vh] bg-transparent text-slate-950 dark:bg-transparent',
         className
       )}
       {...props}
     >
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 hidden overflow-hidden dark:flex">
         <div
           // I'm sorry but this is what peak developer performance looks like (AceternityUI)
           // eslint-disable-next-line tailwindcss/enforces-negative-arbitrary-values
