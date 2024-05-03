@@ -23,6 +23,7 @@ import {
   CarouselContent,
   CarouselItem
 } from '@/components/ui/carousel'
+import { Spotlight } from '@/components/ui/Spotlightl'
 import { ModeToggle } from '@/components/mode-toggle'
 import { GithubButton } from '@/components/navigations/github-button'
 
@@ -111,53 +112,56 @@ export default function RootLandingPage() {
 
           {/* bento-grid features section */}
           <section className="mt-60">
-            <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
-              Features
-            </h2>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-              {bentoGridItems.map((item, i) => (
-                // AceternityUI
-                <CardContainer3d
-                  key={i}
-                  containerClassName={cn('row-span-1', item.className)}
-                  className="size-full"
-                >
-                  {/* shadcnUI */}
-                  <Card
-                    className={cn(
-                      'row-span-1 flex size-full flex-col justify-between border border-zinc-300 [transform-style:preserve-3d] hover:shadow-2xl dark:border-zinc-700 [&>*]:[transform-style:preserve-3d]',
-                      item.className
-                    )}
+            <div className="relative">
+              <Spotlight className="-top-40 md:-top-60" fill="white" />
+              <h2 className="mb-4 text-center text-2xl font-bold md:text-4xl">
+                Features
+              </h2>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                {bentoGridItems.map((item, i) => (
+                  // AceternityUI
+                  <CardContainer3d
+                    key={i}
+                    containerClassName={cn('row-span-1', item.className)}
+                    className="size-full"
                   >
-                    <CardHeader>
-                      {/* AceternityUI */}
-                      <CardItem3d
-                        rotateZ={-5}
-                        translateY={-20}
-                        translateZ={120}
-                      >
-                        <CardTitle>{item.title}</CardTitle>
-                      </CardItem3d>
-                      <CardItem3d
-                        rotateZ={-5}
-                        translateY={-20}
-                        translateZ={120}
-                      >
-                        <CardDescription>{item.description}</CardDescription>
-                      </CardItem3d>
-                    </CardHeader>
-                    <div>
-                      {/* AceternityUI */}
-                      <CardItem3d as={'div'} rotateZ={5} translateZ={160}>
-                        {/* shadcnUI */}
-                        <CardContent className="w-full">
-                          {item.component}
-                        </CardContent>
-                      </CardItem3d>
-                    </div>
-                  </Card>
-                </CardContainer3d>
-              ))}
+                    {/* shadcnUI */}
+                    <Card
+                      className={cn(
+                        'row-span-1 flex size-full flex-col justify-between border border-zinc-300 [transform-style:preserve-3d] hover:shadow-2xl dark:border-zinc-700 [&>*]:[transform-style:preserve-3d]',
+                        item.className
+                      )}
+                    >
+                      <CardHeader>
+                        {/* AceternityUI */}
+                        <CardItem3d
+                          rotateZ={-5}
+                          translateY={-20}
+                          translateZ={120}
+                        >
+                          <CardTitle>{item.title}</CardTitle>
+                        </CardItem3d>
+                        <CardItem3d
+                          rotateZ={-5}
+                          translateY={-20}
+                          translateZ={120}
+                        >
+                          <CardDescription>{item.description}</CardDescription>
+                        </CardItem3d>
+                      </CardHeader>
+                      <div>
+                        {/* AceternityUI */}
+                        <CardItem3d as={'div'} rotateZ={5} translateZ={160}>
+                          {/* shadcnUI */}
+                          <CardContent className="w-full">
+                            {item.component}
+                          </CardContent>
+                        </CardItem3d>
+                      </div>
+                    </Card>
+                  </CardContainer3d>
+                ))}
+              </div>
             </div>
           </section>
 
