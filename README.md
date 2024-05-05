@@ -1,34 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Chatdemo
+
+A fullstack discord-clone web app built using Next.js13, Prisma, Shadcn/ui, Clerk, Socket.io etc. mainly based on [this project](https://www.codewithantonio.com/projects/team-chat-platform).
+
+## Features
+
+- Real-time messaging by websocket communication | **Socket.io**
+- CRUD operation: servers, channels, messages, DMs and members | **Prisma**
+- Member management (GUEST, MODERATOR, ADMIN)
+  > MODERATOR can invite, create channels, delete comments.
+  > ADMIN ( creater of the server ) can change member role, kickout, server settings, delete server in addition.
+- Server invitation link generation
+- 1on1 direct messages
+- Infinite loading chat | **@tanstack/react-query**
+- Video & Voice call | **Livekit**
+- Uploading images and PDFs (2MB or less, adjustable) | **Uploadthing**
+- Responsive UI for PC, tablet, mobile | **TailwindCSS**, **Shadcn/ui**, **AceternityUI**
+- Animation | **framer-motion**
+- Light / Dark mode
+- Emoji Picker | **@emoji-mart**
+- Toast massages on CRUD actions | **React-hot-toast**
+- Authentication | **Clerk**
+- React state management | **Zustand**
+- Form validation | **Zod**
+
+## DevOps Features
+
+- Containerize whole dev environment | **Devcontainer**, **DockerCompose**
+- Spinnig up local Docker pre-deploy instance from inside devcontainer | **Docker-outside-of-docker**, **DockerCompose**
+- CD pipeline | **Github action**
+  > that automatically 1.triggers pending db migration for production and 2. builds and pushes production image to github container registry
+- Render IaC file
+  > controls both web service and postgresDB production instance deployed on Render
+- Visualize ERD and check diffs on every PR | **prisma-erd-generator**, **@mermaid-js**, **Github action**
+- linting & formatting | **eslint**, **prettier**
+- Pre-commit actions | **husky**, **lint-staged**
+- Commit message linting | **@commitlint**
+
+## Roadmap
+
+- [x] ~~initial DevOps setup~~
+- [x] ~~toast massages on CRUD actions~~
+- [x] ~~icon hover tooltip~~
+- [x] ~~light / dark toggle button~~
+- [x] ~~setup Devcontainer~~
+- [x] ~~visualize ERD~~
+- [x] ~~local Docker pre-deploy (test) instance~~
+- [x] ~~deploy on Render.com~~
+- [x] ~~CD pipeline~~
+- [x] ~~IaC for Render~~
+- [x] ~~public landing page~~
+- [ ] feat:UI: chat messages alignment
+- [ ] feat:UI: skelton loading UI
+- [ ] feat: nestable replies to a chat message
 
 ## Getting Started
 
-First, run the development server:
+1. install [Extension: Remote Development
+   ](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) on your VSCode
+2. Start [Docker desktop](https://www.docker.com/ja-jp/products/docker-desktop/) on your local machine or install it if you don't have it
+3. click skyblue button at the bottom left editor and select "Reopen in container"
+   > devcontainer spins up soon and everything you need is already set up.
+4. start local dev envionment running:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+and open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
