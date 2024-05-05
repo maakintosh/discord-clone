@@ -52,7 +52,7 @@ export const bentoGridItems: BentoGridItemProps[] = [
     )
   },
   {
-    title: 'Upload images 🏞️ or PDFs 📄',
+    title: 'Upload images 🏞️ and PDFs 📄',
     description: 'you can upload less than 2MB files!',
     component: (
       <Image
