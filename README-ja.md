@@ -11,11 +11,11 @@ English README [here](https://github.com/maakintosh/discord-clone/blob/main/READ
 <img width="200" alt="create-server" src="https://github.com/maakintosh/discord-clone/assets/102001127/ea1da402-418a-46af-ba91-6249a3a9399d">
 <img width="200" alt="server-header-dropdown" src="https://github.com/maakintosh/discord-clone/assets/102001127/98583fc8-00fe-4acb-b994-cc838e5b65e5">
 
-**サインインしてサーバーを作成したら、ご気軽にこの[デモサーバー](https://chatdemo-l8bt.onrender.com/invite/8b956d5a-2900-4545-bf12-958693184e5f)に参加して、いくつかの機能を簡単に試してみてください！**  
+**サインインしてサーバーを作成したら、ご気軽にこの[デモサーバー](https://chatdemo-l8bt.onrender.com/invite/8b956d5a-2900-4545-bf12-958693184e5f)に参加して、いくつかの機能を簡単に試してみてください！**
 
 また、完成までの開発履歴を全て[Github project](https://github.com/users/maakintosh/projects/6/views/1)にて記録しています。
 
-> **本アプリは、商用ではなくデモンストレーションを目的としており、Render.comの無料プランにデプロイされています。そのため以下のような[制限](https://docs.render.com/free)がかかっています。**
+**本アプリは、商用ではなくデモンストレーションを目的としており、Render.comの無料プランにデプロイされています。そのため以下のような[制限](https://docs.render.com/free)がかかっています。**
 > 1. 15分間操作がないと毎回サービスがスリープし、再起動に1分ほど必要。  
 > 申し訳ありません..あと数秒ですので..そこをなんとかっ..ああっ..
 > 2. 月間の使用量制限
@@ -93,12 +93,13 @@ English README [here](https://github.com/maakintosh/discord-clone/blob/main/READ
 
 3. ローカルマシンで [Docker Desktop](https://www.docker.com/ja-jp/products/docker-desktop/) を起動します。ない場合はインストール（メンドくてすみません）。
 
-4. VSCodeエディター左下の水色のボタンをクリックし、「コンテナーで再度開く」を選択します。すぐに本プロジェクトのdevcontainerが起動します。devcontainerが正常に起動すると、Docker Desktop上のコンテナは次のようになります。  
+4. VSCodeエディター左下の水色のボタンをクリックし、「コンテナーで再度開く」を選択します。すぐに本プロジェクトのdevcontainerが起動します。devcontainerが正常に起動すると、Docker Desktop上のコンテナは次のようになります。
+
     <img width="900" alt="devcontainer" src="https://github.com/maakintosh/discord-clone/assets/102001127/15ada155-165e-4534-a0ae-84c13783de8b">
 
    > 必要な拡張機能や設定が事前にすべてセットアップされているため、追加の設定は一切不要です。すご。
 
-5. devcontainer内で開発環境を起動:
+6. devcontainer内で開発環境を起動:
 
 ```bash
 npm run dev
