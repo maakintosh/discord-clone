@@ -1,22 +1,23 @@
 # Chatdemo<br/><https://chatdemo-l8bt.onrender.com>
 
-日本語版READMEは[こちら]()
-
 > **This project is created mainly based on [this tutorial](https://www.codewithantonio.com/projects/team-chat-platform).**
 
-####　A fullstack discord-clone web app built using Next.js 13, Prisma, TailwindCSS, Shadcn/ui, Clerk, Socket.io etc. and fully docker-containerized.
-<br/>  
+日本語版READMEは[こちら](https://github.com/maakintosh/discord-clone/blob/main/README-ja.md)
+
+### A fullstack discord-clone web app built using Next.js 13, Prisma, TailwindCSS, Shadcn/ui, Clerk, Socket.io etc. and fully docker-containerized.
+
 <img width="200" alt="chatdemo-app" src="https://github.com/maakintosh/discord-clone/assets/102001127/ae92abaa-e28b-469e-bc67-2cc341b6e1de">
 <img width="200" alt="create-server" src="https://github.com/maakintosh/discord-clone/assets/102001127/ea1da402-418a-46af-ba91-6249a3a9399d">
 <img width="200" alt="server-header-dropdown" src="https://github.com/maakintosh/discord-clone/assets/102001127/98583fc8-00fe-4acb-b994-cc838e5b65e5">
 
-**After you suceeded in sign-in and create a server, feel free join this [demo server](https://chatdemo-l8bt.onrender.com/invite/8b956d5a-2900-4545-bf12-958693184e5f) to quickly try some features!**  
+**After you suceeded in sign-in and create a server, feel free join this [demo server](https://chatdemo-l8bt.onrender.com/invite/8b956d5a-2900-4545-bf12-958693184e5f) to quickly try some features!**
+
 Also, all development history up to completion has been recorded on [Github project](https://github.com/users/maakintosh/projects/6/views/1).
 
-> **This web app is deployed on Render.com free-plan for demo purpose, so there are huge [limitations](https://docs.render.com/free). such as:**
->
+<br/><br/>
+**This web app is deployed on Render.com free-plan for demo purpose, so there are huge [limitations](https://docs.render.com/free). such as:**  
 > 1. sleeps service everytime with 15 mins inactivity, and takes 1 min to reboot.  
->    I'm sorry.. a few more seconds.. please wait.. oh, no...
+> I'm sorry.. a few more seconds.. please wait.. oh no...
 > 2. monthly usage limits.
 
 <br/><br/>
@@ -90,13 +91,13 @@ Also, all development history up to completion has been recorded on [Github proj
 2. install [Extension: Remote Development
    ](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) on your VSCode
 3. start [Docker desktop](https://www.docker.com/ja-jp/products/docker-desktop/) on your local machine or install it if you don't have it (sorry).
-4. click skyblue-color button at the bottom left VSCode editor and select "Reopen in container". This project's devcontainer will spin up soon.  
-   if you successfully spins up devcontainer, docker desktop container will be like this.  
+4. click skyblue-color button at the bottom left VSCode editor and select "Reopen in container". This project's devcontainer will spin up soon. If you successfully spins up devcontainer, docker desktop container will be like this.
+
    <img width="900" alt="devcontainer" src="https://github.com/maakintosh/discord-clone/assets/102001127/15ada155-165e-4534-a0ae-84c13783de8b">
 
    > Everything you need is already setup, so no additional configuration is required. wow.
 
-5. start dev environment from inside the devcontainer running:
+6. start dev environment from inside the devcontainer running:
 
 ```bash
 npm run dev
