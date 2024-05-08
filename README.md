@@ -8,7 +8,8 @@
 
 <img width="200" alt="chatdemo-app" src="https://github.com/maakintosh/discord-clone/assets/102001127/ae92abaa-e28b-469e-bc67-2cc341b6e1de">
 <img width="200" alt="server-header-dropdown" src="https://github.com/maakintosh/discord-clone/assets/102001127/98583fc8-00fe-4acb-b994-cc838e5b65e5">
-<video width="200" loop=true src="https://github.com/maakintosh/discord-clone/assets/102001127/c9b49f4c-8620-4fe0-be9b-57345a2a74df" type="video/mp4">
+<img width="220" alt="landing-page-globe" src="https://github.com/maakintosh/discord-clone/assets/102001127/e6e6c185-f2ec-4485-b1d8-607be3c259ff">
+
 
 **After you suceeded in sign-in and create a server, feel free join this [demo server](https://chatdemo-l8bt.onrender.com/invite/8b956d5a-2900-4545-bf12-958693184e5f) to quickly try some features!**
 
