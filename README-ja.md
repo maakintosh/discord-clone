@@ -8,8 +8,8 @@ English README [here](https://github.com/maakintosh/discord-clone/blob/main/READ
 
 <br/>  
 <img width="200" alt="chatdemo-app" src="https://github.com/maakintosh/discord-clone/assets/102001127/ae92abaa-e28b-469e-bc67-2cc341b6e1de">
-<img width="200" alt="create-server" src="https://github.com/maakintosh/discord-clone/assets/102001127/ea1da402-418a-46af-ba91-6249a3a9399d">
 <img width="200" alt="server-header-dropdown" src="https://github.com/maakintosh/discord-clone/assets/102001127/98583fc8-00fe-4acb-b994-cc838e5b65e5">
+<img width="220" alt="landing-page-globe" src="https://github.com/maakintosh/discord-clone/assets/102001127/e6e6c185-f2ec-4485-b1d8-607be3c259ff">  
 
 **サインインしてサーバーを作成したら、ご気軽にこの[デモサーバー](https://chatdemo-l8bt.onrender.com/invite/8b956d5a-2900-4545-bf12-958693184e5f)に参加して、いくつかの機能を簡単に試してみてください！**
 
