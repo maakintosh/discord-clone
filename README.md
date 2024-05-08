@@ -1,6 +1,6 @@
 # Chatdemo<br/><https://chatdemo-l8bt.onrender.com>
 
-> **This project is created mainly based on [this tutorial](https://www.codewithantonio.com/projects/team-chat-platform).**
+> **This app is created mainly based on [this project](https://www.codewithantonio.com/projects/team-chat-platform).**
 
 日本語版READMEは[こちら](https://github.com/maakintosh/discord-clone/blob/main/README-ja.md)
 
