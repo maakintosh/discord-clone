@@ -17,7 +17,6 @@ English README [here](https://github.com/maakintosh/discord-clone/blob/main/READ
 
 **本アプリは、商用ではなくデモンストレーションを目的としており、Render.comの無料プランにデプロイされています。そのため以下のような[制限](https://docs.render.com/free)がかかっています。**
 > 1. 15分間操作がないと毎回サービスがスリープし、再起動に1分ほど必要。  
-> 申し訳ありません..あと数秒ですので..そこをなんとかっ..ああっ..
 > 2. 月間の使用量制限
 
 <br/><br/>
@@ -64,24 +63,25 @@ English README [here](https://github.com/maakintosh/discord-clone/blob/main/READ
 
 ## 機能追加ロードマップ
 
-- [x] ~~DevOpsの初期設定~~
-- [x] ~~CRUDアクション時のToastメッセージ~~
-- [x] ~~各アイコンホバー時のTooltip表示~~
-- [x] ~~ライト / ダークモード切り替えボタン~~
-- [x] ~~Devcontainerの導入~~
-- [x] ~~ERDの視覚化~~
-- [x] ~~ローカルのテスト環境Dockerインスタンス~~
-- [x] ~~Render.comへのデプロイ~~
-- [x] ~~CDパイプライン~~
-- [x] ~~Render IaCファイル~~
-- [x] ~~Livekit APIバグ修正~~
-- [x] ~~プロジェクトアイコン~~
-- [x] ~~ルートドメイン( / )にて認証保護なしの公開ランディングページ~~
+- [x] DevOpsの初期設定
+- [x] CRUDアクション時のToastメッセージ
+- [x] 各アイコンホバー時のTooltip表示
+- [x] ライト / ダークモード切り替えボタン
+- [x] Devcontainerの導入
+- [x] ERDの視覚化
+- [x] ローカルのテスト環境Dockerインスタンス
+- [x] Render.comへのデプロイ
+- [x] CDパイプライン
+- [x] Render IaCファイル
+- [x] Livekit APIバグ修正
+- [x] プロジェクトアイコン
+- [x] ルートドメイン( / )にて認証保護なしの公開ランディングページ
 - [ ] feat:UI: チャットメッセージの配置
   > 自分のメッセージを右揃え、その他を左揃えにする  
   > 自分のメッセージをプライムカラー（indigo-500）にする
 - [ ] feat:UI: スケルトンローディングUI
 - [ ] feat: チャットメッセージへのネスト可能な返信(Youtubeのような)
+- [ ] feat: 視覚的に即時フィードバックするUI（ボタン押下時、スピンローダーアニメーションの実装など）
 
 <br/><br/>
 
