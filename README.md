@@ -17,8 +17,7 @@ Also, all development history up to completion has been recorded on [Github proj
 
 <br/><br/>
 **This web app is deployed on Render.com free-plan for demo purpose, so there are huge [limitations](https://docs.render.com/free). such as:**  
-> 1. sleeps service everytime with 15 mins inactivity, and takes 1 min to reboot.  
-> I'm sorry.. a few more seconds.. please wait.. oh no...
+> 1. sleeps service everytime with 15 mins inactivity, and takes 1 min to reboot.
 > 2. monthly usage limits.
 
 <br/><br/>
@@ -65,24 +64,25 @@ Also, all development history up to completion has been recorded on [Github proj
 
 ## Added features Roadmap
 
-- [x] ~~initial DevOps setup~~
-- [x] ~~toast massages on CRUD actions~~
-- [x] ~~tooltips on hovering every icon~~
-- [x] ~~light / dark mode toggle button~~
-- [x] ~~setup Devcontainer~~
-- [x] ~~visualize ERD~~
-- [x] ~~local pre-deploy (test) Docker instance~~
-- [x] ~~deploy on Render.com~~
-- [x] ~~CD pipeline~~
-- [x] ~~IaC file for Render~~
-- [x] ~~Livekit API bugfix~~
-- [x] ~~project icon~~
-- [x] ~~public landing page at the root domain~~
+- [x] initial DevOps setup
+- [x] toast massages on CRUD actions
+- [x] tooltips on hovering every icon
+- [x] light / dark mode toggle button
+- [x] setup Devcontainer
+- [x] visualize ERD
+- [x] local pre-deploy (test) Docker instance
+- [x] deploy on Render.com
+- [x] CD pipeline
+- [x] IaC file for Render
+- [x] Livekit API bugfix
+- [x] project icon
+- [x] public landing page at the root domain
 - [ ] feat:UI: chat messages alignment
   > locate my messeges aligned at right, others at left.  
   > colorize my messages as prime color (indigo-500)
 - [ ] feat:UI: skelton loading UI
 - [ ] feat: nestable replies to a chat message (like Youtube)
+- [ ] feat: visually instant reactive UI (implementation of spinnig loading animation when button pressed)
 
 <br/><br/>
 
